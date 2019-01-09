@@ -1,0 +1,1127 @@
+﻿CREATE TABLE Ministerio (
+    Id int not null,
+    Nome varchar(50) not null,
+	DataCadastro DateTime not null,
+    CONSTRAINT PK_Ministerio PRIMARY KEY (Id)
+) 
+GO
+INSERT INTO Ministerio 
+VALUES (1, 'Ministério Fiel', GETDATE())
+GO
+CREATE TABLE DevocionalJonhPiper (
+    Id int not null,
+    IdMinisterio int not null,
+    DataDevocional varchar(20) not null,
+    DataCadastro DateTime not null,
+    CONSTRAINT PK_DevocionalJonhPiper PRIMARY KEY (Id),
+    CONSTRAINT FK_PersonOrder FOREIGN KEY (IdMinisterio) REFERENCES Ministerio(Id)
+)
+INSERT INTO DevocionalJonhPiper
+VALUES (13656834, 1, '31-de-dezembro', Convert(datetime, '31/12/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13656833, 1, '30-de-dezembro', Convert(datetime, '30/12/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13656832, 1, '29-de-dezembro', Convert(datetime, '29/12/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13656831, 1, '28-de-dezembro', Convert(datetime, '28/12/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13656830, 1, '27-de-dezembro', Convert(datetime, '27/12/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13656829, 1, '26-de-dezembro', Convert(datetime, '26/12/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13645607, 1, '25-de-dezembro', Convert(datetime, '25/12/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13645610, 1, '24-de-dezembro', Convert(datetime, '24/12/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13645609, 1, '23-de-dezembro', Convert(datetime, '23/12/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13645608, 1, '22-de-dezembro', Convert(datetime, '22/12/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13582311, 1, '21-de-dezembro', Convert(datetime, '21/12/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13582310, 1, '20-de-dezembro', Convert(datetime, '20/12/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13582309, 1, '19-de-dezembro', Convert(datetime, '19/12/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13582308, 1, '18-de-dezembro', Convert(datetime, '18/12/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13582307, 1, '17-de-dezembro', Convert(datetime, '17/12/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13558827, 1, '16-de-dezembro', Convert(datetime, '16/12/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13558831, 1, '15-de-dezembro', Convert(datetime, '15/12/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13558830, 1, '14-de-dezembro', Convert(datetime, '14/12/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13558828, 1, '13-de-dezembro', Convert(datetime, '13/12/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13558829, 1, '12-de-dezembro', Convert(datetime, '12/12/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13520168, 1, '11-de-dezembro', Convert(datetime, '11/12/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13520167, 1, '10-de-dezembro', Convert(datetime, '10/12/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13520166, 1, '9-de-dezembro', Convert(datetime, '9/12/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13520165, 1, '8-de-dezembro', Convert(datetime, '8/12/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13520164, 1, '7-de-dezembro', Convert(datetime, '7/12/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13520163, 1, '6-de-dezembro', Convert(datetime, '6/12/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13475257, 1, '5-de-dezembro', Convert(datetime, '5/12/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13475256, 1, '4-de-dezembro', Convert(datetime, '4/12/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13475254, 1, '3-de-dezembro', Convert(datetime, '3/12/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13475253, 1, '2-de-dezembro', Convert(datetime, '2/12/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13475255, 1, '1-de-dezembro', Convert(datetime, '1/12/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13441611, 1, '30-de-novembro', Convert(datetime, '30/11/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13441612, 1, '29-de-novembro', Convert(datetime, '29/11/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13346360, 1, '28-de-novembro', Convert(datetime, '28/11/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13346361, 1, '27-de-novembro', Convert(datetime, '27/11/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13346359, 1, '26-de-novembro', Convert(datetime, '26/11/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13346358, 1, '25-de-novembro', Convert(datetime, '25/11/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13346354, 1, '24-de-novembro', Convert(datetime, '24/11/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13346357, 1, '23-de-novembro', Convert(datetime, '23/11/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13346355, 1, '22-de-novembro', Convert(datetime, '22/11/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13346356, 1, '21-de-novembro', Convert(datetime, '21/11/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13346353, 1, '20-de-novembro', Convert(datetime, '20/11/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13346352, 1, '19-de-novembro', Convert(datetime, '19/11/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13346350, 1, '18-de-novembro', Convert(datetime, '18/11/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13346351, 1, '17-de-novembro', Convert(datetime, '17/11/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13343584, 1, '16-de-novembro_1', Convert(datetime, '16/11/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13144978, 1, '15-de-novembro', Convert(datetime, '15/11/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13144977, 1, '14-de-novembro', Convert(datetime, '14/11/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13144976, 1, '13-de-novembro', Convert(datetime, '13/11/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13144973, 1, '12-de-novembro', Convert(datetime, '12/11/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13293828, 1, '11-de-novembro', Convert(datetime, '11/11/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13144972, 1, '10-de-novembro', Convert(datetime, '10/11/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13144975, 1, '9-de-novembro', Convert(datetime, '9/11/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13144974, 1, '8-de-novembro', Convert(datetime, '8/11/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13144969, 1, '7-de-novembro', Convert(datetime, '7/11/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13144970, 1, '6-de-novembro', Convert(datetime, '6/11/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13144967, 1, '5-de-novembro', Convert(datetime, '5/11/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13144968, 1, '4-de-novembro', Convert(datetime, '4/11/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13144971, 1, '3-de-novembro', Convert(datetime, '3/11/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13144966, 1, '2-de-novembro', Convert(datetime, '2/11/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13144965, 1, '1-de-novembro', Convert(datetime, '1/11/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13133520, 1, '31-de-outubro', Convert(datetime, '31/10/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13133519, 1, '30-de-outubro', Convert(datetime, '30/10/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13133517, 1, '29-de-outubro', Convert(datetime, '29/10/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13133518, 1, '28-de-outubro', Convert(datetime, '28/10/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13133521, 1, '27-de-outubro', Convert(datetime, '27/10/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13071090, 1, '26-de-outubro', Convert(datetime, '26/10/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13071091, 1, '25-de-outubro', Convert(datetime, '25/10/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13071089, 1, '24-de-outubro', Convert(datetime, '24/10/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13071088, 1, '23-de-outubro', Convert(datetime, '23/10/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13071087, 1, '22-de-outubro', Convert(datetime, '22/10/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13071086, 1, '21-de-outubro', Convert(datetime, '21/10/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13071085, 1, '20-de-outubro', Convert(datetime, '20/10/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13071084, 1, '19-de-outubro', Convert(datetime, '19/10/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13047955, 1, '18-de-outubro', Convert(datetime, '18/10/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13047954, 1, '17-de-outubro', Convert(datetime, '17/10/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13034662, 1, '16-de-outubro', Convert(datetime, '16/10/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13034663, 1, '15-de-outubro', Convert(datetime, '15/10/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13034169, 1, '14-de-outubro', Convert(datetime, '14/10/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13004420, 1, '13-de-outubro', Convert(datetime, '13/10/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13004418, 1, '12-de-outubro', Convert(datetime, '12/10/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (13004419, 1, '11-de-outubro', Convert(datetime, '11/10/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12918269, 1, '10-de-outubro', Convert(datetime, '10/10/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12918268, 1, '9-de-outubro', Convert(datetime, '9/10/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12918267, 1, '8-de-outubro', Convert(datetime, '8/10/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12918264, 1, '7-de-outubro', Convert(datetime, '7/10/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12918263, 1, '6-de-outubro', Convert(datetime, '6/10/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12918265, 1, '5-de-outubro', Convert(datetime, '5/10/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12918266, 1, '4-de-outubro', Convert(datetime, '4/10/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12918261, 1, '3-de-outubro', Convert(datetime, '3/10/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12918262, 1, '2-de-outubro', Convert(datetime, '2/10/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12918260, 1, '1-de-outubro', Convert(datetime, '1/10/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12847494, 1, '30-de-setembro', Convert(datetime, '30/09/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12847493, 1, '29-de-setembro', Convert(datetime, '29/09/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12847492, 1, '28-de-setembro', Convert(datetime, '28/09/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12864928, 1, '27-de-setembro', Convert(datetime, '27/09/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12864919, 1, '26-de-setembro', Convert(datetime, '26/09/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12847490, 1, '25-de-setembro_1', Convert(datetime, '25/09/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12847491, 1, '24-de-setembro', Convert(datetime, '24/09/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12847487, 1, '23-de-setembro', Convert(datetime, '23/09/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12847489, 1, '22-de-setembro', Convert(datetime, '22/09/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12847488, 1, '21-de-setembro', Convert(datetime, '21/09/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12829419, 1, '20-de-setembro', Convert(datetime, '20/09/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12829418, 1, '19-de-setembro', Convert(datetime, '19/09/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12826302, 1, '18-de-setembro', Convert(datetime, '18/09/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12820806, 1, '17-de-setembro', Convert(datetime, '17/09/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12815349, 1, '16-de-setembro', Convert(datetime, '16/09/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12697439, 1, '15-de-setembro', Convert(datetime, '15/09/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12697436, 1, '14-de-setembro', Convert(datetime, '14/09/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12697437, 1, '13-de-setembro', Convert(datetime, '13/09/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12697438, 1, '12-de-setembro', Convert(datetime, '12/09/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12697435, 1, '11-de-setembro', Convert(datetime, '11/09/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12697434, 1, '10-de-setembro', Convert(datetime, '10/09/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12697433, 1, '9-de-setembro', Convert(datetime, '9/09/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12697429, 1, '8-de-setembro', Convert(datetime, '8/09/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12697428, 1, '7-de-setembro', Convert(datetime, '7/09/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12697431, 1, '6-de-setembro', Convert(datetime, '6/09/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12697430, 1, '5-de-setembro', Convert(datetime, '5/09/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12697426, 1, '4-de-setembro', Convert(datetime, '4/09/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12697425, 1, '3-de-setembro', Convert(datetime, '3/09/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12697424, 1, '2-de-setembro', Convert(datetime, '2/09/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12697427, 1, '1-de-setembro', Convert(datetime, '1/09/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12651295, 1, '31-de-agosto', Convert(datetime, '31/08/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12651296, 1, '30-de-agosto', Convert(datetime, '30/08/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12651294, 1, '29-de-agosto', Convert(datetime, '29/08/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12651293, 1, '28-de-agosto', Convert(datetime, '28/08/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12651291, 1, '27-de-agosto', Convert(datetime, '27/08/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12651292, 1, '26-de-agosto', Convert(datetime, '26/08/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12623336, 1, '25-de-agosto', Convert(datetime, '25/08/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12623335, 1, '24-de-agosto', Convert(datetime, '24/08/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12623333, 1, '23-de-agosto', Convert(datetime, '23/08/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12623332, 1, '22-de-agosto', Convert(datetime, '22/08/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12614773, 1, '21-de-agosto', Convert(datetime, '21/08/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12572099, 1, '20-de-agosto', Convert(datetime, '20/08/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12572098, 1, '19-de-agosto', Convert(datetime, '19/08/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12555890, 1, '18-de-agosto', Convert(datetime, '18/08/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12555889, 1, '17-de-agosto', Convert(datetime, '17/08/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12555887, 1, '16-de-agosto', Convert(datetime, '16/08/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12555888, 1, '15-de-agosto', Convert(datetime, '15/08/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12555886, 1, '14-de-agosto', Convert(datetime, '14/08/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12473021, 1, '13-de-agosto', Convert(datetime, '13/08/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12555891, 1, '13-de-agosto_1', Convert(datetime, '13/08/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12473022, 1, '12-de-agosto', Convert(datetime, '12/08/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12473020, 1, '11-de-agosto', Convert(datetime, '11/08/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12473019, 1, '10-de-agosto', Convert(datetime, '10/08/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12473018, 1, '9-de-agosto', Convert(datetime, '9/08/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12473017, 1, '8-de-agosto', Convert(datetime, '8/08/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12473016, 1, '7-de-agosto', Convert(datetime, '7/08/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12473015, 1, '6-de-agosto', Convert(datetime, '6/08/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12473014, 1, '5-de-agosto', Convert(datetime, '5/08/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12473013, 1, '4-de-agosto', Convert(datetime, '4/08/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12473012, 1, '3-de-agosto', Convert(datetime, '3/08/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12473010, 1, '2-de-agosto', Convert(datetime, '2/08/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12473011, 1, '1-de-agosto', Convert(datetime, '1/08/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12441043, 1, '31-de-julho', Convert(datetime, '31/07/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12441040, 1, '30-de-julho', Convert(datetime, '30/07/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12441041, 1, '29-de-julho', Convert(datetime, '29/07/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12441042, 1, '28-de-julho', Convert(datetime, '28/07/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12441039, 1, '27-de-julho', Convert(datetime, '27/07/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12388177, 1, '26-de-julho', Convert(datetime, '26/07/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12388174, 1, '25-de-julho', Convert(datetime, '25/07/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12388176, 1, '24-de-julho', Convert(datetime, '24/07/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12388175, 1, '23-de-julho', Convert(datetime, '23/07/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12388173, 1, '22-de-julho', Convert(datetime, '22/07/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12388172, 1, '21-de-julho', Convert(datetime, '21/07/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12388171, 1, '20-de-julho', Convert(datetime, '20/07/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12354836, 1, '19-de-julho', Convert(datetime, '19/07/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12354835, 1, '18-de-julho', Convert(datetime, '18/07/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12354834, 1, '17-de-julho', Convert(datetime, '17/07/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12302836, 1, '16-de-julho', Convert(datetime, '16/07/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12302835, 1, '15-de-julho', Convert(datetime, '15/07/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12302833, 1, '14-de-julho', Convert(datetime, '14/07/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12302831, 1, '13-de-julho', Convert(datetime, '13/07/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12302834, 1, '12-de-julho', Convert(datetime, '12/07/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12302832, 1, '11-de-julho', Convert(datetime, '11/07/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12302830, 1, '10-de-julho_1', Convert(datetime, '10/07/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12302829, 1, '9-de-julho_1', Convert(datetime, '9/07/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12243937, 1, '8-de-julho', Convert(datetime, '8/07/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12243934, 1, '7-de-julho', Convert(datetime, '7/07/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12243932, 1, '6-de-julho', Convert(datetime, '6/07/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12243933, 1, '5-de-julho', Convert(datetime, '5/07/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12243929, 1, '4-de-julho', Convert(datetime, '4/07/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12243930, 1, '3-de-julho', Convert(datetime, '3/07/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12243928, 1, '2-de-julho', Convert(datetime, '2/07/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12243931, 1, '1-de-julho', Convert(datetime, '1/07/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12096767, 1, '30-de-junho', Convert(datetime, '30/06/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12096768, 1, '29-de-junho', Convert(datetime, '29/06/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12096764, 1, '28-de-junho', Convert(datetime, '28/06/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12096765, 1, '27-de-junho', Convert(datetime, '27/06/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12096763, 1, '26-de-junho', Convert(datetime, '26/06/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12096766, 1, '25-de-junho', Convert(datetime, '25/06/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12096762, 1, '24-de-junho', Convert(datetime, '24/06/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12096761, 1, '23-de-junho', Convert(datetime, '23/06/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12096760, 1, '22-de-junho', Convert(datetime, '22/06/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12096757, 1, '21-de-junho', Convert(datetime, '21/06/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12096759, 1, '20-de-junho', Convert(datetime, '20/06/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12096758, 1, '19-de-junho', Convert(datetime, '19/06/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12096756, 1, '18-de-junho', Convert(datetime, '18/06/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12096755, 1, '17-de-junho', Convert(datetime, '17/06/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12040309, 1, '16-de-junho', Convert(datetime, '16/06/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12040307, 1, '15-de-junho', Convert(datetime, '15/06/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12040308, 1, '14-de-junho', Convert(datetime, '14/06/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12040305, 1, '13-de-junho_1', Convert(datetime, '13/06/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12040304, 1, '12-de-junho', Convert(datetime, '12/06/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12040306, 1, '11-de-junho', Convert(datetime, '11/06/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12040303, 1, '10-de-junho', Convert(datetime, '10/06/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12040302, 1, '9-de-junho', Convert(datetime, '9/06/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (12040301, 1, '8-de-junho', Convert(datetime, '8/06/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11943368, 1, '7-de-junho', Convert(datetime, '7/06/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11943364, 1, '6-de-junho', Convert(datetime, '6/06/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11943366, 1, '5-de-junho', Convert(datetime, '5/06/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11943363, 1, '4-de-junho', Convert(datetime, '4/06/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11943365, 1, '3-de-junho', Convert(datetime, '3/06/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11943362, 1, '2-de-junho', Convert(datetime, '2/06/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11943360, 1, '1-de-junho', Convert(datetime, '1/06/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11943357, 1, '31-de-maio', Convert(datetime, '31/05/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11943356, 1, '30-de-maio', Convert(datetime, '30/05/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11890873, 1, '29-de-maio', Convert(datetime, '29/05/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11890871, 1, '28-de-maio', Convert(datetime, '28/05/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11890872, 1, '27-de-maio', Convert(datetime, '27/05/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11890869, 1, '26-de-maio', Convert(datetime, '26/05/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11890868, 1, '25-de-maio', Convert(datetime, '25/05/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11890867, 1, '24-de-maio', Convert(datetime, '24/05/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11890870, 1, '23-de-maio', Convert(datetime, '23/05/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11890866, 1, '22-de-maio', Convert(datetime, '22/05/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11890865, 1, '21-de-maio', Convert(datetime, '21/05/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11798435, 1, '20-de-maio', Convert(datetime, '20/05/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11798432, 1, '19-de-maio', Convert(datetime, '19/05/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11798434, 1, '18-de-maio', Convert(datetime, '18/05/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11798433, 1, '17-de-maio', Convert(datetime, '17/05/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11798431, 1, '16-de-maio', Convert(datetime, '16/05/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11798430, 1, '15-de-maio', Convert(datetime, '15/05/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11798429, 1, '14-de-maio', Convert(datetime, '14/05/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11798428, 1, '13-de-maio', Convert(datetime, '13/05/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11798427, 1, '12-de-maio', Convert(datetime, '12/05/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11798426, 1, '11-de-maio', Convert(datetime, '11/05/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11731031, 1, '10-de-maio', Convert(datetime, '10/05/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11731033, 1, '9-de-maio', Convert(datetime, '9/05/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11731032, 1, '8-de-maio', Convert(datetime, '8/05/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11731030, 1, '7-de-maio', Convert(datetime, '7/05/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11731026, 1, '6-de-maio', Convert(datetime, '6/05/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11731025, 1, '5-de-maio', Convert(datetime, '5/05/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11731028, 1, '4-de-maio', Convert(datetime, '4/05/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11731024, 1, '3-de-maio', Convert(datetime, '3/05/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11731027, 1, '2-de-maio', Convert(datetime, '2/05/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11731023, 1, '1-de-maio', Convert(datetime, '1/05/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11509402, 1, '30-de-abril_1', Convert(datetime, '30/04/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11509404, 1, '29-de-abril', Convert(datetime, '29/04/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11509403, 1, '28-de-abril', Convert(datetime, '28/04/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11509400, 1, '27-de-abril', Convert(datetime, '27/04/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11509398, 1, '26-de-abril', Convert(datetime, '26/04/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11509401, 1, '25-de-abril', Convert(datetime, '25/04/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11509399, 1, '24-de-abril', Convert(datetime, '24/04/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11509397, 1, '23-de-abril', Convert(datetime, '23/04/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11509396, 1, '22-de-abril', Convert(datetime, '22/04/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11509391, 1, '21-de-abril', Convert(datetime, '21/04/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11561213, 1, '20-de-abril', Convert(datetime, '20/04/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11509392, 1, '19-de-abril', Convert(datetime, '19/04/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11509393, 1, '18-de-abril', Convert(datetime, '18/04/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11509395, 1, '17-de-abril', Convert(datetime, '17/04/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11611771, 1, '16-de-abril_1', Convert(datetime, '16/04/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11509394, 1, '16-de-abril', Convert(datetime, '16/04/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11509390, 1, '15-de-abril', Convert(datetime, '15/04/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11509389, 1, '14-de-abril', Convert(datetime, '14/04/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11509388, 1, '13-de-abril', Convert(datetime, '13/04/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11509387, 1, '12-de-abril_1', Convert(datetime, '12/04/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11509386, 1, '11-de-abril_1', Convert(datetime, '11/04/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11509384, 1, '10-de-abril_1', Convert(datetime, '10/04/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11509385, 1, '9-de-abril_1', Convert(datetime, '9/04/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11462552, 1, '8-de-abril_1', Convert(datetime, '8/04/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11462553, 1, '7-de-abril', Convert(datetime, '7/04/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11462551, 1, '6-de-abril', Convert(datetime, '6/04/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11462547, 1, '5-de-abril', Convert(datetime, '5/04/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11462550, 1, '4-de-abril', Convert(datetime, '4/04/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11462549, 1, '3-de-abril', Convert(datetime, '3/04/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11462546, 1, '2-de-abril', Convert(datetime, '2/04/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11462548, 1, '1-de-abril', Convert(datetime, '1/04/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11462554, 1, '30-de-marc', Convert(datetime, '30/03/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11507707, 1, '30-de-marc', Convert(datetime, '30/03/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11324070, 1, '29-de-marc', Convert(datetime, '29/03/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11324069, 1, '28-de-marc', Convert(datetime, '28/03/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11324068, 1, '27-de-marc', Convert(datetime, '27/03/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11324067, 1, '26-de-marc', Convert(datetime, '26/03/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11324066, 1, '25-de-marc', Convert(datetime, '25/03/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11324065, 1, '24-de-marc', Convert(datetime, '24/03/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11324064, 1, '23-de-marc', Convert(datetime, '23/03/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11324061, 1, '22-de-marc', Convert(datetime, '22/03/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11324060, 1, '21-de-marc', Convert(datetime, '21/03/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11324062, 1, '20-de-marc', Convert(datetime, '20/03/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11324059, 1, '19-de-marc', Convert(datetime, '19/03/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11415267, 1, '18-de-marc', Convert(datetime, '18/03/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11324058, 1, '17-de-marc', Convert(datetime, '17/03/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11324057, 1, '16-de-marc', Convert(datetime, '16/03/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11324056, 1, '15-de-marc', Convert(datetime, '15/03/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11324055, 1, '14-de-marc', Convert(datetime, '14/03/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11324054, 1, '13-de-marc', Convert(datetime, '13/03/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11324052, 1, '12-de-marc', Convert(datetime, '12/03/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11337075, 1, '11-de-marc', Convert(datetime, '11/03/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11324053, 1, '11-de-marc', Convert(datetime, '11/03/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11078083, 1, '10-de-marco', Convert(datetime, '10/03/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11078074, 1, '9-de-marco', Convert(datetime, '9/03/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11078055, 1, '8-de-marco', Convert(datetime, '8/03/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11078047, 1, '7-de-marco', Convert(datetime, '7/03/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11078041, 1, '6-de-marco', Convert(datetime, '6/03/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11078091, 1, '5-de-marc', Convert(datetime, '5/03/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11078030, 1, '4-de-marco', Convert(datetime, '4/03/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11078023, 1, '3-de-marco', Convert(datetime, '3/03/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11078015, 1, '2-de-marco', Convert(datetime, '2/03/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (11077988, 1, '1-de-marco', Convert(datetime, '1/03/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (10636334, 1, '29-de-fevereiro', Convert(datetime, '29/02/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (10636303, 1, '28-de-fevereiro', Convert(datetime, '28/02/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (10636243, 1, '27-de-fevereiro', Convert(datetime, '27/02/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (10635843, 1, '26-de-fevereiro', Convert(datetime, '26/02/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (10635799, 1, '25-de-fevereiro', Convert(datetime, '25/02/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (10635793, 1, '24-de-fevereiro', Convert(datetime, '24/02/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (10635787, 1, '23-de-fevereiro', Convert(datetime, '23/02/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (10635520, 1, '22-de-fevereiro', Convert(datetime, '22/02/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (10812776, 1, '22-de-fevereiro', Convert(datetime, '22/02/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (10635509, 1, '21-de-fevereiro', Convert(datetime, '21/02/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (10635489, 1, '20-de-fevereiro', Convert(datetime, '20/02/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (10635472, 1, '19-de-fevereiro', Convert(datetime, '19/02/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (10635467, 1, '18-de-fevereiro', Convert(datetime, '18/02/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (10635460, 1, '17-de-fevereiro', Convert(datetime, '17/02/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (10635444, 1, '16-de-fevereiro', Convert(datetime, '16/02/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (10375938, 1, '15-de-fevereiro', Convert(datetime, '15/02/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (10375932, 1, '14-de-fevereiro', Convert(datetime, '14/02/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (10374967, 1, '13-de-fevereiro', Convert(datetime, '13/02/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (10374706, 1, '12-de-fevereiro', Convert(datetime, '12/02/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (10374651, 1, '11-de-fevereiro', Convert(datetime, '11/02/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (10374643, 1, '10-de-fevereiro', Convert(datetime, '10/02/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (10374636, 1, '9-de-fevereiro', Convert(datetime, '9/02/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (10375964, 1, '8-de-fevereiro', Convert(datetime, '8/02/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (10374621, 1, '7-de-fevereiro', Convert(datetime, '7/02/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (10374615, 1, '6-de-fevereiro', Convert(datetime, '6/02/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (10374607, 1, '5-de-fevereiro', Convert(datetime, '5/02/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (10374601, 1, '4-de-fevereiro', Convert(datetime, '4/02/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (10374593, 1, '3-de-fevereiro', Convert(datetime, '3/02/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (10374585, 1, '2-de-fevereiro', Convert(datetime, '2/02/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (10374577, 1, '1-de-fevereiro', Convert(datetime, '1/02/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (10335444, 1, '31-de-janeiro', Convert(datetime, '31/01/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (10335433, 1, '30-de-janeiro', Convert(datetime, '30/01/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (10335420, 1, '29-de-janeiro', Convert(datetime, '29/01/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (10335408, 1, '28-de-janeiro', Convert(datetime, '28/01/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (10335403, 1, '27-de-janeiro', Convert(datetime, '27/01/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (10335388, 1, '26-de-janeiro', Convert(datetime, '26/01/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (10335379, 1, '25-de-janeiro', Convert(datetime, '25/01/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (10335363, 1, '24-de-janeiro', Convert(datetime, '24/01/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (10335308, 1, '23-de-janeiro', Convert(datetime, '23/01/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (10334198, 1, '22-de-janeiro', Convert(datetime, '22/01/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (10334041, 1, '21-de-janeiro', Convert(datetime, '21/01/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (10264393, 1, '20-de-janeiro', Convert(datetime, '20/01/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (10264390, 1, '19-de-janeiro', Convert(datetime, '19/01/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (10264391, 1, '18-de-janeiro', Convert(datetime, '18/01/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (10264392, 1, '17-de-janeiro', Convert(datetime, '17/01/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (10264389, 1, '16-de-janeiro', Convert(datetime, '16/01/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (10264388, 1, '15-de-janeiro', Convert(datetime, '15/01/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (10264387, 1, '14-de-janeiro', Convert(datetime, '14/01/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (10264386, 1, '13-de-janeiro', Convert(datetime, '13/01/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (10264385, 1, '12-de-janeiro', Convert(datetime, '12/01/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (10264383, 1, '11-de-janeiro', Convert(datetime, '11/01/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (10111616, 1, '10-de-janeiro', Convert(datetime, '10/01/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (10111601, 1, '9-de-janeiro', Convert(datetime, '9/01/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (10111575, 1, '8-de-janeiro', Convert(datetime, '8/01/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (10111571, 1, '7-de-janeiro', Convert(datetime, '7/01/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (10111557, 1, '6-de-janeiro', Convert(datetime, '6/01/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (10111554, 1, '5-de-janeiro', Convert(datetime, '5/01/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (10111548, 1, '4-de-janeiro', Convert(datetime, '4/01/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (10111564, 1, '3-de-janeiro', Convert(datetime, '3/01/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (10111521, 1, '2-de-janeiro', Convert(datetime, '2/01/2019', 103))
+GO
+INSERT INTO DevocionalJonhPiper
+VALUES (10111260, 1, '1-de-janeiro', Convert(datetime, '1/01/2019', 103))
