@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -13,19 +14,14 @@ namespace ProjetoCincoSolas.DAO
 {
     public class BuscaDevocional
     {
-        string connetionString = @"Data Source=.\SQLExpress;Initial Catalog=ProjetoCincoSolas; User ID=sa; Password=conectar";
-
         public int GetDevocional(string data)
         {
-            using (SqlConnection conn = new SqlConnection(connetionString))
+            var connectionString = ConfigurationManager.ConnectionStrings["DatabaseConnection"].ConnectionString;
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 try
                 {
-                    //var xml = new XmlDocument();
-                    //xml.Load($@"..\..\Shared\Integracao\ImportacaoTaxas\{""}");
-                    //var jsonTaxas = JsonConvert.SerializeXmlNode(xml, Formatting.None, true);
-                    //var taxas = JsonHelper.ToEntity<Pessoa> (jsonTaxas);
-
                     var cmd = new SqlCommand("select * from DevocionalJonhPiper where DataDevocional = @data", conn);
                     cmd.Parameters.AddWithValue("@data", data);
                     //cmd.Parameters.Add(new SqlParameter("@data", data));

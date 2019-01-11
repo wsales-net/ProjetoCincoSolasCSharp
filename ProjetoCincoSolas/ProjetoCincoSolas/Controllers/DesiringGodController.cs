@@ -1,7 +1,14 @@
-﻿using ProjetoCincoSolas.DAO;
+﻿using Newtonsoft.Json;
+using ProjetoCincoSolas.DAO;
+using ProjetoCincoSolas.Helpers;
+using ProjetoCincoSolas.Models;
+using ProjetoCincoSolas.Servico;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
@@ -9,12 +16,33 @@ namespace ProjetoCincoSolas.Controllers
 {
     public class DesiringGodController : Controller
     {
-        private readonly BuscaDevocional _buscaDevocional = new BuscaDevocional();
+        private readonly BuscaDevocional _buscaDevocional;
+        private readonly DevsServico _devsServico;
+
+        public DesiringGodController()
+        {
+            _devsServico = new DevsServico();
+            _buscaDevocional = new BuscaDevocional();
+        }
 
         // GET: DesiringGod
         public ActionResult Index()
         {
             return View();
+        }
+
+        public void SincronizarDados()
+        {
+            var listaPessoas = new List<Pessoa>();
+            var i = 1;
+            while (i <= 100)
+            {
+                var getPessoa = _devsServico.SincronizarPessoa();
+                var pessoa = JsonHelper.ToEntity<Pessoa>(getPessoa);
+
+                listaPessoas.Add(pessoa);
+                i++;
+            }
         }
 
         public JsonResult GetCodigoDevocional()
