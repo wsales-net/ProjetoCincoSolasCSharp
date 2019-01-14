@@ -1,26 +1,18 @@
-﻿using Newtonsoft.Json;
-using ProjetoCincoSolas.DAO;
+﻿using ProjetoCincoSolas.DAO;
 using ProjetoCincoSolas.Helpers;
 using ProjetoCincoSolas.Models;
 using ProjetoCincoSolas.Servico;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 
 namespace ProjetoCincoSolas.Controllers
 {
-    public class DevocionalDiarioController : Controller
+    public class DesiringGodController : Controller
     {
         private readonly BuscaDevocional _buscaDevocional;
 
-        public DevocionalDiarioController()
+        public DesiringGodController()
         {
             _buscaDevocional = new BuscaDevocional();
         }
@@ -33,14 +25,18 @@ namespace ProjetoCincoSolas.Controllers
 
         public JsonResult GetCodigoDevocional()
         {
+            //var day = DateTime.Now.AddDays(1).Day;
+            //var ano = DateTime.Now.AddYears(1).Year;
+
             var date = DateTime.Now.Day + "-de-" + GetMonth(DateTime.Now.Month);
 
+            //Verificar dado retornar
             var codeEpisodio = _buscaDevocional.GetDevocional(date);
 
             return Json(codeEpisodio, JsonRequestBehavior.AllowGet);
         }
 
-        private string GetMonth(int mes)
+        private static string GetMonth(int mes)
         {
             switch (mes)
             {

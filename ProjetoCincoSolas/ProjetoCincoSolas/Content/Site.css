@@ -22,10 +22,3 @@ select,
 textarea {
     max-width: 280px;
 }
-
-.sinc {
-    text-align: center;
-}
-img.load {
-    display: none;
-}

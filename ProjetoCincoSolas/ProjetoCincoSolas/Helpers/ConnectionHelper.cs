@@ -8,7 +8,7 @@ using System.Web;
 namespace ProjetoCincoSolas.Helpers
 {
 
-    public class ConnectionHelper : IConnectionHelper
+    public static class ConnectionHelper
     {
         //public static Usuario UsuarioLogado { get; private set; }
         public static string BaseDadosConectada { get; private set; }
@@ -47,11 +47,6 @@ namespace ProjetoCincoSolas.Helpers
             {
                 return false;
             }
-        }
-
-        public string GetConexao()
-        {
-            return ConfigurationManager.ConnectionStrings["DatabaseConnection"].ConnectionString;
         }
     }
 }

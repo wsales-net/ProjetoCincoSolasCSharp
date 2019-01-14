@@ -8,7 +8,7 @@ namespace ProjetoCincoSolas.Models
     public class Pessoa
     {
         public string Nome { get; set; }
-        public string cpf { get; set; }
+        public string Cpf { get; set; }
         public string Rg { get; set; }
         public string Data_nasc { get; set; }
         public string Signo { get; set; }
