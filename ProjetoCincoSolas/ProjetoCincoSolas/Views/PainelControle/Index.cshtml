@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+<div class="sinc">
+    <h2>Sincronizar Dados</h2>
+    <img src="https://cdn2.iconfinder.com/data/icons/flat-user/114/user-refresh-512.png" alt="Sincronizar Pessoa" width="200px" /><br />
+    <button id="sincronizar" class="btn btn-primary" type="submit">Sincronizar Pessoas</button><br />
+    <img src="~/Imagens/load.gif" class="load"/>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#sincronizar").click(function (e) {
+            $('.load').show();
+            $("#sincronizar").html('Sincronizando...');
+            $('#sincronizar').prop('disabled', true);
+            $.ajax({
+                type: "POST",
+                url: "/PainelControle/SincronizarDados/",
+                success: function (result) {
+                    $('.load').hide();
+                    $("#sincronizar").html('Sincronizar Pessoas');
+                    $('#sincronizar').prop('disabled', false);
+                    alert('Dados sincronizados com sucesso!');
+                },
+                error: function (result) {
+                    alert('error');
+                }
+            });
+        });
+    });
+</script>

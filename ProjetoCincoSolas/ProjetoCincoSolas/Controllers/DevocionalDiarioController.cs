@@ -9,19 +9,19 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
 namespace ProjetoCincoSolas.Controllers
 {
-    public class DesiringGodController : Controller
+    public class DevocionalDiarioController : Controller
     {
         private readonly BuscaDevocional _buscaDevocional;
-        private readonly DevsServico _devsServico;
 
-        public DesiringGodController()
+        public DevocionalDiarioController()
         {
-            _devsServico = new DevsServico();
             _buscaDevocional = new BuscaDevocional();
         }
 
@@ -31,28 +31,10 @@ namespace ProjetoCincoSolas.Controllers
             return View();
         }
 
-        public void SincronizarDados()
-        {
-            var listaPessoas = new List<Pessoa>();
-            var i = 1;
-            while (i <= 100)
-            {
-                var getPessoa = _devsServico.SincronizarPessoa();
-                var pessoa = JsonHelper.ToEntity<Pessoa>(getPessoa);
-
-                listaPessoas.Add(pessoa);
-                i++;
-            }
-        }
-
         public JsonResult GetCodigoDevocional()
         {
-            //var day = DateTime.Now.AddDays(1).Day;
-            //var ano = DateTime.Now.AddYears(1).Year;
-
             var date = DateTime.Now.Day + "-de-" + GetMonth(DateTime.Now.Month);
 
-            //Verificar dado retornar
             var codeEpisodio = _buscaDevocional.GetDevocional(date);
 
             return Json(codeEpisodio, JsonRequestBehavior.AllowGet);

@@ -1,0 +1,50 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Alegria Inabalável - Jonh Piper";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+</head>
+<body>
+    <h2>Alegria Inabalável - Jonh Piper</h2>
+    <div class="link-player"></div>
+</body>
+</html>
+<script>
+    $(document).ready(function () {
+        $(function () {
+            $.ajax({
+                dataType: "json",
+                type: "GET",
+                url: "/DesiringGod/GetCodigoDevocional",
+                success: function (dados) {
+                    $.ajax({
+                        dataType: "json",
+                        type: "GET",
+                        url: "https://api.spreaker.com/episode/" + dados,
+                        success: function (dados) {
+                            if (dados) {
+                                $('<iframe>', {
+                                    src: 'https://widget.spreaker.com/player?episode_id=' + dados.response.episode.episode_id + '&theme=dark&autoplay=true&playlist=false',
+                                    width: '100%',
+                                    height: '200px',
+                                    frameborder: "0"
+                                }).appendTo('.link-player');
+
+                                //window.location.replace(dados.response.episode.download_url);
+                            }
+                        }
+                    });
+                }
+            });
+        });
+    });
+
+
+    $(".button_play.xlarge").click();
+</script>
