@@ -1,18 +1,14 @@
 ﻿using ProjetoCincoSolas.DAO;
-using ProjetoCincoSolas.Helpers;
-using ProjetoCincoSolas.Models;
-using ProjetoCincoSolas.Servico;
 using System;
-using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace ProjetoCincoSolas.Controllers
 {
-    public class DesiringGodController : Controller
+    public class DevocionalDiarioController : Controller
     {
         private readonly BuscaDevocional _buscaDevocional;
 
-        public DesiringGodController()
+        public DevocionalDiarioController()
         {
             _buscaDevocional = new BuscaDevocional();
         }

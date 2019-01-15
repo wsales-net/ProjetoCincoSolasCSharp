@@ -1,0 +1,51 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div class="panel-controle">
+        <img src="https://cdn3.iconfinder.com/data/icons/toolbar-people/512/user_refresh_man_male_profile_account_person-512.png" width="256px" /><br />
+        <button class="btn btn-primary" id="sincronizar">Sincronizar</button>
+        <br />
+        <img src="~/Imagens/load.gif" class="load" />
+        <label class="msg"></label><br />
+    </div>
+</body>
+</html>
+<script>
+    $(document).ready(function () {
+        $(".load").hide();
+        $("#sincronizar").click(function (e) {
+            $("#sincronizar").prop("disabled", true);
+            $("#sincronizar").html("Sincronizando...");
+            $(".msg").html("");
+            $(".load").show();
+            $.ajax({
+                type: "POST",
+                url: "/PainelControle/SincronizarDados/",
+                success: function (resposta) {
+                    $(".msg").fadeOut(0).html(resposta).fadeIn(200);
+                    setTimeout(function () {
+                        $('.msg').fadeOut('slow');
+                    }, 2500);
+
+                    $(".msg").css("color", "#39ce38");
+                    $("#sincronizar").prop("disabled", false);
+                    $("#sincronizar").html("Sincronizar");
+                    $(".load").hide();
+                },
+                error: function (result) {
+                    alert('error');
+                }
+            });
+        });
+    });
+</script>

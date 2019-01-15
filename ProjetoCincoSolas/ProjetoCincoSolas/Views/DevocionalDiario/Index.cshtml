@@ -9,8 +9,6 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>*@
-    <script src="~/Scripts/jquery-1.10.2.js"></script>
 </head>
 <body>
     <h2>Alegria Inabalável - Jonh Piper</h2>
@@ -21,19 +19,6 @@
 </html>
 <script>
     $(function () {
-        $("#sincronizar").click(function (e) {
-            $.ajax({
-                type: "POST",
-                url: "/DesiringGod/SincronizarDados/",
-                success: function (result) {
-                    alert('Dados sincronizados com sucesso!');
-                },
-                error: function (result) {
-                    alert('error');
-                }
-            });
-        });
-
         $.ajax({
             dataType: "json",
             type: "GET",
