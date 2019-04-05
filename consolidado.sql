@@ -1,499 +1,407 @@
- 
-
-DROP TABLE IF EXISTS [Pessoa]
+GO
+ -- EXEMPLO: LIVRO, PREGAÇÃO, WHATSAPP-AUDIO, PODCAST, SITE
+If Object_Id('CategoriaAnotacaoEvangelho') Is Null
+CREATE TABLE CategoriaAnotacaoEvangelho (
+	Id INT IDENTITY,
+	Descricao VARCHAR(15) NOT NULL,
+	DataRegistro DATETIME DEFAULT GETDATE(),
+	CONSTRAINT PkCategoriaAnotacaoEvangelho PRIMARY KEY (ID)
+)
+GO
+ -- EXEMPLO: BASICO, MEDIO, AVANÇADO
+If Object_Id('NivelAnotacaoEvangelho') Is Null
+CREATE TABLE NivelAnotacaoEvangelho (
+	Id INT IDENTITY,
+	Nivel INT NOT NULL,
+	DataRegistro DATETIME DEFAULT GETDATE(),
+	CONSTRAINT PkNivelAnotacaoEvangelho PRIMARY KEY (ID)
+)
+GO
+ -- DESCRICAO: CONTROLE DE CLASSIFICAR POR 5 ESTRELAS
+If Object_Id('ClassificacaoAnotacaoEvangelho') Is Null
+CREATE TABLE ClassificacaoAnotacaoEvangelho (
+	Id INT IDENTITY,
+	Classificacao INT NOT NULL,
+	DataRegistro DATETIME DEFAULT GETDATE(),
+	CONSTRAINT PkClassificacaoAnotacaoEvangelho PRIMARY KEY (ID)
+)
+GO
+ -- DESCRICAO: COMENTÁRIO DE USUÁRIOS PARA CADA ANOTAÇÃO
+If Object_Id('ComentarioAnotacaoEnvagelho') Is Null
+CREATE TABLE ComentarioAnotacaoEnvagelho (
+	Id INT IDENTITY, 
+	Cometario VARCHAR(1000),
+	DataRegistro DATETIME DEFAULT GETDATE(),
+	CONSTRAINT PkComentarioAnotacaoEnvagelho PRIMARY KEY (ID)
+)
+GO
+ -- DESCRICAO: ANOTAÇÃO DE CADA CONTEUDO
+If Object_Id('AnotacaoEvangelho') Is Null
+CREATE TABLE AnotacaoEvangelho (
+	Id INT IDENTITY,
+	IdCategoriaAnotacaoEvangelho INT NOT NULL,
+	IdNivelAnotacaoEvangelho INT NOT NULL,
+	IdComentarioAnotacaoEnvagelho INT,
+	Titulo VARCHAR(20) NOT NULL,
+	Descricao VARCHAR(MAX) NOT NULL,
+	DataRegistro DATETIME DEFAULT GETDATE()
+	CONSTRAINT PkAnotacaoEvangelho PRIMARY KEY (Id),
+	CONSTRAINT FkAnotacaoEvangelho_x_CategoriaEvangelho FOREIGN KEY (IdCategoriaAnotacaoEvangelho) 
+	REFERENCES CategoriaAnotacaoEvangelho(Id)
+) 
+GO
+ -- EXEMPLO: REDENÇÃO, SALVAÇÃO, PURIFICAÇÃO, JUSTIFICAÇÃO, ETC
+ -- DESCRICAO: TAGS PARA CADA ANOTAÇÃO
+If Object_Id('Tag') Is Null
+CREATE TABLE Tag (
+	ID INT IDENTITY,
+	Titulo VARCHAR(20),
+	CONSTRAINT PkTag PRIMARY KEY (Id)
+)
+GO
+ -- DESCRICAO: TABELA INTERMEDIÁRIA
+If Object_Id('AnotacaoEvangelhoTag') Is Null
+CREATE TABLE AnotacaoEvangelhoTag
+(
+	ID INT IDENTITY,
+	IdAnotacaoEvangelho INT NOT NULL,
+	IdTag INT NOT NULL,
+	CONSTRAINT PkAnotacaoEvangelhoTag PRIMARY KEY (Id), 
+	CONSTRAINT FkAnotacaoEvangelhoTag_x_AnotacaoEvangelho FOREIGN KEY (IdAnotacaoEvangelho) REFERENCES AnotacaoEvangelho (Id),
+	CONSTRAINT FkAnotacaoEvangelhoTag_x_Tag FOREIGN KEY (IdTag) REFERENCES Tag (Id)
+)
 
 GO
-DROP TABLE IF EXISTS [Funcao]
-
-GO
-DROP TABLE IF EXISTS [Dizimo]
-
-GO
-DROP TABLE IF EXISTS [Usuario]
-
-GO
-DROP TABLE IF EXISTS [Venda]
-
-GO
-DROP TABLE IF EXISTS [Cidade]
-
-GO
-DROP TABLE IF EXISTS [Estado]
-
-GO
-DROP TABLE IF EXISTS [Endereco]
-
-GO
-DROP TABLE IF EXISTS [Oferta]
-
-GO
-DROP TABLE IF EXISTS [ItemVenda]
-
-GO
-DROP TABLE IF EXISTS [Categoria]
-
-GO
-DROP TABLE IF EXISTS [Produto]
-
-GO
-DROP TABLE IF EXISTS [ContaReceber]
-
-GO
-DROP TABLE IF EXISTS [FormaPagamento]
-
-GO
-DROP TABLE IF EXISTS [Publico]
-
-GO
-DROP TABLE IF EXISTS [Evento]
-
-GO
-DROP TABLE IF EXISTS [Telefone]
-
-GO
-DROP TABLE IF EXISTS [Orcamento]
-
-GO
-DROP TABLE IF EXISTS [ContaPagar]
-
-GO
-DROP TABLE IF EXISTS [TipoContaPagar]
-
-GO
-DROP TABLE IF EXISTS [Perfil]
-
-GO
-DROP TABLE IF EXISTS [TipoTelefone]
-
-GO
-
-
-CREATE TABLE [Pessoa] (
-	Id integer NOT NULL,
-	EnderecoId integer NOT NULL,
-	FuncaoId integer NOT NULL,
-	TelefoneId integer NOT NULL,
-	Nome varchar(15) NOT NULL,
-	SobreNome varchar(60) NOT NULL,
-	Sexo varchar(1) NOT NULL,
+If Object_Id('Pessoa') Is Null
+CREATE TABLE Pessoa (
+	Id INT IDENTITY,
+	IdEnderecoPessoa INT NOT NULL,
+	IdFuncaoMinisterial INT NOT NULL,
+	IdTelefone INT NOT NULL,
+	IdEstadoCivil INT NOT NULL,
+	Nome VARCHAR(15) NOT NULL,
+	SobreNome VARCHAR(60) NOT NULL,
+	Sexo CHAR(1) NOT NULL,
 	DataNascimento datetime NOT NULL,
-	Numero integer NOT NULL,
-	Complemento varchar(20),
-	RG varchar(12) UNIQUE,
-	CPF varchar(14) UNIQUE,
-	Email varchar(30) UNIQUE,
-	Ativo binary NOT NULL,
-	Foto varchar,
-	DataCadastro datetime NOT NULL,
-	DataAtualizacao datetime NOT NULL,
-  CONSTRAINT [PK_PESSOA] PRIMARY KEY CLUSTERED
-  (
-  [Id] ASC
-  ) WITH (IGNORE_DUP_KEY = OFF)
-
+	NomeMae VARCHAR(30),
+	NomePai VARCHAR(30),
+	RG VARCHAR(12) UNIQUE,
+	CPF VARCHAR(14) UNIQUE,
+	Email VARCHAR(30) UNIQUE,
+	DataRegistro datetime NOT NULL,
+	Ativo BIT NOT NULL,
+	Foto VARCHAR,
+  	CONSTRAINT PkPessoa PRIMARY KEY (Id)
 )
-GO
-CREATE TABLE [Funcao] (
-	Id integer NOT NULL,
-	Descricao varchar(15) NOT NULL UNIQUE,
-	DataCadastro datetime NOT NULL,
-	DataAtualizacao datetime NOT NULL,
-  CONSTRAINT [PK_FUNCAO] PRIMARY KEY CLUSTERED
-  (
-  [Id] ASC
-  ) WITH (IGNORE_DUP_KEY = OFF)
 
-)
 GO
-CREATE TABLE [Dizimo] (
-	Id integer NOT NULL,
-	PessoaId integer NOT NULL,
+
+If Object_Id('FuncaoMinisterial') Is Null
+CREATE TABLE FuncaoMinisterial (
+	Id INT NOT NULL,
+	Descricao VARCHAR(15) NOT NULL UNIQUE,
+  	CONSTRAINT PkFuncaoMinisterial PRIMARY KEY (Id)
+)
+
+GO
+
+If Object_Id('Dizimo') Is Null
+CREATE TABLE Dizimo (
+	Id INT NOT NULL,
+	IdPessoa INT NOT NULL,
 	Valor decimal(6,2) NOT NULL,
-	Observacao varchar(500),
-	DataCadastro datetime NOT NULL,
-	DataAtualizacao datetime NOT NULL,
-  CONSTRAINT [PK_DIZIMO] PRIMARY KEY CLUSTERED
-  (
-  [Id] ASC
-  ) WITH (IGNORE_DUP_KEY = OFF)
-
+	DataEntrada datetime NOT NULL,
+	Observacao VARCHAR(500),
+  	CONSTRAINT PkDizimo PRIMARY KEY (Id)
 )
-GO
-CREATE TABLE [Usuario] (
-	Id integer NOT NULL,
-	PerfilId integer NOT NULL,
-	PessoaId integer NOT NULL,
-	Usuario varchar(20) NOT NULL UNIQUE,
-	Senha varchar(30) NOT NULL,
-	DataCadastro datetime NOT NULL,
-	DataUltimoAcesso datetime,
-	DataAtualizacao datetime NOT NULL,
-  CONSTRAINT [PK_USUARIO] PRIMARY KEY CLUSTERED
-  (
-  [Id] ASC
-  ) WITH (IGNORE_DUP_KEY = OFF)
 
-)
 GO
-CREATE TABLE [Venda] (
-	Id integer NOT NULL,
-	PessoaId integer NOT NULL,
+
+If Object_Id('Usuario') Is Null
+CREATE TABLE Usuario (
+	Id INT NOT NULL,
+	IdPerfil INT NOT NULL,
+	IdPessoa INT NOT NULL,
+	Usuario VARCHAR(20) NOT NULL UNIQUE,
+	Senha VARCHAR(30) NOT NULL,
+  	CONSTRAINT PkUsuario PRIMARY KEY (Id)
+)
+
+GO
+
+If Object_Id('Venda') Is Null
+CREATE TABLE Venda (
+	Id INT NOT NULL,
+	IdPessoa INT NOT NULL,
 	Valor decimal(5,2) NOT NULL,
 	Desconto decimal(5,2) NOT NULL,
 	ValorPago decimal(5,2) NOT NULL,
-	DataCadastro datetime NOT NULL,
-	DataAtualizacao datetime NOT NULL,
-  CONSTRAINT [PK_VENDA] PRIMARY KEY CLUSTERED
-  (
-  [Id] ASC
-  ) WITH (IGNORE_DUP_KEY = OFF)
-
+  	CONSTRAINT PkVenda PRIMARY KEY (Id)
 )
-GO
-CREATE TABLE [Cidade] (
-	Id integer NOT NULL,
-	EstadoId integer NOT NULL,
-	Descricao varchar(100) NOT NULL,
-  CONSTRAINT [PK_CIDADE] PRIMARY KEY CLUSTERED
-  (
-  [Id] ASC
-  ) WITH (IGNORE_DUP_KEY = OFF)
 
-)
 GO
-CREATE TABLE [Estado] (
-	Id integer NOT NULL,
-	UF varchar(2) NOT NULL UNIQUE,
-  CONSTRAINT [PK_ESTADO] PRIMARY KEY CLUSTERED
-  (
-  [Id] ASC
-  ) WITH (IGNORE_DUP_KEY = OFF)
 
+If Object_Id('Cidade') Is Null
+CREATE TABLE Cidade (
+	Id INT NOT NULL,
+	IdEstado INT NOT NULL,
+	Descricao VARCHAR(100) NOT NULL,
+  	CONSTRAINT PkCidade PRIMARY KEY (Id)
 )
-GO
-CREATE TABLE [Endereco] (
-	Id integer NOT NULL,
-	CidadeId integer NOT NULL,
-	Cep varchar(9) NOT NULL UNIQUE,
-	Logradouro varchar(50) NOT NULL,
-	Bairro varchar(70) NOT NULL,
-	DataCadastro datetime NOT NULL,
-	DataAtualizacao datetime NOT NULL,
-  CONSTRAINT [PK_ENDERECO] PRIMARY KEY CLUSTERED
-  (
-  [Id] ASC
-  ) WITH (IGNORE_DUP_KEY = OFF)
 
-)
 GO
-CREATE TABLE [Oferta] (
-	Id integer NOT NULL,
-	PessoaId integer,
+
+If Object_Id('Estado') Is Null
+CREATE TABLE Estado (
+	Id INT NOT NULL,
+	UF VARCHAR(2) NOT NULL UNIQUE,
+  	CONSTRAINT PkEstado PRIMARY KEY (Id)
+)
+
+GO
+
+If Object_Id('Endereco') Is Null
+CREATE TABLE Endereco (
+	Id INT NOT NULL,
+	IdCidade INT NOT NULL,
+	Cep VARCHAR(9) NOT NULL UNIQUE,
+	Logradouro VARCHAR(50) NOT NULL,
+	Bairro VARCHAR(70) NOT NULL,
+	Numero INT NOT NULL,
+	Complemento VARCHAR(20),
+  	CONSTRAINT PkEndereco PRIMARY KEY (Id)
+)
+
+GO
+
+If Object_Id('Oferta') Is Null
+CREATE TABLE Oferta (
+	Id INT NOT NULL,
+	IdPessoa INT,
 	Valor decimal(6,2) NOT NULL,
-	Observacao varchar(500),
-	DataCadastro datetime NOT NULL,
-	DataAtualizacao datetime NOT NULL,
-  CONSTRAINT [PK_OFERTA] PRIMARY KEY CLUSTERED
-  (
-  [Id] ASC
-  ) WITH (IGNORE_DUP_KEY = OFF)
-
+	DataEntrada datetime NOT NULL,
+	Observacao VARCHAR(500),
+  	CONSTRAINT PkOferta PRIMARY KEY (Id)
 )
+
 GO
-CREATE TABLE [ItemVenda] (
-	Id integer NOT NULL,
-	VendaId integer NOT NULL,
-	ProdutoId integer NOT NULL,
-	Quantidade integer NOT NULL,
+
+If Object_Id('ItemVenda') Is Null
+CREATE TABLE ItemVenda (
+	Id INT NOT NULL,
+	IdVenda INT NOT NULL,
+	IdProduto INT NOT NULL,
+	Quantidade INT NOT NULL,
 	Valor decimal(5,2) NOT NULL,
-  CONSTRAINT [PK_ITEMVENDA] PRIMARY KEY CLUSTERED
-  (
-  [Id] ASC
-  ) WITH (IGNORE_DUP_KEY = OFF)
-
+  	CONSTRAINT PkItemVenda PRIMARY KEY (Id)
 )
-GO
-CREATE TABLE [Categoria] (
-	Id integer NOT NULL,
-	Descricao varchar(20) NOT NULL UNIQUE,
-	DataCadastro datetime NOT NULL,
-	DataAtualizacao datetime NOT NULL,
-  CONSTRAINT [PK_CATEGORIA] PRIMARY KEY CLUSTERED
-  (
-  [Id] ASC
-  ) WITH (IGNORE_DUP_KEY = OFF)
 
-)
 GO
-CREATE TABLE [Produto] (
-	Id integer NOT NULL,
-	CategoriaId integer NOT NULL,
-	Nome varchar(30) NOT NULL UNIQUE,
+
+If Object_Id('Categoria') Is Null
+CREATE TABLE Categoria (
+	Id INT NOT NULL,
+	Descricao VARCHAR(20) NOT NULL UNIQUE,
+  	CONSTRAINT PkCategoria PRIMARY KEY (Id)
+)
+
+GO
+
+If Object_Id('Produto') Is Null
+CREATE TABLE Produto (
+	Id INT NOT NULL,
+	IdCategoria INT NOT NULL,
+	Nome VARCHAR(30) NOT NULL UNIQUE,
 	Valor decimal(5,2) NOT NULL,
-	Descricao varchar(500) NOT NULL,
-	DataCadastro datetime NOT NULL,
-	DataAtualizacao datetime NOT NULL,
-  CONSTRAINT [PK_PRODUTO] PRIMARY KEY CLUSTERED
-  (
-  [Id] ASC
-  ) WITH (IGNORE_DUP_KEY = OFF)
-
+	Descricao VARCHAR(500) NOT NULL,
+  	CONSTRAINT PkProduto PRIMARY KEY (Id)
 )
+
 GO
-CREATE TABLE [ContaReceber] (
-	Id integer NOT NULL,
-	VendaId integer NOT NULL,
-	FormaPagamentoId integer NOT NULL,
+
+If Object_Id('ContaReceber') Is Null
+CREATE TABLE ContaReceber (
+	Id INT NOT NULL,
+	IdVenda INT NOT NULL,
+	IdFormaPagamento INT NOT NULL,
 	Valor decimal(6,2) NOT NULL,
-	Observacao varchar(500),
-	DataCadastro datetime NOT NULL,
-	DataAtualizacao decimal NOT NULL,
-  CONSTRAINT [PK_CONTARECEBER] PRIMARY KEY CLUSTERED
-  (
-  [Id] ASC
-  ) WITH (IGNORE_DUP_KEY = OFF)
-
+	DataEntrada datetime NOT NULL,
+	Observacao VARCHAR(500),
+  	CONSTRAINT PkContaReceber PRIMARY KEY (Id)
 )
-GO
-CREATE TABLE [FormaPagamento] (
-	Id integer NOT NULL,
-	Descricao varchar(15) NOT NULL UNIQUE,
-	DataCadastro datetime NOT NULL,
-  CONSTRAINT [PK_FORMAPAGAMENTO] PRIMARY KEY CLUSTERED
-  (
-  [Id] ASC
-  ) WITH (IGNORE_DUP_KEY = OFF)
 
-)
 GO
-CREATE TABLE [Publico] (
-	Id integer NOT NULL,
-	Descricao varchar(10) NOT NULL UNIQUE,
-	Classificacao varchar(5) NOT NULL,
-	DataCadastro datetime NOT NULL,
-	DataAtualizacao datetime NOT NULL,
-  CONSTRAINT [PK_PUBLICO] PRIMARY KEY CLUSTERED
-  (
-  [Id] ASC
-  ) WITH (IGNORE_DUP_KEY = OFF)
 
+If Object_Id('FormaPagamento') Is Null
+CREATE TABLE FormaPagamento (
+	Id INT NOT NULL,
+	Descricao VARCHAR(15) NOT NULL UNIQUE,
+  	CONSTRAINT PkFormaPagamento PRIMARY KEY (Id)
 )
+
 GO
-CREATE TABLE [Evento] (
-	Id integer NOT NULL,
-	PublicoId integer NOT NULL,
-	EnderecoId integer NOT NULL,
-	Nome varchar(100) NOT NULL,
+
+If Object_Id('Publico') Is Null
+CREATE TABLE Publico (
+	Id INT NOT NULL,
+	Descricao VARCHAR(10) NOT NULL UNIQUE,
+	Classificacao VARCHAR(5) NOT NULL,
+  	CONSTRAINT PkPublico PRIMARY KEY (Id)
+)
+
+GO
+
+If Object_Id('Evento') Is Null
+CREATE TABLE Evento (
+	Id INT NOT NULL,
+	IdPublico INT NOT NULL,
+	IdEnderecoPessoa INT NOT NULL,
+	Nome VARCHAR(100) NOT NULL,
 	Data date NOT NULL,
 	Hora time NOT NULL,
-	Descricao varchar(500),
-	Numero integer NOT NULL,
-	PontoReferencia varchar(30),
-	DataCadastro datetime NOT NULL,
-	DataAtualizacao datetime NOT NULL,
-  CONSTRAINT [PK_EVENTO] PRIMARY KEY CLUSTERED
-  (
-  [Id] ASC
-  ) WITH (IGNORE_DUP_KEY = OFF)
-
+	Descricao VARCHAR(500),
+	Numero INT NOT NULL,
+	PontoReferencia VARCHAR(30),
+  	CONSTRAINT PkEvento PRIMARY KEY (Id)
 )
-GO
-CREATE TABLE [Telefone] (
-	Id integer NOT NULL,
-	EstadoId integer NOT NULL,
-	Numero varchar(10) NOT NULL,
-	Servico varchar(10) NOT NULL,
-	DataCadastro datetime NOT NULL,
-	DataAtualizacao datetime NOT NULL,
-	TipoTelefone integer NOT NULL,
-  CONSTRAINT [PK_TELEFONE] PRIMARY KEY CLUSTERED
-  (
-  [Id] ASC
-  ) WITH (IGNORE_DUP_KEY = OFF)
 
-)
 GO
-CREATE TABLE [Orcamento] (
-	Id integer NOT NULL,
+
+If Object_Id('Telefone') Is Null
+CREATE TABLE Telefone (
+	Id INT NOT NULL,
+	IdEstado INT NOT NULL,
+	Numero VARCHAR(10) NOT NULL,
+	Servico VARCHAR(10) NOT NULL,
+  	CONSTRAINT PkTelefone PRIMARY KEY (Id)
+)
+
+GO
+
+If Object_Id('Orcamento') Is Null
+CREATE TABLE Orcamento (
+	Id INT NOT NULL,
 	TotalDizimo decimal(6,2) NOT NULL,
 	TotalOferta decimal(6,2) NOT NULL,
-	DataAtualizacao datetime NOT NULL,
-  CONSTRAINT [PK_ORCAMENTO] PRIMARY KEY CLUSTERED
-  (
-  [Id] ASC
-  ) WITH (IGNORE_DUP_KEY = OFF)
-
+  	CONSTRAINT PkOrcamento PRIMARY KEY (Id)
 )
+
 GO
-CREATE TABLE [ContaPagar] (
-	Id integer NOT NULL,
-	TipoContaId integer NOT NULL,
-	Descricao varchar(10) NOT NULL,
+
+If Object_Id('ContaPagar') Is Null
+CREATE TABLE ContaPagar (
+	Id INT NOT NULL,
+	IdTipoConta INT NOT NULL,
+	Descricao VARCHAR(10) NOT NULL,
 	Valor decimal(6,2) NOT NULL,
 	DataVencimento datetime NOT NULL,
-	DataCadastro datetime NOT NULL,
-	DataAtualizacao binary NOT NULL,
-  CONSTRAINT [PK_CONTAPAGAR] PRIMARY KEY CLUSTERED
-  (
-  [Id] ASC
-  ) WITH (IGNORE_DUP_KEY = OFF)
-
+	DataPagamento datetime,
+  	CONSTRAINT PkContaPagar PRIMARY KEY (Id)
 )
-GO
-CREATE TABLE [TipoContaPagar] (
-	Id integer NOT NULL,
-	Descricao varchar(10) NOT NULL UNIQUE,
-	DataCadastro datetime NOT NULL,
-	DataAtualizacao datetime NOT NULL,
-  CONSTRAINT [PK_TIPOCONTAPAGAR] PRIMARY KEY CLUSTERED
-  (
-  [Id] ASC
-  ) WITH (IGNORE_DUP_KEY = OFF)
 
+GO
+
+If Object_Id('TipoContaPagar') Is Null
+CREATE TABLE TipoContaPagar (
+	Id INT NOT NULL,
+	Descricao VARCHAR(10) NOT NULL UNIQUE,
+  	CONSTRAINT PkTipoContaPagar PRIMARY KEY (Id)
 )
-GO
-CREATE TABLE [Perfil] (
-	Id integer NOT NULL,
-	Nome varchar(20) NOT NULL UNIQUE,
-	DataCadastro datetime NOT NULL,
-	DataAtualizacao datetime NOT NULL,
-  CONSTRAINT [PK_PERFIL] PRIMARY KEY CLUSTERED
-  (
-  [Id] ASC
-  ) WITH (IGNORE_DUP_KEY = OFF)
 
+GO
+
+If Object_Id('Perfil') Is Null
+CREATE TABLE Perfil (
+	Id INT NOT NULL,
+	Nome VARCHAR(20) NOT NULL UNIQUE,
+  	CONSTRAINT PkPerfil PRIMARY KEY (Id)
 )
-GO
-CREATE TABLE [TipoTelefone] (
-	Id integer NOT NULL,
-	Nome varchar(20) NOT NULL UNIQUE,
-	DataCadastro datetime NOT NULL,
-	DataAtualizacao datetime NOT NULL,
-  CONSTRAINT [PK_TIPOTELEFONE] PRIMARY KEY CLUSTERED
-  (
-  [Id] ASC
-  ) WITH (IGNORE_DUP_KEY = OFF)
 
-)
 GO
-ALTER TABLE [Pessoa] WITH CHECK ADD CONSTRAINT [Pessoa_fk0] FOREIGN KEY ([EnderecoId]) REFERENCES [Endereco]([Id])
-ON UPDATE CASCADE
+ALTER TABLE [Pessoa] WITH CHECK ADD CONSTRAINT [FkPessoa_x_Endereco] FOREIGN KEY ([IdEnderecoPessoa]) REFERENCES [Endereco]([Id])
 GO
-ALTER TABLE [Pessoa] CHECK CONSTRAINT [Pessoa_fk0]
+ALTER TABLE [Pessoa] CHECK CONSTRAINT [FkPessoa_x_Endereco]
 GO
-ALTER TABLE [Pessoa] WITH CHECK ADD CONSTRAINT [Pessoa_fk1] FOREIGN KEY ([FuncaoId]) REFERENCES [Funcao]([Id])
-ON UPDATE CASCADE
+ALTER TABLE [Pessoa] WITH CHECK ADD CONSTRAINT [FkPessoa_x_FuncaoMinisterial] FOREIGN KEY ([IdFuncaoMinisterial]) REFERENCES [FuncaoMinisterial]([Id])
 GO
-ALTER TABLE [Pessoa] CHECK CONSTRAINT [Pessoa_fk1]
+ALTER TABLE [Pessoa] CHECK CONSTRAINT [FkPessoa_x_FuncaoMinisterial]
 GO
-ALTER TABLE [Pessoa] WITH CHECK ADD CONSTRAINT [Pessoa_fk2] FOREIGN KEY ([TelefoneId]) REFERENCES [Telefone]([Id])
-ON UPDATE CASCADE
+ALTER TABLE [Pessoa] WITH CHECK ADD CONSTRAINT [FkPessoa_x_Telefone] FOREIGN KEY ([IdTelefone]) REFERENCES [Telefone]([Id])
 GO
-ALTER TABLE [Pessoa] CHECK CONSTRAINT [Pessoa_fk2]
-GO
+ALTER TABLE [Pessoa] CHECK CONSTRAINT [FkPessoa_x_Telefone]
 
+GO
+ALTER TABLE [Dizimo] WITH CHECK ADD CONSTRAINT [FkDizimo_x_Pessoa] FOREIGN KEY ([IdPessoa]) REFERENCES [Pessoa]([Id])
+GO
+ALTER TABLE [Dizimo] CHECK CONSTRAINT [FkDizimo_x_Pessoa]
 
-ALTER TABLE [Dizimo] WITH CHECK ADD CONSTRAINT [Dizimo_fk0] FOREIGN KEY ([PessoaId]) REFERENCES [Pessoa]([Id])
-ON UPDATE CASCADE
 GO
-ALTER TABLE [Dizimo] CHECK CONSTRAINT [Dizimo_fk0]
+ALTER TABLE [Usuario] WITH CHECK ADD CONSTRAINT [FkUsuario_x_Perfil] FOREIGN KEY ([IdPerfil]) REFERENCES [Perfil]([Id])
 GO
+ALTER TABLE [Usuario] CHECK CONSTRAINT [FkUsuario_x_Perfil]
+GO
+ALTER TABLE [Usuario] WITH CHECK ADD CONSTRAINT [FkUsuario_x_Pessoa] FOREIGN KEY ([IdPessoa]) REFERENCES [Pessoa]([Id])
+GO
+ALTER TABLE [Usuario] CHECK CONSTRAINT [FkUsuario_x_Pessoa]
 
-ALTER TABLE [Usuario] WITH CHECK ADD CONSTRAINT [Usuario_fk0] FOREIGN KEY ([PerfilId]) REFERENCES [Perfil]([Id])
-ON UPDATE CASCADE
 GO
-ALTER TABLE [Usuario] CHECK CONSTRAINT [Usuario_fk0]
+ALTER TABLE [Venda] WITH CHECK ADD CONSTRAINT [FkVenda_x_Pessoa] FOREIGN KEY ([IdPessoa]) REFERENCES [Pessoa]([Id])
 GO
-ALTER TABLE [Usuario] WITH CHECK ADD CONSTRAINT [Usuario_fk1] FOREIGN KEY ([PessoaId]) REFERENCES [Pessoa]([Id])
-ON UPDATE CASCADE
-GO
-ALTER TABLE [Usuario] CHECK CONSTRAINT [Usuario_fk1]
-GO
+ALTER TABLE [Venda] CHECK CONSTRAINT [FkVenda_x_Pessoa]
 
-ALTER TABLE [Venda] WITH CHECK ADD CONSTRAINT [Venda_fk0] FOREIGN KEY ([PessoaId]) REFERENCES [Pessoa]([Id])
-ON UPDATE CASCADE
 GO
-ALTER TABLE [Venda] CHECK CONSTRAINT [Venda_fk0]
+ALTER TABLE [Cidade] WITH CHECK ADD CONSTRAINT [FkCidade_x_Estado] FOREIGN KEY ([IdEstado]) REFERENCES [Estado]([Id])
 GO
+ALTER TABLE [Cidade] CHECK CONSTRAINT [FkCidade_x_Estado]
 
-ALTER TABLE [Cidade] WITH CHECK ADD CONSTRAINT [Cidade_fk0] FOREIGN KEY ([EstadoId]) REFERENCES [Estado]([Id])
-ON UPDATE CASCADE
 GO
-ALTER TABLE [Cidade] CHECK CONSTRAINT [Cidade_fk0]
+ALTER TABLE [Endereco] WITH CHECK ADD CONSTRAINT [FkEndereco_x_Cidade] FOREIGN KEY ([IdCidade]) REFERENCES [Cidade]([Id])
 GO
+ALTER TABLE [Endereco] CHECK CONSTRAINT [FkEndereco_x_Cidade]
 
+GO
+ALTER TABLE [Oferta] WITH CHECK ADD CONSTRAINT [FkOferta_x_Pessoa] FOREIGN KEY ([IdPessoa]) REFERENCES [Pessoa]([Id])
+GO
+ALTER TABLE [Oferta] CHECK CONSTRAINT [FkOferta_x_Pessoa]
 
-ALTER TABLE [Endereco] WITH CHECK ADD CONSTRAINT [Endereco_fk0] FOREIGN KEY ([CidadeId]) REFERENCES [Cidade]([Id])
-ON UPDATE CASCADE
 GO
-ALTER TABLE [Endereco] CHECK CONSTRAINT [Endereco_fk0]
+ALTER TABLE [ItemVenda] WITH CHECK ADD CONSTRAINT [FkItemVenda_x_Venda] FOREIGN KEY ([IdVenda]) REFERENCES [Venda]([Id])
 GO
+ALTER TABLE [ItemVenda] CHECK CONSTRAINT [FkItemVenda_x_Venda]
+GO
+ALTER TABLE [ItemVenda] WITH CHECK ADD CONSTRAINT [FkItemVenda_x_Produto] FOREIGN KEY ([IdProduto]) REFERENCES [Produto]([Id])
+GO
+ALTER TABLE [ItemVenda] CHECK CONSTRAINT [FkItemVenda_x_Produto]
 
-ALTER TABLE [Oferta] WITH CHECK ADD CONSTRAINT [Oferta_fk0] FOREIGN KEY ([PessoaId]) REFERENCES [Pessoa]([Id])
-ON UPDATE CASCADE
 GO
-ALTER TABLE [Oferta] CHECK CONSTRAINT [Oferta_fk0]
+ALTER TABLE [Produto] WITH CHECK ADD CONSTRAINT [FkProduto_x_Categoria] FOREIGN KEY ([IdCategoria]) REFERENCES [Categoria]([Id])
 GO
+ALTER TABLE [Produto] CHECK CONSTRAINT [FkProduto_x_Categoria]
 
-ALTER TABLE [ItemVenda] WITH CHECK ADD CONSTRAINT [ItemVenda_fk0] FOREIGN KEY ([VendaId]) REFERENCES [Venda]([Id])
-ON UPDATE CASCADE
 GO
-ALTER TABLE [ItemVenda] CHECK CONSTRAINT [ItemVenda_fk0]
+ALTER TABLE [ContaReceber] WITH CHECK ADD CONSTRAINT [FkContaReceber_x_Venda] FOREIGN KEY ([IdVenda]) REFERENCES [Venda]([Id])
 GO
-ALTER TABLE [ItemVenda] WITH CHECK ADD CONSTRAINT [ItemVenda_fk1] FOREIGN KEY ([ProdutoId]) REFERENCES [Produto]([Id])
-ON UPDATE CASCADE
+ALTER TABLE [ContaReceber] CHECK CONSTRAINT [FkContaReceber_x_Venda]
 GO
-ALTER TABLE [ItemVenda] CHECK CONSTRAINT [ItemVenda_fk1]
+ALTER TABLE [ContaReceber] WITH CHECK ADD CONSTRAINT [FkContaReceber_x_FormaPagamento] FOREIGN KEY ([IdFormaPagamento]) REFERENCES [FormaPagamento]([Id])
 GO
+ALTER TABLE [ContaReceber] CHECK CONSTRAINT [FkContaReceber_x_FormaPagamento]
 
+GO
+ALTER TABLE [Evento] WITH CHECK ADD CONSTRAINT [FkEvento_x_Publico] FOREIGN KEY ([IdPublico]) REFERENCES [Publico]([Id])
+GO
+ALTER TABLE [Evento] CHECK CONSTRAINT [FkEvento_x_Publico]
+GO
+ALTER TABLE [Evento] WITH CHECK ADD CONSTRAINT [FkEvento_x_Endereco] FOREIGN KEY ([IdEnderecoPessoa]) REFERENCES [Endereco]([Id])
+GO
+ALTER TABLE [Evento] CHECK CONSTRAINT [FkEvento_x_Endereco]
 
-ALTER TABLE [Produto] WITH CHECK ADD CONSTRAINT [Produto_fk0] FOREIGN KEY ([CategoriaId]) REFERENCES [Categoria]([Id])
-ON UPDATE CASCADE
 GO
-ALTER TABLE [Produto] CHECK CONSTRAINT [Produto_fk0]
+ALTER TABLE [Telefone] WITH CHECK ADD CONSTRAINT [FkTelefone_x_Estado] FOREIGN KEY ([IdEstado]) REFERENCES [Estado]([Id])
 GO
+ALTER TABLE [Telefone] CHECK CONSTRAINT [FkTelefone_x_Estado]
 
-ALTER TABLE [ContaReceber] WITH CHECK ADD CONSTRAINT [ContaReceber_fk0] FOREIGN KEY ([VendaId]) REFERENCES [Venda]([Id])
-ON UPDATE CASCADE
 GO
-ALTER TABLE [ContaReceber] CHECK CONSTRAINT [ContaReceber_fk0]
+ALTER TABLE [ContaPagar] WITH CHECK ADD CONSTRAINT [FkContaPagar_x_TipoContaPagar] FOREIGN KEY ([IdTipoConta]) REFERENCES [TipoContaPagar]([Id])
 GO
-ALTER TABLE [ContaReceber] WITH CHECK ADD CONSTRAINT [ContaReceber_fk1] FOREIGN KEY ([FormaPagamentoId]) REFERENCES [FormaPagamento]([Id])
-ON UPDATE CASCADE
-GO
-ALTER TABLE [ContaReceber] CHECK CONSTRAINT [ContaReceber_fk1]
-GO
-
-
-
-ALTER TABLE [Evento] WITH CHECK ADD CONSTRAINT [Evento_fk0] FOREIGN KEY ([PublicoId]) REFERENCES [Publico]([Id])
-ON UPDATE CASCADE
-GO
-ALTER TABLE [Evento] CHECK CONSTRAINT [Evento_fk0]
-GO
-ALTER TABLE [Evento] WITH CHECK ADD CONSTRAINT [Evento_fk1] FOREIGN KEY ([EnderecoId]) REFERENCES [Endereco]([Id])
-ON UPDATE CASCADE
-GO
-ALTER TABLE [Evento] CHECK CONSTRAINT [Evento_fk1]
-GO
-
-ALTER TABLE [Telefone] WITH CHECK ADD CONSTRAINT [Telefone_fk0] FOREIGN KEY ([EstadoId]) REFERENCES [Estado]([Id])
-ON UPDATE CASCADE
-GO
-ALTER TABLE [Telefone] CHECK CONSTRAINT [Telefone_fk0]
-GO
-ALTER TABLE [Telefone] WITH CHECK ADD CONSTRAINT [Telefone_fk1] FOREIGN KEY ([TipoTelefone]) REFERENCES [TipoTelefone]([Id])
-ON UPDATE CASCADE
-GO
-ALTER TABLE [Telefone] CHECK CONSTRAINT [Telefone_fk1]
-GO
-
-
-ALTER TABLE [ContaPagar] WITH CHECK ADD CONSTRAINT [ContaPagar_fk0] FOREIGN KEY ([TipoContaId]) REFERENCES [TipoContaPagar]([Id])
-ON UPDATE CASCADE
-GO
-ALTER TABLE [ContaPagar] CHECK CONSTRAINT [ContaPagar_fk0]
-GO
-
-
-
+ALTER TABLE [ContaPagar] CHECK CONSTRAINT [FkContaPagar_x_TipoContaPagar]
