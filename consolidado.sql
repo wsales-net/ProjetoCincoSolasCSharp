@@ -78,7 +78,6 @@ GO
 If Object_Id('Pessoa') Is Null
 CREATE TABLE Pessoa (
 	Id INT IDENTITY,
-	IdTelefone INT NOT NULL,
 	IdEstadoCivil INT NOT NULL,
 	IdEnderecoPessoa INT NOT NULL,
 	IdFuncaoMinisterial INT NOT NULL,
@@ -314,11 +313,24 @@ GO
 If Object_Id('Telefone') Is Null
 CREATE TABLE Telefone (
 	Id INT NOT NULL,
+	IdPessoa INT NOT NULL,
+	IdTipoTelefone INT NOT NULL,
 	IdEstado INT NOT NULL,
+	Ddd INT NOT NULL,
 	Numero VARCHAR(10) NOT NULL,
 	Servico VARCHAR(10) NOT NULL,
 	DataRegistro DATETIME DEFAULT GETDATE(),
   	CONSTRAINT PkTelefone PRIMARY KEY (Id)
+)
+
+GO
+
+If Object_Id('TipoTelefone') Is Null
+CREATE TABLE TipoContaPagar (
+	Id INT NOT NULL,
+	TipoTelefone VARCHAR(20) NOT NULL UNIQUE,
+	DataRegistro DATETIME DEFAULT GETDATE(),
+  	CONSTRAINT PkTipoContaPagar PRIMARY KEY (Id)
 )
 
 GO
