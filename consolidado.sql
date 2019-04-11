@@ -2,7 +2,8 @@
 
 GO
  -- EXEMPLO: LIVRO, PREGAÇÃO, WHATSAPP-AUDIO, PODCAST, SITE
-If Object_Id('CategoriaAnotacaoEvangelho') Is Null
+If Object_Id('CategoriaA
+caoEvangelho') Is Null
 CREATE TABLE CategoriaAnotacaoEvangelho (
 	Id INT IDENTITY,
 	Descricao VARCHAR(15) NOT NULL,
@@ -78,22 +79,74 @@ GO
 If Object_Id('Pessoa') Is Null
 CREATE TABLE Pessoa (
 	Id INT IDENTITY,
+	IdEndereco INT NOT NULL,
 	IdEstadoCivil INT NOT NULL,
-	IdEnderecoPessoa INT NOT NULL,
-	IdFuncaoMinisterial INT NOT NULL,
+	--IdFuncaoMinisterial INT NOT NULL, Lideranca
+	--IdSalarioMinisterial INT NOT NULL, Lideranca
+	IdProfissao INT NOT NULL,
 	Nome VARCHAR(15) NOT NULL,
 	SobreNome VARCHAR(60) NOT NULL,
 	Sexo CHAR(1) NOT NULL,
 	DataNascimento DATETIME NOT NULL,
 	NomeMae VARCHAR(30),
 	NomePai VARCHAR(30),
-	RG VARCHAR(12) UNIQUE,
-	CPF VARCHAR(14) UNIQUE,
+	Rg VARCHAR(12) UNIQUE,
+	Cpf VARCHAR(14) UNIQUE,
+	--CpfConjuge VARCHAR(14) UNIQUE,
+	--NomeConjuge VARCHAR(14),
+	Batizado BIT NOT NULL,
+	Observacao VARCHAR(1000),
 	DataRegistro DATETIME NOT NULL,
-	Ativo BIT NOT NULL,
+	Ativo BIT DEFAULT(1),
+	--ExerceFuncaoMinisterial BIT DEFAULT(0), Lideranca
 	Foto VARCHAR,
   	CONSTRAINT PkPessoa PRIMARY KEY (Id)
 )
+
+	--Atividade
+		--Pessoa
+		--Inicio
+		--Fim
+	--Lider 
+	--MatriculaEbd
+		--Aluno (Membro)
+		--Curso
+		--Prof
+	--MinisterioAnterior
+
+GO
+
+If Object_Id('Endereco') Is Null
+CREATE TABLE Endereco (
+	Id INT NOT NULL,
+	IdCidade INT NOT NULL,
+	Cep VARCHAR(9) NOT NULL UNIQUE,
+	Logradouro VARCHAR(50) NOT NULL,
+	Bairro VARCHAR(70) NOT NULL,
+	Numero INT NOT NULL,
+	Complemento VARCHAR(20),
+	DataRegistro DATETIME DEFAULT GETDATE(),
+  	CONSTRAINT PkEndereco PRIMARY KEY (Id)
+)
+
+GO
+If Object_Id('DonsEspirituais') Is Null
+CREATE TABLE DonsEspirituais (
+	Id INT IDENTITY,
+	IdPessoa INT NOT NULL,
+	Descricao VARCHAR(30) NOT NULL,
+  	CONSTRAINT PkDonsEspirituais PRIMARY KEY (Id)
+)
+GO
+
+--If Object_Id('Pessoa') Is Null
+--CREATE TABLE Pessoa (
+--)
+--GO
+
+--If Object_Id('Ministerio') Is Null
+--CREATE TABLE Ministerio (
+--)
 
 GO
 
@@ -115,9 +168,9 @@ CREATE TABLE Email (
 	Email VARCHAR(100) NOT NULL,
 	Observacao VARCHAR(500),
 	EmailPrincipal BIT NOT NULL,
-	Excluido BIT NOT NULL DEFAULT (0),
-	Notificado BIT NOT NULL DEFAULT (0),
-	Confirmado BIT NOT NULL DEFAULT (0),
+	Excluido BIT DEFAULT (0),
+	Notificado BIT DEFAULT (0),
+	Confirmado BIT DEFAULT (0),
 	DataRegistro DATETIME DEFAULT GETDATE(),
   	CONSTRAINT PkFuncaoMinisterial PRIMARY KEY (Id)
 )
@@ -190,21 +243,6 @@ CREATE TABLE Estado (
 	UF VARCHAR(2) NOT NULL UNIQUE,
 	DataRegistro DATETIME DEFAULT GETDATE(),
   	CONSTRAINT PkEstado PRIMARY KEY (Id)
-)
-
-GO
-
-If Object_Id('Endereco') Is Null
-CREATE TABLE Endereco (
-	Id INT NOT NULL,
-	IdCidade INT NOT NULL,
-	Cep VARCHAR(9) NOT NULL UNIQUE,
-	Logradouro VARCHAR(50) NOT NULL,
-	Bairro VARCHAR(70) NOT NULL,
-	Numero INT NOT NULL,
-	Complemento VARCHAR(20),
-	DataRegistro DATETIME DEFAULT GETDATE(),
-  	CONSTRAINT PkEndereco PRIMARY KEY (Id)
 )
 
 GO
@@ -297,7 +335,7 @@ If Object_Id('Evento') Is Null
 CREATE TABLE Evento (
 	Id INT NOT NULL,
 	IdPublico INT NOT NULL,
-	IdEnderecoPessoa INT NOT NULL,
+	IdEndereco INT NOT NULL,
 	Nome VARCHAR(100) NOT NULL,
 	Data date NOT NULL,
 	Hora time NOT NULL,
@@ -379,7 +417,7 @@ CREATE TABLE Perfil (
 )
 
 GO
-ALTER TABLE Pessoa WITH CHECK ADD CONSTRAINT FkPessoa_x_Endereco FOREIGN KEY (IdEnderecoPessoa) REFERENCES Endereco(Id)
+ALTER TABLE Pessoa WITH CHECK ADD CONSTRAINT FkPessoa_x_Endereco FOREIGN KEY (IdEndereco) REFERENCES Endereco(Id)
 GO
 ALTER TABLE Pessoa ADD CONSTRAINT CHK_PessoaSexo CHECK (SEXO = 'M' OR SEXO = 'F');
 GO
@@ -462,7 +500,7 @@ ALTER TABLE Evento WITH CHECK ADD CONSTRAINT FkEvento_x_Publico FOREIGN KEY (IdP
 GO
 ALTER TABLE Evento CHECK CONSTRAINT FkEvento_x_Publico
 GO
-ALTER TABLE Evento WITH CHECK ADD CONSTRAINT FkEvento_x_Endereco FOREIGN KEY (IdEnderecoPessoa) REFERENCES Endereco(Id)
+ALTER TABLE Evento WITH CHECK ADD CONSTRAINT FkEvento_x_Endereco FOREIGN KEY (IdEndereco) REFERENCES Endereco(Id)
 GO
 ALTER TABLE Evento CHECK CONSTRAINT FkEvento_x_Endereco
 
@@ -475,3 +513,24 @@ GO
 ALTER TABLE ContaPagar WITH CHECK ADD CONSTRAINT FkContaPagar_x_TipoContaPagar FOREIGN KEY (IdTipoConta) REFERENCES TipoContaPagar(Id)
 GO
 ALTER TABLE ContaPagar CHECK CONSTRAINT FkContaPagar_x_TipoContaPagar
+
+If Object_Id('TagConsultaBancoDados') Is Null
+CREATE TABLE TagConsultaBancoDados (
+	ID INT IDENTITY,
+	Titulo VARCHAR(20),
+	CONSTRAINT PkTag PRIMARY KEY (Id)
+)
+
+If Object_Id('ConsultasBancoDados') Is Null
+create table ConsultasBancoDados (
+	Id int identity, 
+	IdTagConsultaBancoDados int not null,
+	Query varchar(max) not null,
+	Descricao varchar(1000) not null, 
+	CONSTRAINT PkConsultaBancoDados PRIMARY KEY (Id),
+	CONSTRAINT FKConsultaBancoDados_x_TagConsultaBancoDados FOREIGN KEY (IdTagConsultaBancoDados) REFERENCES TagConsultaBancoDados(id)
+)
+
+
+INSERT INTO TagConsultaBancoDados (Titulo)
+VALUES ('conta'),('representante'),('pessoas'),(''),(''),(''),('')
