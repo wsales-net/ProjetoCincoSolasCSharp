@@ -76,29 +76,54 @@ CREATE TABLE AnotacaoEvangelhoTag
 
 GO
 
-If Object_Id('Pessoa') Is Null
+If Object_Id('Membro') Is Null
 CREATE TABLE Pessoa (
 	Id INT IDENTITY,
 	IdEndereco INT NOT NULL,
 	IdEstadoCivil INT NOT NULL,
-	--IdFuncaoMinisterial INT NOT NULL, Lideranca
-	--IdSalarioMinisterial INT NOT NULL, Lideranca
 	IdProfissao INT NOT NULL,
 	Nome VARCHAR(15) NOT NULL,
-	SobreNome VARCHAR(60) NOT NULL,
+	Sobrenome VARCHAR(60) NOT NULL,
 	Sexo CHAR(1) NOT NULL,
 	DataNascimento DATETIME NOT NULL,
 	NomeMae VARCHAR(30),
 	NomePai VARCHAR(30),
 	Rg VARCHAR(12) UNIQUE,
 	Cpf VARCHAR(14) UNIQUE,
-	--CpfConjuge VARCHAR(14) UNIQUE,
-	--NomeConjuge VARCHAR(14),
+	CpfConjuge VARCHAR(14) UNIQUE,
+	NomeConjuge VARCHAR(14),
 	Batizado BIT NOT NULL,
 	Observacao VARCHAR(1000),
 	DataRegistro DATETIME NOT NULL,
 	Ativo BIT DEFAULT(1),
-	--ExerceFuncaoMinisterial BIT DEFAULT(0), Lideranca
+	Foto VARCHAR,
+  	CONSTRAINT PkPessoa PRIMARY KEY (Id)
+)
+
+GO
+
+If Object_Id('Lider') Is Null
+CREATE TABLE Pessoa (
+	Id INT IDENTITY,
+	IdEndereco INT NOT NULL,
+	IdEstadoCivil INT NOT NULL,
+	IdProfissao INT NOT NULL,
+	IdFuncaoMinisterial INT NOT NULL,
+	IdSalarioMinisterial INT,
+	Nome VARCHAR(15) NOT NULL,
+	Sobrenome VARCHAR(60) NOT NULL,
+	Sexo CHAR(1) NOT NULL,
+	DataNascimento DATETIME NOT NULL,
+	NomeMae VARCHAR(30),
+	NomePai VARCHAR(30),
+	Rg VARCHAR(12) UNIQUE,
+	Cpf VARCHAR(14) UNIQUE,
+	CpfConjuge VARCHAR(14) UNIQUE,
+	NomeConjuge VARCHAR(14),
+	Batizado BIT DEFAULT(1),
+	Observacao VARCHAR(1000),
+	DataRegistro DATETIME NOT NULL,
+	Ativo BIT DEFAULT(1),
 	Foto VARCHAR,
   	CONSTRAINT PkPessoa PRIMARY KEY (Id)
 )
@@ -107,7 +132,6 @@ CREATE TABLE Pessoa (
 		--Pessoa
 		--Inicio
 		--Fim
-	--Lider 
 	--MatriculaEbd
 		--Aluno (Membro)
 		--Curso
