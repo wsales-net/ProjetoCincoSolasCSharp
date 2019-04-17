@@ -13,7 +13,9 @@
 <body>
     <div class="panel-controle">
         <img src="https://cdn3.iconfinder.com/data/icons/toolbar-people/512/user_refresh_man_male_profile_account_person-512.png" width="256px" /><br />
-        <button class="btn btn-primary" id="sincronizar">Sincronizar</button>
+        <button type="button" class="btn btn-primary" id="sincronizar">
+            Sincronizar
+        </button>
         <br />
         <img src="~/Imagens/load.gif" class="load" />
         <label class="msg-retorno-service"></label><br />
@@ -23,26 +25,27 @@
 <script>
     $(document).ready(function () {
         $(".load").hide();
-        $("#sincronizar").click(function (e) {
-            $("#sincronizar").prop("disabled", true);
-            $("#sincronizar").html("Sincronizando...");
+        $('#sincronizar').on('click', function () {
+            $(this).button('loading');
+            $(this).prop("disabled", true);
+            $(this).html("Sincronizando...");
+
             $(".msg-retorno-service").html("");
             $(".load").show();
             $.ajax({
                 type: "POST",
-                //'@Url.Action("SincronizarDados", "PainelControle")' + '?idUsuario=' + idUsuario + '&idFicha=' + '@Model.IdFichaCadastral',
-                url: "/PainelControle/SincronizarDados/",
+                url: '@Url.Action("SincronizarDados", "PainelControle")',
                 success: function (resposta) {
                     $(".msg-retorno-service").fadeOut(0).html(resposta).fadeIn(200);
                     setTimeout(function () {
                         $('.msg-retorno-service').fadeOut('slow');
                     }, 2500);
 
-                    $("#sincronizar").prop("disabled", false);
-                    $("#sincronizar").html("Sincronizar");
+                    $(this).button('reset');
                     $(".load").hide();
                 },
                 error: function (result) {
+                    $(this).button('reset');
                     alert('error', result);
                 }
             });
