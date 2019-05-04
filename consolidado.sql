@@ -75,8 +75,9 @@ CREATE TABLE AnotacaoEvangelhoTag
 
 GO
 
+BEGIN TRAN
 If Object_Id('Membro') Is Null
-CREATE TABLE Pessoa (
+CREATE TABLE Membro (
 	Id INT IDENTITY,
 	IdEndereco INT NOT NULL,
 	IdEstadoCivil INT NOT NULL,
@@ -87,22 +88,139 @@ CREATE TABLE Pessoa (
 	DataNascimento DATETIME NOT NULL,
 	NomeMae VARCHAR(30),
 	NomePai VARCHAR(30),
-	Rg VARCHAR(12) UNIQUE,
-	Cpf VARCHAR(14) UNIQUE,
-	CpfConjuge VARCHAR(14) UNIQUE,
+	Rg VARCHAR(12),
+	Cpf VARCHAR(14),
+	CpfConjuge VARCHAR(14),
 	NomeConjuge VARCHAR(14),
 	Batizado BIT NOT NULL,
 	Observacao VARCHAR(1000),
 	DataRegistro DATETIME NOT NULL,
 	Ativo BIT DEFAULT(1),
 	Foto VARCHAR,
-  	CONSTRAINT PkPessoa PRIMARY KEY (Id)
+  	CONSTRAINT PkPessoa PRIMARY KEY (Id),
+  	CONSTRAINT UQRgPessoa UNIQUE (Rg),
+  	CONSTRAINT UQCpfPessoa UNIQUE (Cpf),
+  	CONSTRAINT UQCpfConjugePessoa UNIQUE (Cpf),
+	CONSTRAINT CHKIdPessoa CHECK ([Id] > 0)
+)
+GO
+--MinisterioAnterior
+
+
+-- Dump of table exercicio
+-- ------------------------------------------------------------
+
+DROP TABLE IF EXISTS [Curso];
+
+CREATE TABLE Curso (
+	Id INT IDENTITY,
+	Nome VARCHAR(255) NOT NULL,
+  	CONSTRAINT PkCurso PRIMARY KEY (Id),
+	CONSTRAINT CHKIdCurso CHECK ([Id] > 0)
+);
+
+INSERT INTO Curso ([nome])
+VALUES ('Integração Ministerial')
+
+
+-- Dump of table exercicio
+-- ------------------------------------------------------------
+
+DROP TABLE IF EXISTS [Exercicio];
+
+CREATE TABLE Exercicio (
+	Id int IDENTITY,
+	IdSecao int NOT NULL,
+	Pergunta varchar(500) NOT NULL,
+	RespostaOficial varchar(500) NOT NULL,
+	CONSTRAINT PkExercicio PRIMARY KEY (Id),
+	CONSTRAINT CHKIdExercicio CHECK ([Id] > 0)
+);
+
+-- Dump of table Turma
+-- ------------------------------------------------------------
+
+
+DROP TABLE IF EXISTS [Turma];
+
+CREATE TABLE Turma (
+	Id int NOT NULL IDENTITY,
+	IdLider	int NOT NULL,
+	IdMembro int NOT NULL,
+	DataInicio datetime NOT NULL,
+	DataFim	date NOT NULL,
+	CONSTRAINT PkTurma PRIMARY KEY (Id),
+	CONSTRAINT CHKIdTurma CHECK ([Id] > 0)
+);
+
+
+-- Dump of table matricula
+-- ------------------------------------------------------------
+
+
+DROP TABLE IF EXISTS [Matricula];
+
+CREATE TABLE Matricula (
+	Id int IDENTITY,
+	IdMembro int NOT NULL,
+	IdCurso int NOT NULL,
+	DataMatricula datetime NOT NULL,
+	CONSTRAINT PkMatricula PRIMARY KEY (Id),
+	CONSTRAINT CHKIdMatricula CHECK ([Id] > 0)
 )
 
-GO
+
+-- Dump of table nota
+-- ------------------------------------------------------------
+
+DROP TABLE IF EXISTS [nota];
+
+CREATE TABLE Nota (
+	Id int check ([id] > 0) NOT NULL IDENTITY,
+	IdResposta int,
+	Nota int,
+	CONSTRAINT PkNota PRIMARY KEY (Id),
+	CONSTRAINT CHKIdNota CHECK ([Id] > 0)
+)
+
+
+-- Dump of table resposta
+-- ------------------------------------------------------------
+
+DROP TABLE IF EXISTS [Resposta];
+
+CREATE TABLE Resposta (
+	Id int IDENTITY,
+	IdExercicio int,
+	IdMembro int,
+	RespostaDada varchar(500),
+	CONSTRAINT PkResposta PRIMARY KEY (Id),
+	CONSTRAINT CHKIdResposta CHECK ([Id] > 0)
+) ;
+
+
+-- Dump of table secao
+-- ------------------------------------------------------------
+
+DROP TABLE IF EXISTS [Secao];
+
+CREATE TABLE Secao (
+	Id int IDENTITY,
+	IdCurso int NOT NULL,
+	Titulo varchar(255) NOT NULL,
+	Explicacao varchar(1000) NOT NULL,
+	Numero int NOT NULL,
+	CONSTRAINT PkSecao PRIMARY KEY (Id),
+	CONSTRAINT CHKIdSecao CHECK ([Id] > 0)
+)
+ALTER TABLE Secao ADD CONSTRAINT DFTitulo DEFAULT '' FOR Titulo
+
+-- Dump of table exercicio
+-- ------------------------------------------------------------
+
 
 If Object_Id('Lider') Is Null
-CREATE TABLE Pessoa (
+CREATE TABLE Lider (
 	Id INT IDENTITY,
 	IdEndereco INT NOT NULL,
 	IdEstadoCivil INT NOT NULL,
@@ -126,16 +244,6 @@ CREATE TABLE Pessoa (
 	Foto VARCHAR,
   	CONSTRAINT PkPessoa PRIMARY KEY (Id)
 )
-
-	--Atividade
-		--Pessoa
-		--Inicio
-		--Fim
-	--MatriculaEbd
-		--Aluno (Membro)
-		--Curso
-		--Prof
-	--MinisterioAnterior
 
 GO
 
