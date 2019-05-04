@@ -2,8 +2,7 @@
 
 GO
  -- EXEMPLO: LIVRO, PREGAÇÃO, WHATSAPP-AUDIO, PODCAST, SITE
-If Object_Id('CategoriaA
-caoEvangelho') Is Null
+If Object_Id('CategoriaAcaoEvangelho') Is Null
 CREATE TABLE CategoriaAnotacaoEvangelho (
 	Id INT IDENTITY,
 	Descricao VARCHAR(15) NOT NULL,
