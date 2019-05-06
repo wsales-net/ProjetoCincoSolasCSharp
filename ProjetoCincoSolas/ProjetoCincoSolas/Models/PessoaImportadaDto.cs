@@ -5,7 +5,7 @@ using System.Web;
 
 namespace ProjetoCincoSolas.Models
 {
-    public class Pessoa
+    public class PessoaImportadaDto
     {
         public string Nome { get; set; }
         public string Cpf { get; set; }

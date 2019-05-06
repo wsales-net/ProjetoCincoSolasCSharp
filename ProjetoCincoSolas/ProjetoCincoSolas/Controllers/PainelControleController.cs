@@ -26,14 +26,14 @@ namespace ProjetoCincoSolas.Controllers
 
         public JsonResult SincronizarDados()
         {
-            var listaPessoas = new List<Pessoa>();
+            var listaPessoas = new List<PessoaImportadaDto>();
             var i = 1;
             while (i <= 10)
             {
                 var getPessoa = _devsServico.SincronizarPessoa();
-                var pessoa = JsonHelper.ToEntity<Pessoa>(getPessoa);
+                var pessoaImportadaDto = JsonHelper.ToEntity<PessoaImportadaDto>(getPessoa);
 
-                listaPessoas.Add(pessoa);
+                listaPessoas.Add(pessoaImportadaDto);
                 i++;
             }
 
