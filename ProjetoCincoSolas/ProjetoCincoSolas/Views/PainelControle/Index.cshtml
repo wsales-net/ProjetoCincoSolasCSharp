@@ -13,37 +13,40 @@
 <body>
     <div class="panel-controle">
         <img src="https://cdn3.iconfinder.com/data/icons/toolbar-people/512/user_refresh_man_male_profile_account_person-512.png" width="256px" /><br />
-        <button class="btn btn-primary" id="sincronizar">Sincronizar</button>
+        <button type="button" class="btn btn-primary" id="sincronizar">
+            Sincronizar
+        </button>
         <br />
         <img src="~/Imagens/load.gif" class="load" />
-        <label class="msg"></label><br />
+        <label class="msg-retorno-service"></label><br />
     </div>
 </body>
 </html>
 <script>
     $(document).ready(function () {
         $(".load").hide();
-        $("#sincronizar").click(function (e) {
-            $("#sincronizar").prop("disabled", true);
-            $("#sincronizar").html("Sincronizando...");
-            $(".msg").html("");
+        $('#sincronizar').on('click', function () {
+            $(this).button('loading');
+            $(this).prop("disabled", true);
+            $(this).html("Sincronizando...");
+
+            $(".msg-retorno-service").html("");
             $(".load").show();
             $.ajax({
                 type: "POST",
-                url: "/PainelControle/SincronizarDados/",
+                url: '@Url.Action("SincronizarDados", "PainelControle")',
                 success: function (resposta) {
-                    $(".msg").fadeOut(0).html(resposta).fadeIn(200);
+                    $(".msg-retorno-service").fadeOut(0).html(resposta).fadeIn(200);
                     setTimeout(function () {
-                        $('.msg').fadeOut('slow');
+                        $('.msg-retorno-service').fadeOut('slow');
                     }, 2500);
 
-                    $(".msg").css("color", "#39ce38");
-                    $("#sincronizar").prop("disabled", false);
-                    $("#sincronizar").html("Sincronizar");
+                    $(this).button('reset');
                     $(".load").hide();
                 },
                 error: function (result) {
-                    alert('error');
+                    $(this).button('reset');
+                    alert('error', result);
                 }
             });
         });
