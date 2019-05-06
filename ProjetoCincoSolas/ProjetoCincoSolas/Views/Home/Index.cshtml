@@ -2,30 +2,483 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+<!-- Home -->
+
+<div class="home">
+    <div class="home_background" style="background-image:url(images/index.jpg)"></div>
+    <div class="home_content text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="home_title">A crença em Deus como Pai está no coração de nossa fé.</div>
+                    <div class="home_text">Deus se revela através da Bíblia. Deus se revela mais claramente através de seu Filho, Jesus Cristo. Deus se faz conhecido pessoalmente a cada cristão através da obra do Espírito Santo.</div>
+                    <div class="button home_link"><a href="#">PROJETO SOLAS</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+<!-- Event -->
+
+<div class="event">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="event_container d-flex flex-lg-row flex-column align-items-center justify-content-start">
+                    <div class="event_date d-flex flex-column align-items-center justify-content-center">
+                        <div class="event_day">18</div>
+                        <div class="event_month">mar</div>
+                    </div>
+                    <div class="event_content">
+                        <div class="event_title">PRÓXIMO EVENTO: <a href="#">Clamor por avivamento</a></div>
+                        <ul class="event_row">
+                            <li>
+                                <div class="event_icon"><i class="fa fa-calendar-o" aria-hidden="true"></i></div>
+                                <span>08:00 - 11:00</span>
+                            </li>
+                            <li>
+                                <div class="event_icon"><i class="fa fa-map-marker" aria-hidden="true"></i></div>
+                                <span>R. Euríco Sodré, 105 - Vila Medeiros, São Paulo</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="event_timer_container ml-lg-auto">
+                        <ul class="event_timer">
+                            <li><div id="dia" class="event_num">00</div><div class="event_ss">dia</div></li>
+                            <li><div id="hora" class="event_num">00</div><div class="event_ss">hora</div></li>
+                            <li><div id="minuto" class="event_num">00</div><div class="event_ss">minuto</div></li>
+                            <li><div id="segundo" class="event_num">00</div><div class="event_ss">segundo</div></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+</div>
+
+<!-- About -->
+
+<div class="about">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="section_title_container text-center">
+                    <div class="section_title">BEM-VINDO AO NOSSO PROJETO</div>
+                    <div class="section_subtitle">É o começo de uma incrível jornada de fé.</div>
+                </div>
+            </div>
+        </div>
+        <div class="row about_row">
+            <div class="col-lg-6">
+                <div class="about_image"><img src="images/about.jpg" alt=""></div>
+            </div>
+            <div class="col-lg-6">
+                <div class="about_content">
+                    <div class="about_text">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer gestas ant eget risus varius, euismod tellus suscipit. Aenean condimentum cond mentum ulla, vitae imperd urna varius volutpa. Mauris lobotis comodo mollis nolle. In vetib  velit ifermentum empor euismod. Cras gravida maximus ligula ac posuere. Maecenas auctor interdum varius sollicitudin orci. Phasellus quis volutpat ex, id maximus magna. Sed elit posuere augue, tincid unt non ipsum sit amet, maximus sagittis lectus. Quisque tincidunt, antevis pharetra sodales, non ante magna tempus nulla, sed molestie orci magna quis tellus. Nulla facilisi sit amet libero sed condimentum.</p>
+                    </div>
+                    <div class="button about_button"><a href="#">leia a história</a></div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+</div>
+
+<!-- Sermons -->
+
+<div class="sermons">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="section_title_container text-center">
+                    <div class="section_title">sermões hoje</div>
+                    <div class="section_subtitle">Nossas vidas em louvar a Deus</div>
+                </div>
+            </div>
+        </div>
+        <div class="row sermons_row">
+            <div class="col-lg-4 sermon_col">
+                <div class="card">
+                    <img class="card-img-top" src="images/sermon_1.jpg" alt="">
+                    <div class="card-body text-center">
+                        <div class="card-title sermon_title"><a href="sermon.html">Oração: Princípios da Oração</a></div>
+                        <div class="card-text sermon_info_container">
+                            <div class="sermon_info">
+                                <div class="sermon_info_title">Preletor: </div>
+                                <ul class="sermon_info_list">
+                                    <li><a href="#">Josh Brighton</a></li>
+                                </ul>
+                            </div>
+                            <div class="sermon_info">
+                                <div class="sermon_info_title">Categorias: </div>
+                                <ul class="sermon_info_list">
+                                    <li><a href="#">Deus, </a></li>
+                                    <li><a href="#">Oração</a></li>
+                                </ul>
+                            </div>
+                            <div class="sermon_links">
+                                <ul>
+                                    <li><a href="#"><i class="fa fa-link" aria-hidden="true"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-download" aria-hidden="true"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 sermon_col">
+                <div class="card">
+                    <img class="card-img-top" src="images/sermon_2.jpg" alt="">
+                    <div class="card-body text-center">
+                        <div class="card-title sermon_title"><a href="sermon.html">Sobre a fé: Um novo propósito.</a></div>
+                        <div class="card-text sermon_info_container">
+                            <div class="sermon_info">
+                                <div class="sermon_info_title">Pastor: </div>
+                                <ul class="sermon_info_list">
+                                    <li><a href="#">Julia Amber</a></li>
+                                </ul>
+                            </div>
+                            <div class="sermon_info">
+                                <div class="sermon_info_title">Categorias: </div>
+                                <ul class="sermon_info_list">
+                                    <li><a href="#">Deus, </a></li>
+                                    <li><a href="#">Fé</a></li>
+                                </ul>
+                            </div>
+                            <div class="sermon_links">
+                                <ul>
+                                    <li><a href="#"><i class="fa fa-link" aria-hidden="true"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-download" aria-hidden="true"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 sermon_col">
+                <div class="card">
+                    <img class="card-img-top" src="images/sermon_3.jpg" alt="">
+                    <div class="card-body text-center">
+                        <div class="card-title sermon_title"><a href="sermon.html">Sermões de comunhão: Venha para a mesa.</a></div>
+                        <div class="card-text sermon_info_container">
+                            <div class="sermon_info">
+                                <div class="sermon_info_title">Pastor: </div>
+                                <ul class="sermon_info_list">
+                                    <li><a href="#">Ashley Young</a></li>
+                                </ul>
+                            </div>
+                            <div class="sermon_info">
+                                <div class="sermon_info_title">Categorias: </div>
+                                <ul class="sermon_info_list">
+                                    <li><a href="#">Deus, </a></li>
+                                    <li><a href="#">Comunhão</a></li>
+                                </ul>
+                            </div>
+                            <div class="sermon_links">
+                                <ul>
+                                    <li><a href="#"><i class="fa fa-link" aria-hidden="true"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-download" aria-hidden="true"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Mission -->
+
+<div class="mission">
+    <div class="mission_background parallax-window" data-parallax="scroll" data-image-src="images/mission.jpg" data-speed="0.8"></div>
+    <div class="mission_items d-flex flex-row flex-wrap align-items-start justify-content-start">
+
+        <div class="mission_item text-center">
+            <div class="mission_icon"><i class="fa fa-bell-o" aria-hidden="true"></i></div>
+            <div class="mission_title">nossa missão</div>
+            <div class="mission_text">Lorem ipsum dolor  amet, consectet adipiscing doelit. Sed a mauri suscipita utrum arcu , gravida nisl. Interdum mante ipsum.</div>
+        </div>
+
+        <div class="mission_item text-center">
+            <div class="mission_icon"><i class="fa fa-flag-o" aria-hidden="true"></i></div>
+            <div class="mission_title">nossa comunidade</div>
+            <div class="mission_text">Lorem ipsum dolor  amet, consectet adipiscing doelit. Sed a mauri suscipita utrum arcu , gravida nisl. Interdum mante ipsum.</div>
+        </div>
+
+        <div class="mission_item text-center">
+            <div class="mission_icon"><i class="fa fa-heart-o" aria-hidden="true"></i></div>
+            <div class="mission_title">nossa crença</div>
+            <div class="mission_text">Lorem ipsum dolor  amet, consectet adipiscing doelit. Sed a mauri suscipita utrum arcu , gravida nisl. Interdum mante ipsum.</div>
+        </div>
+
+        <div class="mission_item text-center">
+            <div class="mission_icon"><i class="fa fa-moon-o" aria-hidden="true"></i></div>
+            <div class="mission_title">nossa fé</div>
+            <div class="mission_text">Lorem ipsum dolor  amet, consectet adipiscing doelit. Sed a mauri suscipita utrum arcu , gravida nisl. Interdum mante ipsum.</div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Events -->
+
+<div class="events">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="section_title_container text-center">
+                    <div class="section_title">PRÓXIMOS EVENTOS</div>
+                    <div class="section_subtitle">Experimente a presença de Deus</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="events_items d-flex flex-lg-row flex-column align-items-lg-start align-items-center justify-content-lg-between justify-content-center">
+
+        <!-- Event -->
+        <div class="events_item">
+            <div class="events_item_image"><img src="images/event_1.jpg" alt=""></div>
+            <div class="events_item_content d-flex flex-row align-items-start justfy-content-start">
+                <div class="event_date d-flex flex-column align-items-center justify-content-center">
+                    <div class="event_day">18</div>
+                    <div class="event_month">mar</div>
+                </div>
+                <div class="event_content">
+                    <div class="event_title"><a href="#">CLAMOR POR AVIVAMENTO</a></div>
+                    <ul class="event_row">
+                        <li>
+                            <div class="event_icon"><i class="fa fa-calendar-o" aria-hidden="true"></i></div>
+                            <span>08:00 - 11:00</span>
+                        </li>
+                        <li>
+                            <div class="event_icon"><i class="fa fa-map-marker" aria-hidden="true"></i></div>
+                            <span>R. Euríco Sodré, 105 - Vila Medeiros, São Paulo</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Event -->
+        <div class="events_item">
+            <div class="events_item_image"><img src="images/event_2.jpg" alt=""></div>
+            <div class="events_item_content d-flex flex-row align-items-start justfy-content-start">
+                <div class="event_date d-flex flex-column align-items-center justify-content-center">
+                    <div class="event_day">18</div>
+                    <div class="event_month">mar</div>
+                </div>
+                <div class="event_content">
+                    <div class="event_title"><a href="#">To Love and to Cherish, The Wedding</a></div>
+                    <ul class="event_row">
+                        <li>
+                            <div class="event_icon"><i class="fa fa-calendar-o" aria-hidden="true"></i></div>
+                            <span>08:00 AM - 11:00 AM</span>
+                        </li>
+                        <li>
+                            <div class="event_icon"><i class="fa fa-map-marker" aria-hidden="true"></i></div>
+                            <span>1195 Lobortis Rd, New Orleans, New Hampshire</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Event -->
+        <div class="events_item">
+            <div class="events_item_image"><img src="images/event_3.jpg" alt=""></div>
+            <div class="events_item_content d-flex flex-row align-items-start justfy-content-start">
+                <div class="event_date d-flex flex-column align-items-center justify-content-center">
+                    <div class="event_day">18</div>
+                    <div class="event_month">mar</div>
+                </div>
+                <div class="event_content">
+                    <div class="event_title"><a href="#">The Christian Community in America</a></div>
+                    <ul class="event_row">
+                        <li>
+                            <div class="event_icon"><i class="fa fa-calendar-o" aria-hidden="true"></i></div>
+                            <span>08:00 AM - 11:00 AM</span>
+                        </li>
+                        <li>
+                            <div class="event_icon"><i class="fa fa-map-marker" aria-hidden="true"></i></div>
+                            <span>1195 Lobortis Rd, New Orleans, New Hampshire</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Donations -->
+
+<div class="donations">
+    <div class="donations_background parallax-window" data-parallax="scroll" data-image-src="images/donation.jpg" data-speed="0.8"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="donations_content">
+                    <div class="donation_title">help children get an education</div>
+                    <div class="donation_info_container">
+                        <div class="donation_info">
+                            <div class="donation_info_title">Donation Caller: </div>
+                            <ul class="donation_info_list">
+                                <li><a href="#">John Connor</a></li>
+                            </ul>
+                        </div>
+                        <div class="donation_info">
+                            <div class="donation_info_title">Categorias: </div>
+                            <ul class="donation_info_list">
+                                <li><a href="#">Education, </a></li>
+                                <li><a href="#">Children</a></li>
+                            </ul>
+                        </div>
+                        <div class="donation_info">
+                            <div class="donation_info_title">On: </div>
+                            <ul class="donation_info_list">
+                                <li><a href="#">Friday 16 MAR, 2018</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="donation_text">
+                        <p>Mauris eleifend dolor ante, at fringilla magna dignissim et. Maecenas imperdiet quam quis erat molestie facilisis. Ut in condimentum ipsum. Aenean ac congue turpis. Nunc luctus ligula tellus, in pellentesque leo ullamcorper in.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="donation_details_container">
+                    <div class="donation_details">
+                        <div class="donation_funds">
+                            <div class="donation_funds_title">Remaining: </div>
+                            <div class="donations_funds_value">$2,100</div>
+                        </div>
+                        <div class="donation_progress_container">
+                            <div class="donation_progress_outer">
+                                <div class="donation_progress" style="width: 70%;"><div class="donation_progress_value">70%</div></div>
+                            </div>
+                            <div class="donation_info d-flex flex-row align-items-center justify-content-start">
+                                <div class="donation_current">Raised: <span>$5,000</span></div>
+                                <div class="donation_goal ml-auto">Goal: <span>$7,100</span></div>
+                            </div>
+                            <div class="button donation_button"><a href="#">donate now</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Quote -->
+
+<div class="quote">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="quote_container text-center">
+                    <div class="quote_quote">“Wherever the bishop appears, there let the people be, even as wheresoever Christ Jesus is, there is the catholic church.”</div>
+                    <div class="quote_icon"><img src="images/quote.png" alt=""></div>
+                    <div class="quote_source">Ignatius of Antioch</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<hr>
+
+<!-- Latest News -->
+
+<div class="latest_news">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="section_title_container text-center">
+                    <div class="section_title">latest news</div>
+                    <div class="section_subtitle">Be part of a community of people experiencing Deus together.</div>
+                </div>
+            </div>
+        </div>
+        <div class="row news_row">
+
+            <!-- News Post -->
+            <div class="col-xl-4 col-lg-6 news_post_col">
+                <div class="news_post">
+                    <div class="news_image"><img src="images/news_1.jpg" alt=""></div>
+                    <div class="news_post_content">
+                        <div class="news_post_title">
+                            <a href="blog_single.html">Find out why a priest prays around her hometown</a>
+                        </div>
+                        <div class="news_post_meta">
+                            <ul>
+                                <li><i class="fa fa-user" aria-hidden="true"></i><a href="#">Josh Brighton</a></li>
+                                <li><i class="fa fa-calendar-o" aria-hidden="true"></i><a href="#">08 MAR, 2018</a></li>
+                                <li><i class="fa fa-comment" aria-hidden="true"></i><a href="#">15</a></li>
+                            </ul>
+                        </div>
+                        <div class="news_post_text">
+                            <p>Integer luctus diam acto scerisque consectetur. Vimus euismod nec lacus sit amet. Aenean interdus mid vitae blandit  porta. Quisque dignissim commodo congue efficitur...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- News Post -->
+            <div class="col-xl-4 col-lg-6 news_post_col">
+                <div class="news_post">
+                    <div class="news_image"><img src="images/news_2.jpg" alt=""></div>
+                    <div class="news_post_content">
+                        <div class="news_post_title">
+                            <a href="blog_single.html">Moderator joins Pope Francis in call to Oração for peace</a>
+                        </div>
+                        <div class="news_post_meta">
+                            <ul>
+                                <li><i class="fa fa-user" aria-hidden="true"></i><a href="#">Ashley Young</a></li>
+                                <li><i class="fa fa-calendar-o" aria-hidden="true"></i><a href="#">08 MAR, 2018</a></li>
+                                <li><i class="fa fa-comment" aria-hidden="true"></i><a href="#">12</a></li>
+                            </ul>
+                        </div>
+                        <div class="news_post_text">
+                            <p>Integer luctus diam acto scerisque consectetur. Vimus euismod nec lacus sit amet. Aenean interdus mid vitae blandit  porta. Quisque dignissim commodo congue efficitur...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- News Post -->
+            <div class="col-xl-4 col-lg-6 news_post_col">
+                <div class="news_post">
+                    <div class="news_image"><img src="images/news_3.jpg" alt=""></div>
+                    <div class="news_post_content">
+                        <div class="news_post_title">
+                            <a href="blog_single.html">Church plays a major role in tackling loneliness</a>
+                        </div>
+                        <div class="news_post_meta">
+                            <ul>
+                                <li><i class="fa fa-user" aria-hidden="true"></i><a href="#">Josh Brighton</a></li>
+                                <li><i class="fa fa-calendar-o" aria-hidden="true"></i><a href="#">07 MAR, 2018</a></li>
+                                <li><i class="fa fa-comment" aria-hidden="true"></i><a href="#">10</a></li>
+                            </ul>
+                        </div>
+                        <div class="news_post_text">
+                            <p>Integer luctus diam acto scerisque consectetur. Vimus euismod nec lacus sit amet. Aenean interdus mid vitae blandit  porta. Quisque dignissim commodo congue efficitur...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
 </div>

@@ -9,26 +9,123 @@
     @Scripts.Render("~/bundles/jquery")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
+
+    <!-- Header -->
+    <header class="header">
+        <!-- Top Bar -->
+        <div class="top_bar">
+            <div class="top_bar_background" style="background-image:url(images/top_bar.jpg)"></div>
+            <div class="top_bar_container">
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <div class="top_bar_content d-flex flex-row align-items-center justify-content-start">
+                                <ul class="top_bar_contact_list">
+                                    <li>
+                                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                                        <div>Email: infodeercreative@gmail.com</div>
+                                    </li>
+                                    <li>
+                                        <i class="fa fa-phone" aria-hidden="true"></i>
+                                        <div>Call Us: +1234 800 8080</div>
+                                    </li>
+                                </ul>
+                                <div class="top_bar_social ml-auto">
+                                    <ul class="social_list">
+                                        <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+
+        <!-- Header Content -->
+        <div class="header_container">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="header_content d-flex flex-row align-items-center justify-content-start">
+                            <div class="logo_container">
+                                <a href="#">
+                                    <div class="logo"><img src="images/logo.png" alt=""></div>
+                                    <div class="logo_text">mimosan</div>
+                                </a>
+                            </div>
+                            <nav class="main_nav_contaner ml-auto">
+                                <ul class="main_nav">
+                                    <li class="active"><a href="#">home</a></li>
+                                    <li><a href="about.html">about</a></li>
+                                    <li><a href="sermons.html">sermons</a></li>
+                                    <li><a href="events.html">events</a></li>
+                                    <li><a href="blog.html">blog</a></li>
+                                    <li><a href="contact.html">contact</a></li>
+                                </ul>
+                                <div class="search_button"><i class="fa fa-search" aria-hidden="true"></i></div>
+                            </nav>
+
+                            <!-- Hamburger -->
+
+                            <div class="hamburger ml-auto">
+                                <i class="fa fa-bars" aria-hidden="true"></i>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Header Search Panel -->
+        <div class="header_search_container">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="header_search_content d-flex flex-row align-items-center justify-content-end">
+                            <form action="#" class="header_search_form">
+                                <input type="search" class="search_input" placeholder="Search" required="required">
+                                <button class="header_search_button d-flex flex-column align-items-center justify-content-center">
+                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Menu -->
+
+    <div class="menu d-flex flex-column align-items-center justify-content-center">
+        <div class="menu_content">
+            <div class="cross_1 d-flex flex-column align-items-center justify-content-center"><img src="images/logo.png" alt=""></div>
+            <form action="#" class="menu_search_form">
+                <input type="search" class="menu_search_input" placeholder="Search" required="required">
+                <button class="menu_search_button d-flex flex-column align-items-center justify-content-center">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </button>
+            </form>
+            <nav class="menu_nav">
+                <ul>
+                    <li class="active"><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="sermons.html">Sermons</a></li>
+                    <li><a href="events.html">Events</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="menu_close"><i class="fa fa-times" aria-hidden="true"></i></div>
     </div>
+
     <div class="container body-content">
         @RenderBody()
         <hr />
@@ -39,5 +136,91 @@
 
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
+
+
+    <!-- Footer -->
+
+    <footer class="footer">
+        <div class="footer_background parallax-window" data-parallax="scroll" data-image-src="images/footer.jpg" data-speed="0.8"></div>
+        <div class="container">
+            <div class="row">
+
+                <!-- Footer - Contact -->
+                <div class="col-lg-4 footer_col">
+                    <div class="footer_column footer_contact_column">
+                        <div class="footer_logo_container">
+                            <a href="#">
+                                <div class="footer_logo"><img src="images/logo_2.png" alt=""></div>
+                                <div class="footer_logo_text">mimosan</div>
+                            </a>
+                        </div>
+                        <div class="footer_contact">
+                            <ul>
+                                <li><div><i class="fa fa-map-marker" aria-hidden="true"></i></div><span>1195 Lobortis Rd, New Orleans, New Hampshire</span></li>
+                                <li><div><i class="fa fa-phone" aria-hidden="true"></i></div><span>+1 234 800 8080</span></li>
+                                <li><div><i class="fa fa-envelope" aria-hidden="true"></i></div><span>info.deercreative@gmail.com</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer - Links -->
+                <div class="col-lg-4 footer_col">
+                    <div class="footer_column footer_links">
+                        <div class="footer_title">useful links</div>
+                        <ul class="footer_links_list">
+                            <li><a href="about.html"><i class="fa fa-angle-double-right" aria-hidden="true"></i> About us</a></li>
+                            <li><a href="contact.html"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Contact</a></li>
+                            <li><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Donation</a></li>
+                            <li><a href="blog.html"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Blog</a></li>
+                            <li><a href="sermon.html"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Sermons</a></li>
+                            <li><a href="events.html"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Events</a></li>
+                            <li><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Service</a></li>
+                            <li><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Media</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Footer - Subscribe -->
+                <div class="col-lg-4 footer_col">
+                    <div class="footer_column footer_subscribe">
+                        <div class="footer_title">subscribe</div>
+                        <div class="footer_text">Join nossa weekly email newsletter to receive news, events and other announcements about what is going on at nossa church.</div>
+                        <div class="footer_form_container">
+                            <form action="#" class="footer_form">
+                                <div>
+                                    <input type="email" class="subscribe_input" placeholder="Enter ynossa email" required="required">
+                                    <button class="subscribe_button trans_200" type="submit">subscribe</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row copyright_row">
+                <div class="col">
+                    <div class="copyright_container d-flex flex-lg-row flex-column align-items-center justify-content-lg-start justify-content-center">
+                        <div class="copyright">
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            Copyright &copy;
+                            <script>document.write(new Date().getFullYear());</script> Todos os direitos reservados | Este modelo é feito por <a href="#" target="_blank">Wellington Sales</a>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        </div>
+                        <div class="footer_social ml-lg-auto">
+                            <ul>
+                                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
