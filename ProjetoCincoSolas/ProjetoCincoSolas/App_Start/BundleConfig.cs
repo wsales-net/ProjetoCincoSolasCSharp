@@ -20,12 +20,16 @@ namespace ProjetoCincoSolas
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js",
-                      "~/Scripts/respond.js"));
+                      "~/Scripts/bootstrap.min.js",
+                      "~/Scripts/popper.js",
+                      "~/Scripts/respond.js",
+                      "~/Scripts/custom.js",
+                      "~/Scripts/plugins/parallax-js-master/parallax.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/bootstrap.min.css",
+                      "~/Content/main_styles.css",
+                      "~/Content/responsive.css"));
         }
     }
 }
