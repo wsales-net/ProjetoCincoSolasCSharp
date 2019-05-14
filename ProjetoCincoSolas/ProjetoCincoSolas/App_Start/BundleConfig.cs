@@ -9,7 +9,8 @@ namespace ProjetoCincoSolas
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        //"~/Scripts/jquery-{version}.js",
+                        "~/Scripts/jquery-3.2.1.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -19,7 +20,7 @@ namespace ProjetoCincoSolas
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
-            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
+            bundles.Add(new ScriptBundle("~/bundles/js").Include(
                       "~/Scripts/bootstrap.min.js",
                       "~/Scripts/popper.js",
                       "~/Scripts/respond.js",
@@ -29,7 +30,8 @@ namespace ProjetoCincoSolas
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.min.css",
                       "~/Content/main_styles.css",
-                      "~/Content/responsive.css"));
+                      "~/Content/responsive.css",
+                      "~/Content/font-awesome.min.css"));
         }
     }
 }

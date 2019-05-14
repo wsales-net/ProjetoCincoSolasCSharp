@@ -1,4 +1,4 @@
-@charset "utf-8";
+﻿@charset "utf-8";
 /* CSS Document */
 
 /******************************
@@ -39,6 +39,7 @@
 /*********************************
 2. Body and some general stuff
 *********************************/
+@import url(//fonts.googleapis.com/css?family=Fira+Sans);
 
 *
 {
@@ -48,13 +49,12 @@
 	-webkit-text-shadow: rgba(0,0,0,.01) 0 0 1px;
 	text-shadow: rgba(0,0,0,.01) 0 0 1px;
 }
-body
-{
-	font-family: 'Assistant', sans-serif;
-	font-size: 14px;
-	font-weight: 400;
-	background: #FFFFFF;
-	color: #a5a5a5;
+body {
+    font-family: 'Fira Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    background: #FFFFFF;
+    color: #a5a5a5;
 }
 div
 {
@@ -411,7 +411,7 @@ section
 	font-size: 30px;
 	font-weight: 700;
 	text-transform: uppercase;
-	line-height: 0.75;
+	line-height: 2.75;
 	color: #181818;
 	vertical-align: middle;
 	margin-left: 7px;
@@ -684,14 +684,14 @@ section
 	width: 100%;
 	z-index: 10;
 }
-.home_title
-{
-	font-size: 55px;
-	font-weight: 800;
-	text-transform: uppercase;
-	letter-spacing: 0.03em;
-	color: #FFFFFF;
-	line-height: 1.18;
+.home_title {
+    font-size: 55px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: #FFFFFF;
+    line-height: 1.18;
+    font-family: 'Monotype Corsiva', 'Script MT', 'Pristina';
 }
 .home_text
 {

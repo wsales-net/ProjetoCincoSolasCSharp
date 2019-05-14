@@ -7,104 +7,107 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/js")
+
 </head>
 <body>
-
-    <!-- Header -->
-    <header class="header">
-        <!-- Top Bar -->
-        <div class="top_bar">
-            <div class="top_bar_background" style="background-image:url(images/top_bar.jpg)"></div>
-            <div class="top_bar_container">
-                <div class="container">
-                    <div class="row">
-                        <div class="col">
-                            <div class="top_bar_content d-flex flex-row align-items-center justify-content-start">
-                                <ul class="top_bar_contact_list">
-                                    <li>
-                                        <i class="fa fa-envelope" aria-hidden="true"></i>
-                                        <div>E-mail: projetocincosolas@gmail.com</div>
-                                    </li>
-                                    <li>
-                                        <i class="fa fa-phone" aria-hidden="true"></i>
-                                        <div>+55 11 2636-5659</div>
-                                    </li>
-                                </ul>
-                                <div class="top_bar_social ml-auto">
-                                    <ul class="social_list">
-                                        <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+    <div class="super_container">
+        <!-- Header -->
+        <header class="header">
+            <!-- Top Bar -->
+            <div class="top_bar">
+                <div class="top_bar_background" style="background-image:url(Imagens/top_bar.jpg)"></div>
+                <div class="top_bar_container">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <div class="top_bar_content d-flex flex-row align-items-center justify-content-start">
+                                    <ul class="top_bar_contact_list">
+                                        <li>
+                                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                                            <div>E-mail: projetocincosolas@gmail.com</div>
+                                        </li>
+                                        <li>
+                                            <i class="fa fa-phone" aria-hidden="true"></i>
+                                            <div>+55 11 2636-5659</div>
+                                        </li>
                                     </ul>
+                                    <div class="top_bar_social ml-auto">
+                                        <ul class="social_list">
+                                            <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Header Content -->
-        <div class="header_container">
-            <div class="container">
-                <div class="row">
-                    <div class="col">
-                        <div class="header_content d-flex flex-row align-items-center justify-content-start">
-                            <div class="logo_container">
-                                <a href="#">
-                                    <div class="logo"><img src="http://e-djs.com.br/wp-content/uploads/2014/10/default-img-400x240.gifimages/logo.png" alt=""></div>
-                                    <div class="logo_text">PROJETO CINCO SOLAS</div>
-                                </a>
+            <!-- Header Content -->
+            <div class="header_container">
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <div class="header_content d-flex flex-row align-items-center justify-content-start">
+                                <div class="logo_container">
+                                    <a href="#">
+                                        <div class="logo"><img src="http://inova.gov.br/wp-content/themes/inovagov2.1.1/img/default-thumbnail.jpg" alt=""></div>
+                                        <div class="logo_text">PROJETO CINCO SOLAS</div>
+                                    </a>
+                                </div>
+                                <nav class="main_nav_contaner ml-auto">
+                                    <ul class="main_nav">
+                                        <li class="active"><a href="#">início</a></li>
+                                        <li><a href="about.html">sobre</a></li>
+                                        <li><a href="sermons.html">sermões</a></li>
+                                        <li><a href="events.html">eventos</a></li>
+                                        <li><a href="blog.html">blog</a></li>
+                                        <li><a href="contact.html">contato</a></li>
+                                    </ul>
+                                    <div class="search_button"><i class="fa fa-search" aria-hidden="true"></i></div>
+                                </nav>
+
+                                <!-- Hamburger -->
+
+                                <div class="hamburger ml-auto">
+                                    <i class="fa fa-bars" aria-hidden="true"></i>
+                                </div>
+
                             </div>
-                            <nav class="main_nav_contaner ml-auto">
-                                <ul class="main_nav">
-                                    <li class="active"><a href="#">início</a></li>
-                                    <li><a href="about.html">sobre</a></li>
-                                    <li><a href="sermons.html">sermões</a></li>
-                                    <li><a href="events.html">eventos</a></li>
-                                    <li><a href="blog.html">blog</a></li>
-                                    <li><a href="contact.html">contat</a></li>
-                                </ul>
-                                <div class="search_button"><i class="fa fa-search" aria-hidden="true"></i></div>
-                            </nav>
-
-                            <!-- Hamburger -->
-
-                            <div class="hamburger ml-auto">
-                                <i class="fa fa-bars" aria-hidden="true"></i>
-                            </div>
-
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Header Search Panel -->
-        <div class="header_search_container">
-            <div class="container">
-                <div class="row">
-                    <div class="col">
-                        <div class="header_search_content d-flex flex-row align-items-center justify-content-end">
-                            <form action="#" class="header_search_form">
-                                <input type="search" class="search_input" placeholder="Search" required="required">
-                                <button class="header_search_button d-flex flex-column align-items-center justify-content-center">
-                                    <i class="fa fa-search" aria-hidden="true"></i>
-                                </button>
-                            </form>
+            <!-- Header Search Panel -->
+            <div class="header_search_container">
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <div class="header_search_content d-flex flex-row align-items-center justify-content-end">
+                                <form action="#" class="header_search_form">
+                                    <input type="search" class="search_input" placeholder="Search" required="required">
+                                    <button class="header_search_button d-flex flex-column align-items-center justify-content-center">
+                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                    </button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </header>
+        </header>
+    </div>
 
     <!-- Menu -->
     <div class="menu d-flex flex-column align-items-center justify-content-center">
         <div class="menu_content">
-            <div class="cross_1 d-flex flex-column align-items-center justify-content-center"><img src="http://e-djs.com.br/wp-content/uploads/2014/10/default-img-400x240.gifimages/logo.png" alt=""></div>
+            <div class="cross_1 d-flex flex-column align-items-center justify-content-center"><img src="http://inova.gov.br/wp-content/themes/inovagov2.1.1/img/default-thumbnail.jpg" alt=""></div>
             <form action="#" class="menu_search_form">
                 <input type="search" class="menu_search_input" placeholder="Search" required="required">
                 <button class="menu_search_button d-flex flex-column align-items-center justify-content-center">
@@ -125,15 +128,10 @@
         <div class="menu_close"><i class="fa fa-times" aria-hidden="true"></i></div>
     </div>
 
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
+    @RenderBody()
+    
+    <hr />
 
-    @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 
     <!-- Footer -->
@@ -147,7 +145,7 @@
                     <div class="footer_column footer_contact_column">
                         <div class="footer_logo_container">
                             <a href="#">
-                                <div class="footer_logo"><img src="http://e-djs.com.br/wp-content/uploads/2014/10/default-img-400x240.gifimages/logo_2.png" alt=""></div>
+                                <div class="footer_logo"><img src="http://inova.gov.br/wp-content/themes/inovagov2.1.1/img/default-thumbnail.jpg" alt=""></div>
                                 <div class="footer_logo_text">projejto cinco solas</div>
                             </a>
                         </div>
