@@ -101,15 +101,14 @@ CREATE TABLE Membro (
   	CONSTRAINT UQRgPessoa UNIQUE (Rg),
   	CONSTRAINT UQCpfPessoa UNIQUE (Cpf),
   	CONSTRAINT UQCpfConjugePessoa UNIQUE (Cpf),
-	CONSTRAINT CHKIdPessoa CHECK ([Id] > 0)
+	CONSTRAINT CHKIdPessoa CHECK (Id > 0)
 )
 GO
 --MinisterioAnterior
 
 
--- Dump of table exercicio
+-- Dump of table curso
 -- ------------------------------------------------------------
-
 DROP TABLE IF EXISTS [Curso];
 
 CREATE TABLE Curso (
@@ -125,7 +124,6 @@ VALUES ('Integração Ministerial')
 
 -- Dump of table exercicio
 -- ------------------------------------------------------------
-
 DROP TABLE IF EXISTS [Exercicio];
 
 CREATE TABLE Exercicio (
@@ -138,9 +136,7 @@ CREATE TABLE Exercicio (
 );
 
 -- Dump of table Turma
--- ------------------------------------------------------------
-
-
+-- -----------------------------------------------------------
 DROP TABLE IF EXISTS [Turma];
 
 CREATE TABLE Turma (
@@ -156,8 +152,6 @@ CREATE TABLE Turma (
 
 -- Dump of table matricula
 -- ------------------------------------------------------------
-
-
 DROP TABLE IF EXISTS [Matricula];
 
 CREATE TABLE Matricula (
@@ -167,12 +161,11 @@ CREATE TABLE Matricula (
 	DataMatricula datetime NOT NULL,
 	CONSTRAINT PkMatricula PRIMARY KEY (Id),
 	CONSTRAINT CHKIdMatricula CHECK ([Id] > 0)
-)
+);
 
 
 -- Dump of table nota
 -- ------------------------------------------------------------
-
 DROP TABLE IF EXISTS [nota];
 
 CREATE TABLE Nota (
@@ -181,12 +174,11 @@ CREATE TABLE Nota (
 	Nota int,
 	CONSTRAINT PkNota PRIMARY KEY (Id),
 	CONSTRAINT CHKIdNota CHECK ([Id] > 0)
-)
+);
 
 
 -- Dump of table resposta
 -- ------------------------------------------------------------
-
 DROP TABLE IF EXISTS [Resposta];
 
 CREATE TABLE Resposta (
@@ -196,12 +188,11 @@ CREATE TABLE Resposta (
 	RespostaDada varchar(500),
 	CONSTRAINT PkResposta PRIMARY KEY (Id),
 	CONSTRAINT CHKIdResposta CHECK ([Id] > 0)
-) ;
+);
 
 
 -- Dump of table secao
 -- ------------------------------------------------------------
-
 DROP TABLE IF EXISTS [Secao];
 
 CREATE TABLE Secao (
@@ -215,7 +206,6 @@ CREATE TABLE Secao (
 )
 ALTER TABLE Secao ADD CONSTRAINT DFTitulo DEFAULT '' FOR Titulo
 
--- Dump of table exercicio
 -- ------------------------------------------------------------
 
 
@@ -264,25 +254,22 @@ GO
 If Object_Id('DonsEspirituais') Is Null
 CREATE TABLE DonsEspirituais (
 	Id INT IDENTITY,
-	IdPessoa INT NOT NULL,
+	IdMembro INT NOT NULL,
+	IdLider INT NOT NULL,
 	Descricao VARCHAR(30) NOT NULL,
   	CONSTRAINT PkDonsEspirituais PRIMARY KEY (Id)
 )
 GO
 
---If Object_Id('Pessoa') Is Null
---CREATE TABLE Pessoa (
---)
---GO
-
 --If Object_Id('Ministerio') Is Null
---CREATE TABLE Ministerio (
+--	CREATE TABLE Ministerio (
+--	);
 --)
 
 GO
 
-If Object_Id('IdTipoEmail') Is Null
-CREATE TABLE IdTipoEmail (
+If Object_Id('TipoEmail') Is Null
+CREATE TABLE TipoEmail (
 	Id INT NOT NULL,
 	TipoEmail VARCHAR(15) NOT NULL,
 	DataRegistro DATETIME DEFAULT GETDATE(),
@@ -644,24 +631,3 @@ GO
 ALTER TABLE ContaPagar WITH CHECK ADD CONSTRAINT FkContaPagar_x_TipoContaPagar FOREIGN KEY (IdTipoConta) REFERENCES TipoContaPagar(Id)
 GO
 ALTER TABLE ContaPagar CHECK CONSTRAINT FkContaPagar_x_TipoContaPagar
-
-If Object_Id('TagConsultaBancoDados') Is Null
-CREATE TABLE TagConsultaBancoDados (
-	ID INT IDENTITY,
-	Titulo VARCHAR(20),
-	CONSTRAINT PkTag PRIMARY KEY (Id)
-)
-
-If Object_Id('ConsultasBancoDados') Is Null
-create table ConsultasBancoDados (
-	Id int identity, 
-	IdTagConsultaBancoDados int not null,
-	Query varchar(max) not null,
-	Descricao varchar(1000) not null, 
-	CONSTRAINT PkConsultaBancoDados PRIMARY KEY (Id),
-	CONSTRAINT FKConsultaBancoDados_x_TagConsultaBancoDados FOREIGN KEY (IdTagConsultaBancoDados) REFERENCES TagConsultaBancoDados(id)
-)
-
-
-INSERT INTO TagConsultaBancoDados (Titulo)
-VALUES ('conta'),('representante'),('pessoas'),(''),(''),(''),('')
