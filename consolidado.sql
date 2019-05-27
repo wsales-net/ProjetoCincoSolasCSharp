@@ -2,7 +2,10 @@
 
 GO
  -- EXEMPLO: LIVRO, PREGAÇÃO, WHATSAPP-AUDIO, PODCAST, SITE
+-- CategoriaAnotacaoEvangelho
+-- ------------------------------------------------------------
 If Object_Id('CategoriaAcaoEvangelho') Is Null
+
 CREATE TABLE CategoriaAnotacaoEvangelho (
 	Id INT IDENTITY,
 	Descricao VARCHAR(15) NOT NULL,
@@ -10,8 +13,13 @@ CREATE TABLE CategoriaAnotacaoEvangelho (
 	CONSTRAINT PkCategoriaAnotacaoEvangelho PRIMARY KEY (ID)
 )
 GO
+
+
  -- EXEMPLO: BASICO, MEDIO, AVANÇADO
+-- NivelAnotacaoEvangelho
+------------------------------------------------------------
 If Object_Id('NivelAnotacaoEvangelho') Is Null
+
 CREATE TABLE NivelAnotacaoEvangelho (
 	Id INT IDENTITY,
 	Nivel INT NOT NULL,
@@ -19,8 +27,13 @@ CREATE TABLE NivelAnotacaoEvangelho (
 	CONSTRAINT PkNivelAnotacaoEvangelho PRIMARY KEY (ID)
 )
 GO
+
+
  -- DESCRICAO: CONTROLE DE CLASSIFICAR POR 5 ESTRELAS
+-- ClassificacaoAnotacaoEvangelho
+------------------------------------------------------------
 If Object_Id('ClassificacaoAnotacaoEvangelho') Is Null
+
 CREATE TABLE ClassificacaoAnotacaoEvangelho (
 	Id INT IDENTITY,
 	Classificacao INT NOT NULL,
@@ -28,8 +41,12 @@ CREATE TABLE ClassificacaoAnotacaoEvangelho (
 	CONSTRAINT PkClassificacaoAnotacaoEvangelho PRIMARY KEY (ID)
 )
 GO
+
  -- DESCRICAO: COMENTÁRIO DE USUÁRIOS PARA CADA ANOTAÇÃO
+-- ComentarioAnotacaoEnvagelho
+------------------------------------------------------------
 If Object_Id('ComentarioAnotacaoEnvagelho') Is Null
+
 CREATE TABLE ComentarioAnotacaoEnvagelho (
 	Id INT IDENTITY, 
 	Cometario VARCHAR(1000),
@@ -37,8 +54,12 @@ CREATE TABLE ComentarioAnotacaoEnvagelho (
 	CONSTRAINT PkComentarioAnotacaoEnvagelho PRIMARY KEY (ID)
 )
 GO
+
  -- DESCRICAO: ANOTAÇÃO DE CADA CONTEUDO
+ -- AnotacaoEvangelho
+------------------------------------------------------------
 If Object_Id('AnotacaoEvangelho') Is Null
+
 CREATE TABLE AnotacaoEvangelho (
 	Id INT IDENTITY,
 	IdCategoriaAnotacaoEvangelho INT NOT NULL,
@@ -52,17 +73,27 @@ CREATE TABLE AnotacaoEvangelho (
 	REFERENCES CategoriaAnotacaoEvangelho(Id)
 ) 
 GO
+
+
  -- EXEMPLO: REDENÇÃO, SALVAÇÃO, PURIFICAÇÃO, JUSTIFICAÇÃO, ETC
  -- DESCRICAO: TAGS PARA CADA ANOTAÇÃO
+ -- Tag
+------------------------------------------------------------
 If Object_Id('Tag') Is Null
+
 CREATE TABLE Tag (
 	ID INT IDENTITY,
 	Titulo VARCHAR(20),
 	CONSTRAINT PkTag PRIMARY KEY (Id)
 )
 GO
+
+
  -- DESCRICAO: TABELA INTERMEDIÁRIA
+ -- AnotacaoEvangelhoTag
+------------------------------------------------------------
 If Object_Id('AnotacaoEvangelhoTag') Is Null
+
 CREATE TABLE AnotacaoEvangelhoTag
 (
 	ID INT IDENTITY,
@@ -76,7 +107,10 @@ CREATE TABLE AnotacaoEvangelhoTag
 GO
 
 BEGIN TRAN
+ -- Membro
+------------------------------------------------------------
 If Object_Id('Membro') Is Null
+
 CREATE TABLE Membro (
 	Id INT IDENTITY,
 	IdEndereco INT NOT NULL,
@@ -105,6 +139,30 @@ CREATE TABLE Membro (
 )
 GO
 --MinisterioAnterior
+
+-- EstadoCivil
+-- ------------------------------------------------------------
+If Object_Id('EstadoCivil') Is Null
+
+CREATE TABLE EstadoCivil(
+	Id int NOT NULL,
+	Nome varchar(25) NOT NULL,
+	Ativo bit NOT NULL,
+  	CONSTRAINT PkEstadoCivil PRIMARY KEY (Id)
+)
+GO
+
+-- Profissao
+-- ------------------------------------------------------------
+If Object_Id('Profissao') Is Null
+
+CREATE TABLE Profissao (
+	Id int IDENTITY(1,1) NOT NULL,
+	Nome varchar(256) NOT NULL,
+	Ativo bit NOT NULL,
+  	CONSTRAINT PkProfissao PRIMARY KEY (Id)
+)
+GO
 
 
 -- Dump of table curso
@@ -206,10 +264,11 @@ CREATE TABLE Secao (
 )
 ALTER TABLE Secao ADD CONSTRAINT DFTitulo DEFAULT '' FOR Titulo
 
+
+-- Lider
 -- ------------------------------------------------------------
-
-
 If Object_Id('Lider') Is Null
+
 CREATE TABLE Lider (
 	Id INT IDENTITY,
 	IdEndereco INT NOT NULL,
@@ -234,10 +293,13 @@ CREATE TABLE Lider (
 	Foto VARCHAR,
   	CONSTRAINT PkPessoa PRIMARY KEY (Id)
 )
-
 GO
 
+
+-- Endereco
+-- ------------------------------------------------------------
 If Object_Id('Endereco') Is Null
+
 CREATE TABLE Endereco (
 	Id INT NOT NULL,
 	IdCidade INT NOT NULL,
