@@ -6,10 +6,11 @@ GO
 --------------------------------------------------------------
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'CategoriaAnotacaoEvangelho')
 DROP TABLE CategoriaAnotacaoEvangelho
-CREATE TABLE CategoriaAnotacaoEvangelho (
+CREATE TABLE CategoriaAnotacaoEvangelho (	
 	Id INT IDENTITY,
 	Descricao VARCHAR(15) NOT NULL,
 	DataRegistro DATETIME DEFAULT GETDATE()
+	CONSTRAINT PKCategoriaAnotacaoEvangelho PRIMARY KEY (Id)
 );
 GO
 
@@ -19,10 +20,11 @@ GO
 ------------------------------------------------------------
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'NivelAnotacaoEvangelho')
 DROP TABLE NivelAnotacaoEvangelho
-CREATE TABLE NivelAnotacaoEvangelho (
+CREATE TABLE NivelAnotacaoEvangelho (	
 	Id INT IDENTITY,
 	Nivel INT NOT NULL,
 	DataRegistro DATETIME DEFAULT GETDATE()
+	CONSTRAINT PKNivelAnotacaoEvangelho PRIMARY KEY (Id)
 );
 GO
 
@@ -32,10 +34,11 @@ GO
 ------------------------------------------------------------
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'ClassificacaoAnotacaoEvangelho')
 DROP TABLE ClassificacaoAnotacaoEvangelho
-CREATE TABLE ClassificacaoAnotacaoEvangelho (
+CREATE TABLE ClassificacaoAnotacaoEvangelho (	
 	Id INT IDENTITY,
 	Classificacao INT NOT NULL,
 	DataRegistro DATETIME DEFAULT GETDATE()
+	CONSTRAINT PKClassificacaoAnotacaoEvangelho PRIMARY KEY (Id)
 );
 GO
 
@@ -44,10 +47,11 @@ GO
 ------------------------------------------------------------
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'ComentarioAnotacaoEnvagelho')
 DROP TABLE ComentarioAnotacaoEnvagelho
-CREATE TABLE ComentarioAnotacaoEnvagelho (
+CREATE TABLE ComentarioAnotacaoEnvagelho (	
 	Id INT IDENTITY, 
 	Cometario VARCHAR(1000),
 	DataRegistro DATETIME DEFAULT GETDATE()
+	CONSTRAINT PKComentarioAnotacaoEnvagelho PRIMARY KEY (Id)
 );
 GO
 
@@ -56,7 +60,7 @@ GO
 ------------------------------------------------------------
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'AnotacaoEvangelho')
 DROP TABLE AnotacaoEvangelho
-CREATE TABLE AnotacaoEvangelho (
+CREATE TABLE AnotacaoEvangelho (	
 	Id INT IDENTITY,
 	IdCategoriaAnotacaoEvangelho INT NOT NULL,
 	IdNivelAnotacaoEvangelho INT NOT NULL,
@@ -64,6 +68,7 @@ CREATE TABLE AnotacaoEvangelho (
 	Titulo VARCHAR(20) NOT NULL,
 	Descricao VARCHAR(MAX) NOT NULL,
 	DataRegistro DATETIME DEFAULT GETDATE()
+	CONSTRAINT PKAnotacaoEvangelho PRIMARY KEY (Id)
 );
 GO
 
@@ -73,9 +78,11 @@ GO
 -- TagTag------------------------------------------------------------
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Tag')
 DROP TABLE Tag
-CREATE TABLE Tag (
+CREATE TABLE Tag (	
 	ID INT IDENTITY,
 	Titulo VARCHAR(20),
+	DataRegistro DATETIME DEFAULT GETDATE()
+	CONSTRAINT PKTag PRIMARY KEY (Id)
 );
 GO
 
@@ -90,6 +97,8 @@ CREATE TABLE AnotacaoEvangelhoTag
 	ID INT IDENTITY,
 	IdAnotacaoEvangelho INT NOT NULL,
 	IdTag INT NOT NULL,
+	DataRegistro DATETIME DEFAULT GETDATE()
+	CONSTRAINT PKAnotacaoEvangelhoTag PRIMARY KEY (Id)
 );
 GO
 
@@ -98,10 +107,12 @@ GO
 --------------------------------------------------------------
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'EstadoCivil')
 DROP TABLE EstadoCivil
-CREATE TABLE EstadoCivil(
+CREATE TABLE EstadoCivil(	
 	Id int NOT NULL,
 	Nome varchar(25) NOT NULL,
 	Ativo bit NOT NULL,
+	DataRegistro DATETIME DEFAULT GETDATE()
+	CONSTRAINT PKEstadoCivil PRIMARY KEY (Id)
 );
 GO
 
@@ -110,10 +121,11 @@ GO
 --------------------------------------------------------------
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Estado')
 DROP TABLE Estado
-CREATE TABLE Estado (
+CREATE TABLE Estado (	
 	Id INT NOT NULL,
 	UF VARCHAR(2) NOT NULL UNIQUE,
 	DataRegistro DATETIME DEFAULT GETDATE()
+	CONSTRAINT PKEstado PRIMARY KEY (Id)
 );
 GO
 
@@ -122,11 +134,12 @@ GO
 --------------------------------------------------------------
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Cidade')
 DROP TABLE Cidade
-CREATE TABLE Cidade (
+CREATE TABLE Cidade (	
 	Id INT NOT NULL,
 	IdEstado INT NOT NULL,
 	Descricao VARCHAR(100) NOT NULL,
 	DataRegistro DATETIME DEFAULT GETDATE()
+	CONSTRAINT PKCidade PRIMARY KEY (Id)
 );
 GO
 
@@ -135,7 +148,7 @@ GO
 --------------------------------------------------------------
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Endereco')
 DROP TABLE Endereco
-CREATE TABLE Endereco (
+CREATE TABLE Endereco (	
 	Id INT NOT NULL,
 	IdCidade INT NOT NULL,
 	Cep VARCHAR(9) NOT NULL UNIQUE,
@@ -144,6 +157,7 @@ CREATE TABLE Endereco (
 	Numero INT NOT NULL,
 	Complemento VARCHAR(20),
 	DataRegistro DATETIME DEFAULT GETDATE()
+	CONSTRAINT PKEndereco PRIMARY KEY (Id)
 );
 GO
 
@@ -152,10 +166,12 @@ GO
 --------------------------------------------------------------
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Profissao')
 DROP TABLE Profissao
-CREATE TABLE Profissao (
+CREATE TABLE Profissao (	
 	Id int IDENTITY(1,1) NOT NULL,
 	Nome varchar(256) NOT NULL,
 	Ativo bit NOT NULL,
+	DataRegistro DATETIME DEFAULT GETDATE()
+	CONSTRAINT PKProfissao PRIMARY KEY (Id)
 );
 GO
 
@@ -164,7 +180,7 @@ GO
 ------------------------------------------------------------
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Membro')
 DROP TABLE Membro
-CREATE TABLE Membro (
+CREATE TABLE Membro (	
 	Id INT IDENTITY,
 	IdEndereco INT NOT NULL,
 	IdEstadoCivil INT NOT NULL,
@@ -181,10 +197,11 @@ CREATE TABLE Membro (
 	NomeConjuge VARCHAR(14),
 	Batizado BIT NOT NULL,
 	Observacao VARCHAR(1000),
-	DataRegistro DATETIME NOT NULL,
+	DataRegistro DATETIME DEFAULT GETDATE()
+	CONSTRAINT PKMembro PRIMARY KEY (Id)
 	Ativo BIT DEFAULT(1),
 	Foto VARCHAR,
-      );
+);
 GO
 
 
@@ -192,9 +209,11 @@ GO
 --------------------------------------------------------------
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Curso')
 DROP TABLE Curso
-CREATE TABLE Curso (
+CREATE TABLE Curso (	
 	Id INT IDENTITY,
 	Nome VARCHAR(255) NOT NULL,
+	DataRegistro DATETIME DEFAULT GETDATE()
+	CONSTRAINT PKCurso PRIMARY KEY (Id)
 );
 GO
 
@@ -202,11 +221,13 @@ GO
 --------------------------------------------------------------
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Exercicio')
 DROP TABLE Exercicio
-CREATE TABLE Exercicio (
+CREATE TABLE Exercicio (	
 	Id int IDENTITY,
 	IdSecao int NOT NULL,
 	Pergunta varchar(500) NOT NULL,
 	RespostaOficial varchar(500) NOT NULL,
+	DataRegistro DATETIME DEFAULT GETDATE()
+	CONSTRAINT PKExercicio PRIMARY KEY (Id)
 );
 GO
 
@@ -215,12 +236,14 @@ GO
 -------------------------------------------------------------
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Turma')
 DROP TABLE Turma
-CREATE TABLE Turma (
+CREATE TABLE Turma (	
 	Id int NOT NULL IDENTITY,
 	IdLider	int NOT NULL,
 	IdMembro int NOT NULL,
 	DataInicio datetime NOT NULL,
 	DataFim	date NOT NULL,
+	DataRegistro DATETIME DEFAULT GETDATE()
+	CONSTRAINT PKTurma PRIMARY KEY (Id)
 );
 GO
 
@@ -229,11 +252,13 @@ GO
 --------------------------------------------------------------
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Matricula')
 DROP TABLE Matricula
-CREATE TABLE Matricula (
+CREATE TABLE Matricula (	
 	Id int IDENTITY,
 	IdMembro int NOT NULL,
 	IdCurso int NOT NULL,
 	DataMatricula datetime NOT NULL,
+	DataRegistro DATETIME DEFAULT GETDATE()
+	CONSTRAINT PKMatricula PRIMARY KEY (Id)
 );
 GO
 
@@ -242,10 +267,12 @@ GO
 --------------------------------------------------------------
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Nota')
 DROP TABLE Nota
-CREATE TABLE Nota (
+CREATE TABLE Nota (	
 	Id int check (id > 0) NOT NULL IDENTITY,
 	IdResposta int,
 	Nota int,
+	DataRegistro DATETIME DEFAULT GETDATE()
+	CONSTRAINT PKNota PRIMARY KEY (Id)
 );
 GO
 
@@ -254,11 +281,13 @@ GO
 --------------------------------------------------------------
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Resposta')
 DROP TABLE Resposta
-CREATE TABLE Resposta (
+CREATE TABLE Resposta (	
 	Id int IDENTITY,
 	IdExercicio int,
 	IdMembro int,
 	RespostaDada varchar(500),
+	DataRegistro DATETIME DEFAULT GETDATE()
+	CONSTRAINT PKResposta PRIMARY KEY (Id)
 );
 GO
 
@@ -267,12 +296,14 @@ GO
 --------------------------------------------------------------
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Secao')
 DROP TABLE Secao
-CREATE TABLE Secao (
+CREATE TABLE Secao (	
 	Id int IDENTITY,
 	IdCurso int NOT NULL,
 	Titulo varchar(255) NOT NULL,
 	Explicacao varchar(1000) NOT NULL,
 	Numero int NOT NULL,
+	DataRegistro DATETIME DEFAULT GETDATE()
+	CONSTRAINT PKSecao PRIMARY KEY (Id)
 );
 GO
 
@@ -281,10 +312,11 @@ GO
 --------------------------------------------------------------
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'FuncaoMinisterial')
 DROP TABLE FuncaoMinisterial
-CREATE TABLE FuncaoMinisterial (
+CREATE TABLE FuncaoMinisterial (	
 	Id INT NOT NULL,
 	Descricao VARCHAR(15) NOT NULL UNIQUE,
 	DataRegistro DATETIME DEFAULT GETDATE()
+	CONSTRAINT PKFuncaoMinisterial PRIMARY KEY (Id)
 );
 GO
 
@@ -293,11 +325,12 @@ GO
 --------------------------------------------------------------
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'AtividadeMembro')
 DROP TABLE AtividadeMembro
-CREATE TABLE AtividadeMembro (
+CREATE TABLE AtividadeMembro (	
 	Id INT NOT NULL,
 	IdMembro INT,
 	Descricao VARCHAR(15) NOT NULL UNIQUE,
 	DataRegistro DATETIME DEFAULT GETDATE()
+	CONSTRAINT PKAtividadeMembro PRIMARY KEY (Id)
 );
 GO
 
@@ -306,7 +339,7 @@ GO
 --------------------------------------------------------------
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Lider')
 DROP TABLE Lider
-CREATE TABLE Lider (
+CREATE TABLE Lider (	
 	Id INT IDENTITY,
 	IdEndereco INT NOT NULL,
 	IdEstadoCivil INT NOT NULL,
@@ -324,7 +357,8 @@ CREATE TABLE Lider (
 	NomeConjuge VARCHAR(14),
 	Batizado BIT DEFAULT(1),
 	Observacao VARCHAR(1000),
-	DataRegistro DATETIME NOT NULL,
+	DataRegistro DATETIME DEFAULT GETDATE()
+	CONSTRAINT PKLider PRIMARY KEY (Id)
 	Salario Decimal(18,2),
 	Ativo BIT DEFAULT(1),
 	Foto VARCHAR,
@@ -336,10 +370,12 @@ GO
 --------------------------------------------------------------
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'DonsEspirituais')
 DROP TABLE DonsEspirituais
-CREATE TABLE DonsEspirituais (
+CREATE TABLE DonsEspirituais (	
 	Id INT IDENTITY,
 	IdPessoa INT NOT NULL,
 	Descricao VARCHAR(30) NOT NULL,
+	DataRegistro DATETIME DEFAULT GETDATE()
+	CONSTRAINT PKDonsEspirituais PRIMARY KEY (Id)
 );
 GO
 
@@ -348,10 +384,11 @@ GO
 --------------------------------------------------------------
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'TipoEmail')
 DROP TABLE TipoEmail
-CREATE TABLE TipoEmail (
+CREATE TABLE TipoEmail (	
 	Id INT NOT NULL,
 	TipoEmail VARCHAR(15) NOT NULL,
 	DataRegistro DATETIME DEFAULT GETDATE()
+	CONSTRAINT PKTipoEmail PRIMARY KEY (Id)
 );
 GO
 
@@ -360,7 +397,7 @@ GO
 --------------------------------------------------------------
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Email')
 DROP TABLE Email
-CREATE TABLE Email (
+CREATE TABLE Email (	
 	Id INT IDENTITY,
 	IdPessoa INT NOT NULL,
 	IdTipoEmail INT NOT NULL,
@@ -371,6 +408,7 @@ CREATE TABLE Email (
 	Notificado BIT DEFAULT (0),
 	Confirmado BIT DEFAULT (0),
 	DataRegistro DATETIME DEFAULT GETDATE()
+	CONSTRAINT PKEmail PRIMARY KEY (Id)
 );
 GO
 
@@ -379,13 +417,14 @@ GO
 --------------------------------------------------------------
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Dizimo')
 DROP TABLE Dizimo
-CREATE TABLE Dizimo (
+CREATE TABLE Dizimo (	
 	Id INT NOT NULL,
 	IdPessoa INT NOT NULL,
 	Valor decimal(6,2) NOT NULL,
 	DataEntrada DATETIME NOT NULL,
 	Observacao VARCHAR(500),
 	DataRegistro DATETIME DEFAULT GETDATE()
+	CONSTRAINT PKDizimo PRIMARY KEY (Id)
 );
 GO
 
@@ -394,10 +433,11 @@ GO
 --------------------------------------------------------------
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Perfil')
 DROP TABLE Perfil
-CREATE TABLE Perfil (
+CREATE TABLE Perfil (	
 	Id INT NOT NULL,
 	Nome VARCHAR(20) NOT NULL UNIQUE,
 	DataRegistro DATETIME DEFAULT GETDATE()
+	CONSTRAINT PKPerfil PRIMARY KEY (Id)
 );
 
 
@@ -405,13 +445,14 @@ CREATE TABLE Perfil (
 --------------------------------------------------------------
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Usuario')
 DROP TABLE Usuario
-CREATE TABLE Usuario (
+CREATE TABLE Usuario (	
 	Id INT NOT NULL,
 	IdPerfil INT NOT NULL,
 	IdPessoa INT NOT NULL,
 	Usuario VARCHAR(20) NOT NULL UNIQUE,
 	Senha VARCHAR(30) NOT NULL,
 	DataRegistro DATETIME DEFAULT GETDATE()
+	CONSTRAINT PKUsuario PRIMARY KEY (Id)
 );
 GO
 
@@ -420,13 +461,14 @@ GO
 --------------------------------------------------------------
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Venda')
 DROP TABLE Venda
-CREATE TABLE Venda (
+CREATE TABLE Venda (	
 	Id INT NOT NULL,
 	IdPessoa INT NOT NULL,
 	Valor decimal(5,2) NOT NULL,
 	Desconto decimal(5,2) NOT NULL,
 	ValorPago decimal(5,2) NOT NULL,
 	DataRegistro DATETIME DEFAULT GETDATE()
+	CONSTRAINT PKVenda PRIMARY KEY (Id)
 );
 GO
 
@@ -435,13 +477,14 @@ GO
 --------------------------------------------------------------
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Oferta')
 DROP TABLE Oferta
-CREATE TABLE Oferta (
+CREATE TABLE Oferta (	
 	Id INT NOT NULL,
 	IdPessoa INT,
 	Valor decimal(6,2) NOT NULL,
 	DataEntrada DATETIME NOT NULL,
 	Observacao VARCHAR(500),
 	DataRegistro DATETIME DEFAULT GETDATE()
+	CONSTRAINT PKOferta PRIMARY KEY (Id)
 );
 GO
 
@@ -450,10 +493,11 @@ GO
 --------------------------------------------------------------
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Categoria')
 DROP TABLE Categoria
-CREATE TABLE Categoria (
+CREATE TABLE Categoria (	
 	Id INT NOT NULL,
 	Descricao VARCHAR(20) NOT NULL UNIQUE,
 	DataRegistro DATETIME DEFAULT GETDATE()
+	CONSTRAINT PKCategoria PRIMARY KEY (Id)
 );
 GO
 
@@ -462,13 +506,14 @@ GO
 --------------------------------------------------------------
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Produto')
 DROP TABLE Produto
-CREATE TABLE Produto (
+CREATE TABLE Produto (	
 	Id INT NOT NULL,
 	IdCategoria INT NOT NULL,
 	Nome VARCHAR(30) NOT NULL UNIQUE,
 	Valor decimal(5,2) NOT NULL,
 	Descricao VARCHAR(500) NOT NULL,
 	DataRegistro DATETIME DEFAULT GETDATE()
+	CONSTRAINT PKProduto PRIMARY KEY (Id)
 );
 GO
 
@@ -477,13 +522,14 @@ GO
 --------------------------------------------------------------
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'ItemVenda')
 DROP TABLE ItemVenda
-CREATE TABLE ItemVenda (
+CREATE TABLE ItemVenda (	
 	Id INT NOT NULL,
 	IdVenda INT NOT NULL,
 	IdProduto INT NOT NULL,
 	Quantidade INT NOT NULL,
 	Valor decimal(5,2) NOT NULL,
 	DataRegistro DATETIME DEFAULT GETDATE()
+	CONSTRAINT PKItemVenda PRIMARY KEY (Id)
 );
 GO
 
@@ -492,10 +538,11 @@ GO
 --------------------------------------------------------------
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'FormaPagamento')
 DROP TABLE FormaPagamento
-CREATE TABLE FormaPagamento (
+CREATE TABLE FormaPagamento (	
 	Id INT NOT NULL,
 	Descricao VARCHAR(15) NOT NULL UNIQUE,
 	DataRegistro DATETIME DEFAULT GETDATE()
+	CONSTRAINT PKFormaPagamento PRIMARY KEY (Id)
 );
 GO
 
@@ -504,7 +551,7 @@ GO
 --------------------------------------------------------------
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'ContaReceber')
 DROP TABLE ContaReceber
-CREATE TABLE ContaReceber (
+CREATE TABLE ContaReceber (	
 	Id INT NOT NULL,
 	IdVenda INT NOT NULL,
 	IdFormaPagamento INT NOT NULL,
@@ -512,6 +559,7 @@ CREATE TABLE ContaReceber (
 	DataEntrada DATETIME NOT NULL,
 	Observacao VARCHAR(500),
 	DataRegistro DATETIME DEFAULT GETDATE()
+	CONSTRAINT PKContaReceber PRIMARY KEY (Id)
 );
 GO
 
@@ -520,11 +568,12 @@ GO
 --------------------------------------------------------------
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Publico')
 DROP TABLE Publico
-CREATE TABLE Publico (
+CREATE TABLE Publico (	
 	Id INT NOT NULL,
 	Descricao VARCHAR(10) NOT NULL UNIQUE,
 	Classificacao VARCHAR(5) NOT NULL,
 	DataRegistro DATETIME DEFAULT GETDATE()
+	CONSTRAINT PKPublico PRIMARY KEY (Id)
 );
 GO
 
@@ -533,7 +582,7 @@ GO
 --------------------------------------------------------------
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Evento')
 DROP TABLE Evento
-CREATE TABLE Evento (
+CREATE TABLE Evento (	
 	Id INT NOT NULL,
 	IdPublico INT NOT NULL,
 	IdEndereco INT NOT NULL,
@@ -544,15 +593,28 @@ CREATE TABLE Evento (
 	Numero INT NOT NULL,
 	PontoReferencia VARCHAR(30),
 	DataRegistro DATETIME DEFAULT GETDATE()
+	CONSTRAINT PKEvento PRIMARY KEY (Id)
 );
 GO
 
+
+-- TipoTelefone
+--------------------------------------------------------------
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'TipoTelefone')
+DROP TABLE TipoTelefone
+CREATE TABLE TipoTelefone (	
+	Id INT NOT NULL,
+	Descricao VARCHAR(10) NOT NULL UNIQUE,
+	DataRegistro DATETIME DEFAULT GETDATE()
+	CONSTRAINT PKTipoTelefone PRIMARY KEY (Id)
+);
+GO
 
 -- Telefone
 --------------------------------------------------------------
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Telefone')
 DROP TABLE Telefone
-CREATE TABLE Telefone (
+CREATE TABLE Telefone (	
 	Id INT NOT NULL,
 	IdPessoa INT NOT NULL,
 	IdTipoTelefone INT NOT NULL,
@@ -561,6 +623,7 @@ CREATE TABLE Telefone (
 	Numero VARCHAR(10) NOT NULL,
 	Servico VARCHAR(10) NOT NULL,
 	DataRegistro DATETIME DEFAULT GETDATE()
+	CONSTRAINT PKTelefone PRIMARY KEY (Id)
 );
 GO
 
@@ -569,11 +632,12 @@ GO
 --------------------------------------------------------------
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Orcamento')
 DROP TABLE Orcamento
-CREATE TABLE Orcamento (
+CREATE TABLE Orcamento (	
 	Id INT NOT NULL,
 	TotalDizimo decimal(6,2) NOT NULL,
 	TotalOferta decimal(6,2) NOT NULL,
 	DataRegistro DATETIME DEFAULT GETDATE()
+	CONSTRAINT PKOrcamento PRIMARY KEY (Id)
 );
 GO
 
@@ -582,10 +646,11 @@ GO
 --------------------------------------------------------------
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'TipoContaPagar')
 DROP TABLE TipoContaPagar
-CREATE TABLE TipoContaPagar (
+CREATE TABLE TipoContaPagar (	
 	Id INT NOT NULL,
 	Descricao VARCHAR(10) NOT NULL UNIQUE,
 	DataRegistro DATETIME DEFAULT GETDATE()
+	CONSTRAINT PKTipoContaPagar PRIMARY KEY (Id)
 );
 GO
 
@@ -594,7 +659,7 @@ GO
 --------------------------------------------------------------
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'ContaPagar')
 DROP TABLE ContaPagar
-CREATE TABLE ContaPagar (
+CREATE TABLE ContaPagar (	
 	Id INT NOT NULL,
 	IdTipoConta INT NOT NULL,
 	Descricao VARCHAR(10) NOT NULL,
@@ -602,5 +667,6 @@ CREATE TABLE ContaPagar (
 	DataVencimento DATETIME NOT NULL,
 	DataPagamento DATETIME,
 	DataRegistro DATETIME DEFAULT GETDATE()
+	CONSTRAINT PKContaPagar PRIMARY KEY (Id)
 );
 GO
