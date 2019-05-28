@@ -1,17 +1,15 @@
-BEGIN TRAN
-
 -- VERIFICAR ID TELEFONE E TABELA TELEFONE INTEGRAÇÃO
 
 GO
 -- EXEMPLO: LIVRO, PREGAÇÃO, WHATSAPP-AUDIO, PODCAST, SITE
 -- CategoriaAcaoEvangelho
 --------------------------------------------------------------
-If Object_Id('CategoriaAcaoEvangelho') Is Null
-
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'CategoriaAnotacaoEvangelho')
+DROP TABLE CategoriaAnotacaoEvangelho
 CREATE TABLE CategoriaAnotacaoEvangelho (
 	Id INT IDENTITY,
 	Descricao VARCHAR(15) NOT NULL,
-	DataRegistro DATETIME DEFAULT GETDATE(),
+	DataRegistro DATETIME DEFAULT GETDATE()
 );
 GO
 
@@ -19,12 +17,12 @@ GO
 -- EXEMPLO: BASICO, MEDIO, AVANÇADO
 -- NivelAnotacaoEvangelho
 ------------------------------------------------------------
-If Object_Id('NivelAnotacaoEvangelho') Is Null
-
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'NivelAnotacaoEvangelho')
+DROP TABLE NivelAnotacaoEvangelho
 CREATE TABLE NivelAnotacaoEvangelho (
 	Id INT IDENTITY,
 	Nivel INT NOT NULL,
-	DataRegistro DATETIME DEFAULT GETDATE(),
+	DataRegistro DATETIME DEFAULT GETDATE()
 );
 GO
 
@@ -32,32 +30,32 @@ GO
 -- DESCRICAO: CONTROLE DE CLASSIFICAR POR 5 ESTRELAS
 -- ClassificacaoAnotacaoEvangelho
 ------------------------------------------------------------
-If Object_Id('ClassificacaoAnotacaoEvangelho') Is Null
-
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'ClassificacaoAnotacaoEvangelho')
+DROP TABLE ClassificacaoAnotacaoEvangelho
 CREATE TABLE ClassificacaoAnotacaoEvangelho (
 	Id INT IDENTITY,
 	Classificacao INT NOT NULL,
-	DataRegistro DATETIME DEFAULT GETDATE(),
+	DataRegistro DATETIME DEFAULT GETDATE()
 );
 GO
 
 -- DESCRICAO: COMENTÁRIO DE USUÁRIOS PARA CADA ANOTAÇÃO
 -- ComentarioAnotacaoEnvagelho
 ------------------------------------------------------------
-If Object_Id('ComentarioAnotacaoEnvagelho') Is Null
-
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'ComentarioAnotacaoEnvagelho')
+DROP TABLE ComentarioAnotacaoEnvagelho
 CREATE TABLE ComentarioAnotacaoEnvagelho (
 	Id INT IDENTITY, 
 	Cometario VARCHAR(1000),
-	DataRegistro DATETIME DEFAULT GETDATE(),
+	DataRegistro DATETIME DEFAULT GETDATE()
 );
 GO
 
 -- DESCRICAO: ANOTAÇÃO DE CADA CONTEUDO
 -- AnotacaoEvangelho
 ------------------------------------------------------------
-If Object_Id('AnotacaoEvangelho') Is Null
-
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'AnotacaoEvangelho')
+DROP TABLE AnotacaoEvangelho
 CREATE TABLE AnotacaoEvangelho (
 	Id INT IDENTITY,
 	IdCategoriaAnotacaoEvangelho INT NOT NULL,
@@ -73,8 +71,8 @@ GO
 -- EXEMPLO: REDENÇÃO, SALVAÇÃO, PURIFICAÇÃO, JUSTIFICAÇÃO, ETC
 -- DESCRICAO: TAGS PARA CADA ANOTAÇÃO
 -- TagTag------------------------------------------------------------
-If Object_Id('Tag') Is Null
-
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Tag')
+DROP TABLE Tag
 CREATE TABLE Tag (
 	ID INT IDENTITY,
 	Titulo VARCHAR(20),
@@ -85,8 +83,8 @@ GO
 -- DESCRICAO: TABELA INTERMEDIÁRIA
 -- AnotacaoEvangelhoTag
 ------------------------------------------------------------
-If Object_Id('AnotacaoEvangelhoTag') Is Null
-
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'AnotacaoEvangelhoTag')
+DROP TABLE AnotacaoEvangelhoTag
 CREATE TABLE AnotacaoEvangelhoTag
 (
 	ID INT IDENTITY,
@@ -98,8 +96,8 @@ GO
 
 -- EstadoCivil
 --------------------------------------------------------------
-If Object_Id('EstadoCivil') Is Null
-
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'EstadoCivil')
+DROP TABLE EstadoCivil
 CREATE TABLE EstadoCivil(
 	Id int NOT NULL,
 	Nome varchar(25) NOT NULL,
@@ -110,33 +108,33 @@ GO
 
 -- Estado
 --------------------------------------------------------------
-If Object_Id('Estado') Is Null
-
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Estado')
+DROP TABLE Estado
 CREATE TABLE Estado (
 	Id INT NOT NULL,
 	UF VARCHAR(2) NOT NULL UNIQUE,
-	DataRegistro DATETIME DEFAULT GETDATE(),
+	DataRegistro DATETIME DEFAULT GETDATE()
 );
 GO
 
 
 -- Cidade
 --------------------------------------------------------------
-If Object_Id('Cidade') Is Null
-
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Cidade')
+DROP TABLE Cidade
 CREATE TABLE Cidade (
 	Id INT NOT NULL,
 	IdEstado INT NOT NULL,
 	Descricao VARCHAR(100) NOT NULL,
-	DataRegistro DATETIME DEFAULT GETDATE(),
+	DataRegistro DATETIME DEFAULT GETDATE()
 );
 GO
 
 
 -- EnderecoEndereco
 --------------------------------------------------------------
-If Object_Id('Endereco') Is Null
-
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Endereco')
+DROP TABLE Endereco
 CREATE TABLE Endereco (
 	Id INT NOT NULL,
 	IdCidade INT NOT NULL,
@@ -145,15 +143,15 @@ CREATE TABLE Endereco (
 	Bairro VARCHAR(70) NOT NULL,
 	Numero INT NOT NULL,
 	Complemento VARCHAR(20),
-	DataRegistro DATETIME DEFAULT GETDATE(),
+	DataRegistro DATETIME DEFAULT GETDATE()
 );
 GO
 
 
 -- Profissao
 --------------------------------------------------------------
-If Object_Id('Profissao') Is Null
-
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Profissao')
+DROP TABLE Profissao
 CREATE TABLE Profissao (
 	Id int IDENTITY(1,1) NOT NULL,
 	Nome varchar(256) NOT NULL,
@@ -164,8 +162,8 @@ GO
 
 -- Membro
 ------------------------------------------------------------
-If Object_Id('Membro') Is Null
-
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Membro')
+DROP TABLE Membro
 CREATE TABLE Membro (
 	Id INT IDENTITY,
 	IdEndereco INT NOT NULL,
@@ -192,8 +190,8 @@ GO
 
 -- Curso
 --------------------------------------------------------------
-If Object_Id('Curso') Is Null
-
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Curso')
+DROP TABLE Curso
 CREATE TABLE Curso (
 	Id INT IDENTITY,
 	Nome VARCHAR(255) NOT NULL,
@@ -202,8 +200,8 @@ GO
 
 -- Exercicio
 --------------------------------------------------------------
-If Object_Id('Exercicio') Is Null
-
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Exercicio')
+DROP TABLE Exercicio
 CREATE TABLE Exercicio (
 	Id int IDENTITY,
 	IdSecao int NOT NULL,
@@ -215,8 +213,8 @@ GO
 
 -- TurmaTurma
 -------------------------------------------------------------
-If Object_Id('Turma') Is Null
-
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Turma')
+DROP TABLE Turma
 CREATE TABLE Turma (
 	Id int NOT NULL IDENTITY,
 	IdLider	int NOT NULL,
@@ -229,8 +227,8 @@ GO
 
 -- Matricula
 --------------------------------------------------------------
-If Object_Id('Matricula') Is Null
-
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Matricula')
+DROP TABLE Matricula
 CREATE TABLE Matricula (
 	Id int IDENTITY,
 	IdMembro int NOT NULL,
@@ -242,8 +240,8 @@ GO
 
 -- Nota
 --------------------------------------------------------------
-If Object_Id('Nota') Is Null
-
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Nota')
+DROP TABLE Nota
 CREATE TABLE Nota (
 	Id int check (id > 0) NOT NULL IDENTITY,
 	IdResposta int,
@@ -254,8 +252,8 @@ GO
 
 -- respostaResposta
 --------------------------------------------------------------
-If Object_Id('Resposta') Is Null
-
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Resposta')
+DROP TABLE Resposta
 CREATE TABLE Resposta (
 	Id int IDENTITY,
 	IdExercicio int,
@@ -267,8 +265,8 @@ GO
 
 -- secaoSecao
 --------------------------------------------------------------
-If Object_Id('Secao') Is Null
-
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Secao')
+DROP TABLE Secao
 CREATE TABLE Secao (
 	Id int IDENTITY,
 	IdCurso int NOT NULL,
@@ -281,33 +279,33 @@ GO
 
 -- FuncaoMinisterial
 --------------------------------------------------------------
-If Object_Id('FuncaoMinisterial') Is Null
-
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'FuncaoMinisterial')
+DROP TABLE FuncaoMinisterial
 CREATE TABLE FuncaoMinisterial (
 	Id INT NOT NULL,
 	Descricao VARCHAR(15) NOT NULL UNIQUE,
-	DataRegistro DATETIME DEFAULT GETDATE(),
+	DataRegistro DATETIME DEFAULT GETDATE()
 );
 GO
 
 
 -- AtividadeMembro
 --------------------------------------------------------------
-If Object_Id('AtividadeMembro') Is Null
-
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'AtividadeMembro')
+DROP TABLE AtividadeMembro
 CREATE TABLE AtividadeMembro (
 	Id INT NOT NULL,
 	IdMembro INT,
 	Descricao VARCHAR(15) NOT NULL UNIQUE,
-	DataRegistro DATETIME DEFAULT GETDATE(),
+	DataRegistro DATETIME DEFAULT GETDATE()
 );
 GO
 
 
 -- Lider
 --------------------------------------------------------------
-If Object_Id('Lider') Is Null
-
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Lider')
+DROP TABLE Lider
 CREATE TABLE Lider (
 	Id INT IDENTITY,
 	IdEndereco INT NOT NULL,
@@ -336,8 +334,8 @@ GO
 
 -- DonsEspirituais
 --------------------------------------------------------------
-If Object_Id('DonsEspirituais') Is Null
-
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'DonsEspirituais')
+DROP TABLE DonsEspirituais
 CREATE TABLE DonsEspirituais (
 	Id INT IDENTITY,
 	IdPessoa INT NOT NULL,
@@ -348,20 +346,20 @@ GO
 
 -- TipoEmail
 --------------------------------------------------------------
-If Object_Id('TipoEmail') Is Null
-
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'TipoEmail')
+DROP TABLE TipoEmail
 CREATE TABLE TipoEmail (
 	Id INT NOT NULL,
 	TipoEmail VARCHAR(15) NOT NULL,
-	DataRegistro DATETIME DEFAULT GETDATE(),
+	DataRegistro DATETIME DEFAULT GETDATE()
 );
 GO
 
 
 -- Email
 --------------------------------------------------------------
-If Object_Id('Email') Is Null
-
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Email')
+DROP TABLE Email
 CREATE TABLE Email (
 	Id INT IDENTITY,
 	IdPessoa INT NOT NULL,
@@ -372,140 +370,140 @@ CREATE TABLE Email (
 	Excluido BIT DEFAULT (0),
 	Notificado BIT DEFAULT (0),
 	Confirmado BIT DEFAULT (0),
-	DataRegistro DATETIME DEFAULT GETDATE(),
+	DataRegistro DATETIME DEFAULT GETDATE()
 );
 GO
 
 
 -- Dizimo
 --------------------------------------------------------------
-If Object_Id('Dizimo') Is Null
-
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Dizimo')
+DROP TABLE Dizimo
 CREATE TABLE Dizimo (
 	Id INT NOT NULL,
 	IdPessoa INT NOT NULL,
 	Valor decimal(6,2) NOT NULL,
 	DataEntrada DATETIME NOT NULL,
 	Observacao VARCHAR(500),
-	DataRegistro DATETIME DEFAULT GETDATE(),
+	DataRegistro DATETIME DEFAULT GETDATE()
 );
 GO
 
 
 -- PerfilPerfil
 --------------------------------------------------------------
-If Object_Id('Perfil') Is Null
-
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Perfil')
+DROP TABLE Perfil
 CREATE TABLE Perfil (
 	Id INT NOT NULL,
 	Nome VARCHAR(20) NOT NULL UNIQUE,
-	DataRegistro DATETIME DEFAULT GETDATE(),
+	DataRegistro DATETIME DEFAULT GETDATE()
 );
 
 
 -- Usuario
 --------------------------------------------------------------
-If Object_Id('Usuario') Is Null
-
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Usuario')
+DROP TABLE Usuario
 CREATE TABLE Usuario (
 	Id INT NOT NULL,
 	IdPerfil INT NOT NULL,
 	IdPessoa INT NOT NULL,
 	Usuario VARCHAR(20) NOT NULL UNIQUE,
 	Senha VARCHAR(30) NOT NULL,
-	DataRegistro DATETIME DEFAULT GETDATE(),
+	DataRegistro DATETIME DEFAULT GETDATE()
 );
 GO
 
 
 -- Venda
 --------------------------------------------------------------
-If Object_Id('Venda') Is Null
-
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Venda')
+DROP TABLE Venda
 CREATE TABLE Venda (
 	Id INT NOT NULL,
 	IdPessoa INT NOT NULL,
 	Valor decimal(5,2) NOT NULL,
 	Desconto decimal(5,2) NOT NULL,
 	ValorPago decimal(5,2) NOT NULL,
-	DataRegistro DATETIME DEFAULT GETDATE(),
+	DataRegistro DATETIME DEFAULT GETDATE()
 );
 GO
 
 
 -- Oferta
 --------------------------------------------------------------
-If Object_Id('Oferta') Is Null
-
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Oferta')
+DROP TABLE Oferta
 CREATE TABLE Oferta (
 	Id INT NOT NULL,
 	IdPessoa INT,
 	Valor decimal(6,2) NOT NULL,
 	DataEntrada DATETIME NOT NULL,
 	Observacao VARCHAR(500),
-	DataRegistro DATETIME DEFAULT GETDATE(),
+	DataRegistro DATETIME DEFAULT GETDATE()
 );
 GO
 
 
 -- Categoria
 --------------------------------------------------------------
-If Object_Id('Categoria') Is Null
-
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Categoria')
+DROP TABLE Categoria
 CREATE TABLE Categoria (
 	Id INT NOT NULL,
 	Descricao VARCHAR(20) NOT NULL UNIQUE,
-	DataRegistro DATETIME DEFAULT GETDATE(),
+	DataRegistro DATETIME DEFAULT GETDATE()
 );
 GO
 
 
 -- Produto
 --------------------------------------------------------------
-If Object_Id('Produto') Is Null
-
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Produto')
+DROP TABLE Produto
 CREATE TABLE Produto (
 	Id INT NOT NULL,
 	IdCategoria INT NOT NULL,
 	Nome VARCHAR(30) NOT NULL UNIQUE,
 	Valor decimal(5,2) NOT NULL,
 	Descricao VARCHAR(500) NOT NULL,
-	DataRegistro DATETIME DEFAULT GETDATE(),
+	DataRegistro DATETIME DEFAULT GETDATE()
 );
 GO
 
 
 -- ItemVenda
 --------------------------------------------------------------
-If Object_Id('ItemVenda') Is Null
-
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'ItemVenda')
+DROP TABLE ItemVenda
 CREATE TABLE ItemVenda (
 	Id INT NOT NULL,
 	IdVenda INT NOT NULL,
 	IdProduto INT NOT NULL,
 	Quantidade INT NOT NULL,
 	Valor decimal(5,2) NOT NULL,
-	DataRegistro DATETIME DEFAULT GETDATE(),
+	DataRegistro DATETIME DEFAULT GETDATE()
 );
 GO
 
 
 -- FormaPagamento
 --------------------------------------------------------------
-If Object_Id('FormaPagamento') Is Null
-
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'FormaPagamento')
+DROP TABLE FormaPagamento
 CREATE TABLE FormaPagamento (
 	Id INT NOT NULL,
 	Descricao VARCHAR(15) NOT NULL UNIQUE,
-	DataRegistro DATETIME DEFAULT GETDATE(),
+	DataRegistro DATETIME DEFAULT GETDATE()
 );
 GO
 
 
 -- ContaReceber
 --------------------------------------------------------------
-If Object_Id('ContaReceber') Is Null
-
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'ContaReceber')
+DROP TABLE ContaReceber
 CREATE TABLE ContaReceber (
 	Id INT NOT NULL,
 	IdVenda INT NOT NULL,
@@ -513,28 +511,28 @@ CREATE TABLE ContaReceber (
 	Valor decimal(6,2) NOT NULL,
 	DataEntrada DATETIME NOT NULL,
 	Observacao VARCHAR(500),
-	DataRegistro DATETIME DEFAULT GETDATE(),
+	DataRegistro DATETIME DEFAULT GETDATE()
 );
 GO
 
 
 -- Publico
 --------------------------------------------------------------
-If Object_Id('Publico') Is Null
-
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Publico')
+DROP TABLE Publico
 CREATE TABLE Publico (
 	Id INT NOT NULL,
 	Descricao VARCHAR(10) NOT NULL UNIQUE,
 	Classificacao VARCHAR(5) NOT NULL,
-	DataRegistro DATETIME DEFAULT GETDATE(),
+	DataRegistro DATETIME DEFAULT GETDATE()
 );
 GO
 
 
 -- Evento
 --------------------------------------------------------------
-If Object_Id('Evento') Is Null
-
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Evento')
+DROP TABLE Evento
 CREATE TABLE Evento (
 	Id INT NOT NULL,
 	IdPublico INT NOT NULL,
@@ -545,15 +543,15 @@ CREATE TABLE Evento (
 	Descricao VARCHAR(500),
 	Numero INT NOT NULL,
 	PontoReferencia VARCHAR(30),
-	DataRegistro DATETIME DEFAULT GETDATE(),
+	DataRegistro DATETIME DEFAULT GETDATE()
 );
 GO
 
 
 -- Telefone
 --------------------------------------------------------------
-If Object_Id('Telefone') Is Null
-
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Telefone')
+DROP TABLE Telefone
 CREATE TABLE Telefone (
 	Id INT NOT NULL,
 	IdPessoa INT NOT NULL,
@@ -562,40 +560,40 @@ CREATE TABLE Telefone (
 	Ddd INT NOT NULL,
 	Numero VARCHAR(10) NOT NULL,
 	Servico VARCHAR(10) NOT NULL,
-	DataRegistro DATETIME DEFAULT GETDATE(),
+	DataRegistro DATETIME DEFAULT GETDATE()
 );
 GO
 
 
 -- Orcamento
 --------------------------------------------------------------
-If Object_Id('Orcamento') Is Null
-
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Orcamento')
+DROP TABLE Orcamento
 CREATE TABLE Orcamento (
 	Id INT NOT NULL,
 	TotalDizimo decimal(6,2) NOT NULL,
 	TotalOferta decimal(6,2) NOT NULL,
-	DataRegistro DATETIME DEFAULT GETDATE(),
+	DataRegistro DATETIME DEFAULT GETDATE()
 );
 GO
 
 
 -- TipoContaPagar
 --------------------------------------------------------------
-If Object_Id('TipoContaPagar') Is Null
-
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'TipoContaPagar')
+DROP TABLE TipoContaPagar
 CREATE TABLE TipoContaPagar (
 	Id INT NOT NULL,
 	Descricao VARCHAR(10) NOT NULL UNIQUE,
-	DataRegistro DATETIME DEFAULT GETDATE(),
+	DataRegistro DATETIME DEFAULT GETDATE()
 );
 GO
 
 
 -- ContaPagar
 --------------------------------------------------------------
-If Object_Id('ContaPagar') Is Null
-
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'ContaPagar')
+DROP TABLE ContaPagar
 CREATE TABLE ContaPagar (
 	Id INT NOT NULL,
 	IdTipoConta INT NOT NULL,
@@ -603,8 +601,6 @@ CREATE TABLE ContaPagar (
 	Valor decimal(6,2) NOT NULL,
 	DataVencimento DATETIME NOT NULL,
 	DataPagamento DATETIME,
-	DataRegistro DATETIME DEFAULT GETDATE(),
+	DataRegistro DATETIME DEFAULT GETDATE()
 );
 GO
-
---ROLLBACK
