@@ -14,8 +14,10 @@ namespace ProjetoCincoSolas.Models
         public string Signo { get; set; }
         public string Mae { get; set; }
         public string Pai { get; set; }
-        public string Email { get; set; }
-        public string Senha { get; set; }
+
+        public string Email => "wsales.dev@gmail.com";
+
+        public string Senha => "conectar";
         public string Cep { get; set; }
         public string Endereco { get; set; }
         public int Numero { get; set; }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Web;
+using ProjetoCincoSolas.Models;
 
 namespace ProjetoCincoSolas.Servico
 {
@@ -34,6 +35,18 @@ namespace ProjetoCincoSolas.Servico
             var response = (HttpWebResponse)request.GetResponse();
             var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
             return responseString;
+        }
+
+        public void GravarQuery(PessoaImportadaDto pessoaImportadaDto)
+        {
+            Random random = new Random();
+            var cidade = random.Next(1, 5610);
+
+            var query = "IF NOT EXISTS (SELECT * FROM Endereco WHERE Cep = '" + pessoaImportadaDto.Cep + "') " +
+                        "INSERT INTO Endereco (IdCidade, Cep, Logradouro, Bairro, Numero, Complemento)" +
+                        "VALUES (" + cidade + ", " + pessoaImportadaDto.Cep + ", " + pessoaImportadaDto.Endereco + ", " + pessoaImportadaDto.Bairro + ", " + 
+                        ", " + pessoaImportadaDto.Numero;
+
         }
     }
 }

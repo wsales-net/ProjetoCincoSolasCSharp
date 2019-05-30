@@ -32,7 +32,7 @@ namespace ProjetoCincoSolas.Controllers
             {
                 var getPessoa = _devsServico.SincronizarPessoa();
                 var pessoaImportadaDto = JsonHelper.ToEntity<PessoaImportadaDto>(getPessoa);
-
+                _devsServico.GravarQuery(pessoaImportadaDto);
                 listaPessoas.Add(pessoaImportadaDto);
                 i++;
             }
