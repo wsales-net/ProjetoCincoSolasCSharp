@@ -6229,8 +6229,12 @@ CREATE TABLE TipoEmail (
 	CONSTRAINT PKTipoEmail PRIMARY KEY (Id)
 );
 GO
+IF NOT EXISTS (SELECT 1 FROM TipoEmail WHERE Nome = 'Pessoal') 
+INSERT INTO TipoEmail (TipoEmail) Values ('Pessoal')
+IF NOT EXISTS (SELECT 1 FROM TipoEmail WHERE Nome = 'Comercial') 
+INSERT INTO TipoEmail (TipoEmail) Values ('Comercial'),
 
-
+			  
 -- Email
 --------------------------------------------------------------
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Email')
@@ -6277,7 +6281,11 @@ CREATE TABLE Perfil (
 	DataRegistro DATETIME DEFAULT GETDATE()
 	CONSTRAINT PKPerfil PRIMARY KEY (Id)
 );
-
+GO
+IF NOT EXISTS (SELECT 1 FROM PerfilAcesso WHERE Nome = 'Padrão') Insert Into PerfilAcesso (Nome) Values ('Padrão');
+IF NOT EXISTS (SELECT 1 FROM PerfilAcesso WHERE Nome = 'Administrador') Insert Into PerfilAcesso (Nome) Values ('Administrador');
+IF NOT EXISTS (SELECT 1 FROM PerfilAcesso WHERE Nome = 'Master') Insert Into PerfilAcesso (Nome) Values ('Master');
+GO
 
 -- Usuario
 --------------------------------------------------------------
@@ -6329,16 +6337,18 @@ GO
 
 -- Categoria
 --------------------------------------------------------------
-IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Categoria')
-DROP TABLE Categoria
-CREATE TABLE Categoria (	
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'CategoriaProduto')
+DROP TABLE CategoriaProduto
+CREATE TABLE CategoriaProduto (	
 	Id INT NOT NULL,
 	Descricao VARCHAR(20) NOT NULL UNIQUE,
 	DataRegistro DATETIME DEFAULT GETDATE()
 	CONSTRAINT PKCategoria PRIMARY KEY (Id)
 );
+GO	  
+IF NOT EXISTS (SELECT 1 FROM CategoriaProduto WHERE Descricao = 'Doce') Insert Into CategoriaProduto (Descricao) Values ('Doce');
+IF NOT EXISTS (SELECT 1 FROM CategoriaProduto WHERE Descricao = 'Salgado') Insert Into CategoriaProduto (Descricao) Values ('Salgado');
 GO
-
 
 -- Produto
 --------------------------------------------------------------
@@ -6353,8 +6363,11 @@ CREATE TABLE Produto (
 	DataRegistro DATETIME DEFAULT GETDATE()
 	CONSTRAINT PKProduto PRIMARY KEY (Id)
 );
+GO	  
+IF NOT EXISTS (SELECT 1 FROM Produto WHERE Nome = 'Torta') Insert Into Produto (IdCategoria, Nome, Valor, Descrição) Values (2, 'Torta', 5);
+IF NOT EXISTS (SELECT 1 FROM Produto WHERE Nome = 'Bolo') Insert Into Produto (IdCategoria, Nome, Valor, Descrição) Values (1, 'Bolo', 4);
+IF NOT EXISTS (SELECT 1 FROM Produto WHERE Nome = 'Pão de Mel') Insert Into Produto (IdCategoria, Nome, Valor, Descrição) Values (1, 'Pão de Mel', );
 GO
-
 
 -- ItemVenda
 --------------------------------------------------------------
@@ -6382,6 +6395,10 @@ CREATE TABLE FormaPagamento (
 	DataRegistro DATETIME DEFAULT GETDATE()
 	CONSTRAINT PKFormaPagamento PRIMARY KEY (Id)
 );
+GO	  
+IF NOT EXISTS (SELECT 1 FROM FormaPagamento WHERE Descricao = 'Dinheiro') Insert Into Produto (Descricao) Values ('Dinheiro');
+IF NOT EXISTS (SELECT 1 FROM FormaPagamento WHERE Descricao = 'Cartão Débito') Insert Into Produto (Descricao) Values ('Cartão Débito');
+IF NOT EXISTS (SELECT 1 FROM FormaPagamento WHERE Descricao = 'Cartão Crédito') Insert Into Produto (Descricao) Values ('Cartão Crédito');
 GO
 
 
