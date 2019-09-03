@@ -1,0 +1,59 @@
+﻿@model ProjetoCincoSolas.Models.ComentarioBiblicoViewModel
+
+@{
+    ViewBag.Title = "Comentarios Bíblicos";
+    Layout = "_Layout";
+}
+
+<h2>Comentarios Bíblicos</h2>
+
+<div class="form-group col-xs-12 col-md-2">
+    <label>Tabela</label>
+    @Html.DropDownListFor(x => x.IdTabelaCadastro, Model.Tabelas, "Selecione", new { @class = "form-control select2" })
+</div>
+                            
+<div class="form-group col-xs-12 col-md-2">
+    <label>Campo alterado</label>
+    @Html.DropDownListFor(x => x.IdCampoTabelaCadastro, Model.Campos, "Selecione", new {@class = "form-control select2"})
+</div>
+
+
+<script>
+
+    $('#IdTabelaCadastro').on('change', function () {
+
+        var idTabelaCadastro = $('#IdTabelaCadastro').val();
+
+        $('#IdCampoTabelaCadastro').empty().prop('disabled', !idTabelaCadastro);
+
+        if (!idTabelaCadastro) {
+            return;
+        }
+
+
+        $.ajax({
+            url: '@Url.Action("ListarComentariosCapitulo", "ComentarioBiblico")',
+            data: { idTabelaCadastro: idTabelaCadastro },
+            method: 'POST',
+            dataType: 'json',
+            cache: false,
+            success: function (json) {
+                if (!json.Erro) {
+                    var combo = $('#IdCampoTabelaCadastro');
+                    combo.empty();
+                    $.each(json.campos, function () {
+                        combo.append(
+                            $('<option/>', {
+                                value: this.Value,
+                                html: this.Text
+                            })
+                        );
+                    });
+                    $('#IdCampoTabelaCadastro').val(json.idCampo);
+                }
+            }
+        });
+        event.preventDefault();
+    }).change();
+
+</script>
