@@ -213,10 +213,11 @@
     <Compile Include="Helpers\IConnectionHelper.cs" />
     <Compile Include="Helpers\JsonHelper.cs" />
     <Compile Include="Helpers\Retorno.cs" />
-    <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\ComentarioBiblicoViewModel.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\ComentarioBiblico.cs" />
+    <Compile Include="ViewModel\AccountViewModels.cs" />
+    <Compile Include="ViewModel\ComentarioBiblicoViewModel.cs" />
+    <Compile Include="ViewModel\IdentityModels.cs" />
+    <Compile Include="ViewModel\ManageViewModels.cs" />
     <Compile Include="Models\PessoaImportadaDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Servico\DevsServico.cs" />

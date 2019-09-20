@@ -1,4 +1,4 @@
-﻿@model ProjetoCincoSolas.Models.ComentarioBiblicoViewModel
+﻿@model ProjetoCincoSolas.ViewModel.ComentarioBiblicoViewModel
 
 @{
     ViewBag.Title = "Comentarios Bíblicos";
@@ -9,12 +9,12 @@
 
 <div class="form-group col-xs-12 col-md-2">
     <label>Tabela</label>
-    @Html.DropDownListFor(x => x.IdTabelaCadastro, Model.Tabelas, "Selecione", new { @class = "form-control select2" })
+    @Html.DropDownListFor(x => x.IdLivro, Model.Livros, "Selecione", new { @class = "form-control select2" })
 </div>
                             
 <div class="form-group col-xs-12 col-md-2">
     <label>Campo alterado</label>
-    @Html.DropDownListFor(x => x.IdCampoTabelaCadastro, Model.Campos, "Selecione", new {@class = "form-control select2"})
+    @Html.DropDownListFor(x => x.IdCapitulo, Model.Capitulos, "Selecione", new {@class = "form-control select2"})
 </div>
 
 

@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ProjetoCincoSolas.Models;
+using ProjetoCincoSolas.ViewModel;
 
 namespace ProjetoCincoSolas.Controllers
 {
@@ -11,20 +14,33 @@ namespace ProjetoCincoSolas.Controllers
         // GET: ComentarioBiblico
         public ActionResult Index()
         {
-            return View();
+            var model = new ComentarioBiblicoViewModel();
+            model.Livros = MontarComboLivros();
+
+            return View(model);
         }
 
-        // GET: ComentarioBiblico/ListarComentarios/5
-        public ActionResult ListarComentariosCapitulo(int idCapitulo)
+        public IEnumerable<SelectListItem> MontarComboLivros()
         {
-            var campos = MontarComboCampo(idCapitulo);
+            var lista = new List<ComentarioBiblico>();
+
+            return lista.Select(x => new SelectListItem
+            {
+                Value = x.Id.ToString(),
+                Text = x.Livro
+            }).ToList();
+        }
+
+        // GET: ComentarioBiblico/ListarCapitulos/5
+        public ActionResult ListarCapitulos(int idLivro)
+        {
+            var capitulos = new List<ComentarioBiblico>();
 
             return new JsonResult
             {
                 Data = new
                 {
-                    campos = campos,
-                    idCampo = campos.First(),
+                    capitulos,
                     Erro = false,
                     Mensagem = "",
                 }
@@ -32,17 +48,47 @@ namespace ProjetoCincoSolas.Controllers
         }
 
 
-        public IList<SelectListItem> MontarComboCampo(int idTabelaCadastro)
+        // GET: ComentarioBiblico/ListarComentarios/5
+        /// <summary>
+        /// Retorna todos os camentários do banco de acordo com o livro e capítulo
+        /// </summary>
+        /// <param name="idLivro"></param>
+        /// <param name="idCapitulo"></param>
+        /// <returns>Retorna todos os camentários do banco de acordo com o livro e capítulo</returns>
+        public ActionResult ListarComentarios(int idLivro, int idCapitulo)
         {
-            //IList<Classe>
-            //var campos = new IList<obj>(); _campoTabelaCadastroRepository.BuscarCamposPorTabela(idTabelaCadastro);
+            var comentariosBiblicos = new List<ComentarioBiblico>();
 
-            //return campos.Select(x => new SelectListItem
-            //{
-            //    Value = x.Id.ToString(),
-            //    Text = x.Descricao
-            //}).ToList();
-            return new List<SelectListItem>();
+            return new JsonResult
+            {
+                Data = new
+                {
+                    comentariosBiblicos,
+                    Erro = false,
+                    Mensagem = "",
+                }
+            };
+        }
+
+
+        // GET: ComentarioBiblico/ListarComentarios/5
+        /// <summary>
+        /// Retorna todos o camentário do banco de acordo com o livro e capítulo
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult ConsultarComentario(int idComentario)
+        {
+            var comentariosBiblicos = new List<ComentarioBiblico>();
+
+            return new JsonResult
+            {
+                Data = new
+                {
+                    comentariosBiblicos,
+                    Erro = false,
+                    Mensagem = "",
+                }
+            };
         }
     }
 }

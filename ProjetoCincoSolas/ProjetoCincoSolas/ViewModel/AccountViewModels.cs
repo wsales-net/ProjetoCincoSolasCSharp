@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace ProjetoCincoSolas.Models
+namespace ProjetoCincoSolas.ViewModel
 {
     public class ExternalLoginConfirmationViewModel
     {
