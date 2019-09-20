@@ -2,44 +2,60 @@
 
 @{
     ViewBag.Title = "Comentarios Bíblicos";
-    Layout = "_Layout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Comentarios Bíblicos</h2>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
 
-<div class="form-group col-xs-12 col-md-2">
-    <label>Tabela</label>
-    @Html.DropDownListFor(x => x.IdLivro, Model.Livros, "Selecione", new { @class = "form-control select2" })
-</div>
-                            
-<div class="form-group col-xs-12 col-md-2">
-    <label>Campo alterado</label>
-    @Html.DropDownListFor(x => x.IdCapitulo, Model.Capitulos, "Selecione", new {@class = "form-control select2"})
-</div>
+<div class="row">
+    <div class="col-md-12">
+        <h2>Comentarios Bíblicos</h2>
 
+        <div class="box-busca">
+            <div class="row">
+                <div class="form-group col-xs-12 col-md-2">
+                    <label>Livro:</label>
+                    @Html.DropDownListFor(x => x.IdLivro, Model.Livros, "Selecione", new {@class = "form-control"})
+                </div>
+
+                <div class="form-group col-xs-12 col-md-2">
+                    <label>Capítulo:</label>
+                    @Html.DropDownListFor(x => x.IdCapitulo, Model.Capitulos, "Selecione", new {@class = "form-control"})
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
+    $('#idLivro').on('change', function () {
+        var idLivro = $('#IdLivro').val();
+        var idCapitulo = $('#IdCapitulo').val();
 
-    $('#IdTabelaCadastro').on('change', function () {
+        $('#IdLivro').empty().prop('disabled', !idLivro);
+        $('#IdCapitulo').empty().prop('disabled', !idCapitulo);
 
-        var idTabelaCadastro = $('#IdTabelaCadastro').val();
-
-        $('#IdCampoTabelaCadastro').empty().prop('disabled', !idTabelaCadastro);
-
-        if (!idTabelaCadastro) {
+        if (!idLivro) {
             return;
         }
 
-
         $.ajax({
-            url: '@Url.Action("ListarComentariosCapitulo", "ComentarioBiblico")',
-            data: { idTabelaCadastro: idTabelaCadastro },
+            url: '@Url.Action("ListarCapitulos", "ComentarioBiblico")',
+            data: { idLivro: idLivro },
             method: 'POST',
             dataType: 'json',
             cache: false,
             success: function (json) {
                 if (!json.Erro) {
-                    var combo = $('#IdCampoTabelaCadastro');
+                    var combo = $('#idLivro');
                     combo.empty();
                     $.each(json.campos, function () {
                         combo.append(

@@ -16,6 +16,7 @@ namespace ProjetoCincoSolas.Controllers
         {
             var model = new ComentarioBiblicoViewModel();
             model.Livros = MontarComboLivros();
+            model.Capitulos = new List<SelectListItem>();
 
             return View(model);
         }
@@ -23,10 +24,19 @@ namespace ProjetoCincoSolas.Controllers
         public IEnumerable<SelectListItem> MontarComboLivros()
         {
             var lista = new List<ComentarioBiblico>();
+            var gn = new ComentarioBiblico
+            {
+                NumeroLivro = 1,
+                Livro = "Gênesis",
+                Abreviatura = "Gn",
+                Capitulo = 1
+            };
+
+            lista.Add(gn);
 
             return lista.Select(x => new SelectListItem
             {
-                Value = x.Id.ToString(),
+                Value = x.NumeroLivro.ToString(),
                 Text = x.Livro
             }).ToList();
         }
@@ -35,6 +45,14 @@ namespace ProjetoCincoSolas.Controllers
         public ActionResult ListarCapitulos(int idLivro)
         {
             var capitulos = new List<ComentarioBiblico>();
+
+            var gn = new ComentarioBiblico
+            {
+                NumeroLivro = 1,
+                Livro = "Gênesis",
+                Abreviatura = "Gn",
+                Capitulo = 1
+            };
 
             return new JsonResult
             {
