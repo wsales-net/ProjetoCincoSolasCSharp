@@ -12,7 +12,7 @@
 </head>
 <body>
     <h2>Alegria Inabalável - Jonh Piper</h2>
-    <div class="link-player">
+    <div id="link-player">
     </div>
 </body>
 </html>
@@ -21,7 +21,7 @@
         $.ajax({
             dataType: "json",
             type: "GET",
-            url: "/DevocionalDiario/GetCodigoDevocional",
+            url: @Url.Action("GetCodigoDevocional", "DevocionalDiario"),
             success: function (dados) {
                 $.ajax({
                     dataType: "json",
@@ -34,7 +34,7 @@
                                 width: '100%',
                                 height: '200px',
                                 frameborder: "0"
-                            }).appendTo('.link-player');
+                            }).appendTo('#link-player');
                         }
                     }
                 });
@@ -42,7 +42,7 @@
         });
     });
 
-    setTimeout(function () {
+    setTimeout(function() {
         $("#widget-container > div > div.player > div.player_content > button").click();
-    }, 3000)
+    }, 3000);
 </script>

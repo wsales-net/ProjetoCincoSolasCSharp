@@ -19,7 +19,7 @@ namespace ProjetoCincoSolas.DAO
                     //var reader = cmd.ExecuteReader();
                     //if (reader.Read()) return Convert.ToInt32(reader["Id"]);
                 }
-                catch (Exception ex) //BAD BAD BAD!!! Why are you doing this!
+                catch (Exception ex)
                 {
                     throw new Exception(ex.Message);
                 }
