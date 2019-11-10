@@ -6,11 +6,11 @@ namespace ProjetoCincoSolas.Controllers
 {
     public class DevocionalDiarioController : Controller
     {
-        private readonly BuscaDevocional _buscaDevocional;
+        private readonly BuscaDevocionalRepository _buscaDevocional;
 
         public DevocionalDiarioController()
         {
-            _buscaDevocional = new BuscaDevocional();
+            _buscaDevocional = new BuscaDevocionalRepository();
         }
 
         // GET: DesiringGod

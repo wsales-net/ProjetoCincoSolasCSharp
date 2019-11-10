@@ -4,6 +4,9 @@ using System.ComponentModel;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.Ajax.Utilities;
+using ProjetoCincoSolas.DAO;
+using ProjetoCincoSolas.Helpers;
 using ProjetoCincoSolas.Models;
 using ProjetoCincoSolas.ViewModel;
 
@@ -11,6 +14,13 @@ namespace ProjetoCincoSolas.Controllers
 {
     public class ComentarioBiblicoController : Controller
     {
+        private readonly ComentarioBiblicoRepository _comentarioBiblico;
+
+        public ComentarioBiblicoController()
+        {
+            _comentarioBiblico = new ComentarioBiblicoRepository();
+        }
+
         // GET: ComentarioBiblico
         public ActionResult Index()
         {
@@ -21,20 +31,17 @@ namespace ProjetoCincoSolas.Controllers
             return View(model);
         }
 
+        // GET: ComentarioBiblico
+        public ActionResult Perolas()
+        {
+            return View();
+        }
+
         public IEnumerable<SelectListItem> MontarComboLivros()
         {
-            var lista = new List<ComentarioBiblico>();
-            var gn = new ComentarioBiblico
-            {
-                NumeroLivro = 1,
-                Livro = "Gênesis",
-                Abreviatura = "Gn",
-                Capitulo = 1
-            };
+            var livros = _comentarioBiblico.GetAllLivros();
 
-            lista.Add(gn);
-
-            return lista.Select(x => new SelectListItem
+            return livros.Select(x => new SelectListItem
             {
                 Value = x.NumeroLivro.ToString(),
                 Text = x.Livro
@@ -44,23 +51,21 @@ namespace ProjetoCincoSolas.Controllers
         // GET: ComentarioBiblico/ListarCapitulos/5
         public ActionResult ListarCapitulos(int idLivro)
         {
-            var capitulos = new List<ComentarioBiblico>();
+            var retorno = new Retorno();
+            var capitulos = _comentarioBiblico.GetAllCapitulosLivro(idLivro);
 
-            var gn = new ComentarioBiblico
+            if (capitulos == null)
             {
-                NumeroLivro = 1,
-                Livro = "Gênesis",
-                Abreviatura = "Gn",
-                Capitulo = 1
-            };
+                retorno.AddErro("Erro na requisição");
+                retorno.AddErro("Erro");
+            }
 
             return new JsonResult
             {
                 Data = new
                 {
                     capitulos,
-                    Erro = false,
-                    Mensagem = "",
+                    retorno
                 }
             };
         }
@@ -73,7 +78,7 @@ namespace ProjetoCincoSolas.Controllers
         /// <param name="idLivro"></param>
         /// <param name="idCapitulo"></param>
         /// <returns>Retorna todos os camentários do banco de acordo com o livro e capítulo</returns>
-        public ActionResult ListarComentarios(int idLivro, int idCapitulo)
+        public ActionResult ListarComentarios(ComentarioBiblicoViewModel comentarioBiblicoViewModel)
         {
             var comentariosBiblicos = new List<ComentarioBiblico>();
 
@@ -108,5 +113,7 @@ namespace ProjetoCincoSolas.Controllers
                 }
             };
         }
+
+
     }
 }

@@ -1,4 +1,4 @@
-﻿@charset "utf-8";
+@charset "utf-8";
 /* CSS Document */
 
 /******************************
@@ -15,16 +15,11 @@
 	3.5 Hamburger
 4. Menu
 5. Home
-6. Event
-7. About
-8. Sermons
-9. Mission
-10. Events
-11. Donations
-12. Quote
-13. Gallery
-14. Latest News
-15. Footer
+6. About
+7. Mission
+8. Team
+9. Quote
+10. Footer
 
 
 
@@ -39,7 +34,6 @@
 /*********************************
 2. Body and some general stuff
 *********************************/
-@import url(//fonts.googleapis.com/css?family=Fira+Sans);
 
 *
 {
@@ -49,12 +43,13 @@
 	-webkit-text-shadow: rgba(0,0,0,.01) 0 0 1px;
 	text-shadow: rgba(0,0,0,.01) 0 0 1px;
 }
-body {
-    font-family: 'Fira Sans', sans-serif;
-    font-size: 14px;
-    font-weight: 400;
-    background: #FFFFFF;
-    color: #a5a5a5;
+body
+{
+	font-family: 'Assistant', sans-serif;
+	font-size: 14px;
+	font-weight: 400;
+	background: #FFFFFF;
+	color: #a5a5a5;
 }
 div
 {
@@ -411,7 +406,7 @@ section
 	font-size: 30px;
 	font-weight: 700;
 	text-transform: uppercase;
-	line-height: 2.75;
+	line-height: 0.75;
 	color: #181818;
 	vertical-align: middle;
 	margin-left: 7px;
@@ -663,7 +658,7 @@ section
 .home
 {
 	width: 100%;
-	height: 100vh;
+	height: 310px;
 }
 .home_background
 {
@@ -679,156 +674,50 @@ section
 .home_content
 {
 	position: absolute;
-	top: 40%;
+	bottom: 66px;
 	left: 0;
 	width: 100%;
 	z-index: 10;
 }
-.home_title {
-    font-size: 55px;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
-    color: #FFFFFF;
-    line-height: 1.18;
-    font-family: 'Kaushan Script', 'Script MT', 'Pristina';
-}
-.home_text
+.home_title
 {
-	font-size: 18px;
-	color: #FFFFFF;
-	padding-left: 70px;
-	padding-right: 70px;
-	margin-top: 27px;
-}
-.home_link
-{
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: 33px;
-}
-
-/*********************************
-6. Event
-*********************************/
-
-.event
-{
-	width: 100%;	
-}
-.event_container
-{
-	height: 160px;
-	background: #f9f9f9;
-	margin-top: -80px;
-	border-radius: 6px;
-	padding-left: 70px;
-	padding-right: 35px;
-}
-.event_date
-{
-	width: 70px;
-	height: 70px;
-	background: #0782b1;
-}
-.event_day
-{
-	font-size: 32px;
-	font-weight: 600;
+	font-size: 30px;
+	font-weight: 700;
 	color: #FFFFFF;
 	line-height: 0.75;
 }
-.event_month
+.breadcrumbs ul li
 {
-	font-size: 16px;
+	display: inline-block;
+	position: relative;
+	font-size: 18px;
 	font-weight: 400;
 	color: #FFFFFF;
-	text-transform: uppercase;
-	line-height: 0.75;
-	margin-top: 11px;
 }
-.event_content
-{
-	padding-left: 60px;
-}
-.event_title,
-.event_title a
+.breadcrumbs ul li a
 {
 	font-size: 18px;
-	color: #181818;
-	text-transform: uppercase;
-	font-weight: 700;
+	font-weight: 400;
+	color: #FFFFFF;
 	-webkit-transition: all 200ms ease;
 	-moz-transition: all 200ms ease;
 	-ms-transition: all 200ms ease;
 	-o-transition: all 200ms ease;
 	transition: all 200ms ease;
 }
-.event_title a:hover
+.breadcrumbs ul li a:hover
 {
 	color: #0782b1;
 }
-.event_row
-{
-	margin-top: 5px;
-}
-.event_icon
+.breadcrumbs ul li:not(:last-child)::after
 {
 	display: inline-block;
-	width: 14px;
-	height: 15px;
-}
-.event_icon i
-{
-	font-size: 16px;
-	color: #0782b1;
-}
-.event_row li span
-{
-	font-family: 'Standard', serif;
-	font-style: italic;
-	font-size: 12px;
-	color: #7c7c7c;
-	margin-left: 6px;
-}
-.event_row li:not(:last-child)
-{
-	margin-bottom: 7px;
-}
-.event_timer_container
-{
-
-}
-.event_timer li
-{
-	display: inline-block;
-	height: 80px;
-	width: 100px;
-	text-align: center;
-}
-.event_timer li:not(:last-child)
-{
-	border-right: solid 1px #e0e0e0;
-}
-.event_num
-{
-	font-size: 40px;
-	font-weight: 600;
-	line-height: 0.75;
-	color: #181818;
-	margin-top: 8px;
-}
-.event_ss
-{
-	font-size: 16px;
-	line-height: 0.75;
-	color: #7c7c7c;
-	text-transform: uppercase;
-	margin-top: 19px;
+	content: '/';
+	margin-left: 4px;
 }
 
 /*********************************
-7. About
+6. About
 *********************************/
 
 .about
@@ -880,133 +769,7 @@ section
 }
 
 /*********************************
-8. Sermons
-*********************************/
-
-.sermons
-{
-	padding-top: 89px;
-	padding-bottom: 100px;
-	background: #f7f7f7;
-}
-.sermons_row
-{
-	margin-top: 52px;
-}
-.card
-{
-	display: block; /* IE fix for distorted card images */
-	border: none;
-	border-radius: 0px;
-}
-.card-img-top
-{
-	border-radius: 0px;
-}
-.card-body
-{
-	padding-top: 44px;
-	padding-bottom: 50px;
-}
-.card-title
-{
-	margin-bottom: 0;
-}
-.sermon_info_container
-{
-	margin-top: 9px;
-}
-.sermon_info_title
-{
-	display: inline-block;
-}
-.sermon_info_list
-{
-	display: inline-block;
-	margin-left: 4px;
-}
-.sermon_info_title
-{
-	font-family: 'Old Standard TT', serif;
-	font-size: 13px;
-	font-style: italic;
-	color: #7c7c7c;
-}
-.sermon_info_list li
-{
-	display: inline-block;
-}
-.sermon_info_list li a
-{
-	font-family: 'Old Standard TT', serif;
-	font-size: 13px;
-	font-style: italic;
-	color: #0782b1;
-}
-.sermon_title a
-{
-	font-size: 18px;
-	color: #181818;
-	text-transform: uppercase;
-	font-weight: 700;
-	line-height: 1.33;
-	-webkit-transition: all 200ms ease;
-	-moz-transition: all 200ms ease;
-	-ms-transition: all 200ms ease;
-	-o-transition: all 200ms ease;
-	transition: all 200ms ease;
-}
-.sermon_title a:hover
-{
-	color: #0782b1;
-}
-.sermon_links
-{
-	margin-top: 24px;
-}
-.sermon_links ul li
-{
-	display: inline-block;
-	width: 50px;
-	height: 50px;
-	border-radius: 50%;
-	background: #e6e6e6;
-	-webkit-transition: all 200ms ease;
-	-moz-transition: all 200ms ease;
-	-ms-transition: all 200ms ease;
-	-o-transition: all 200ms ease;
-	transition: all 200ms ease;
-}
-.sermon_links ul li:not(:last-child)
-{
-	margin-right: 16px;
-}
-.sermon_links ul li a
-{
-	display: block;
-}
-.sermon_links ul li a i
-{
-	line-height: 48px;
-	font-size: 18px;
-	color: #7c7c7c;
-	-webkit-transition: all 200ms ease;
-	-moz-transition: all 200ms ease;
-	-ms-transition: all 200ms ease;
-	-o-transition: all 200ms ease;
-	transition: all 200ms ease;
-}
-.sermon_links ul li:hover
-{
-	background: #0782b1;
-}
-.sermon_links ul li:hover a i
-{
-	color: #FFFFFF;
-}
-
-/*********************************
-9. Mission
+7. Mission
 *********************************/
 
 .mission
@@ -1065,213 +828,103 @@ section
 }
 
 /*********************************
-10. Events
+8. Team
 *********************************/
 
-.events
+.team
 {
-	width: 100%;
-	background: #FFFFFF;
 	padding-top: 97px;
-	padding-bottom: 64px;
+	padding-bottom: 34px;
+	background: #FFFFFF;
 }
-.events_items
+.team_row
 {
-	padding-left: 75px;
-	padding-right: 75px;
 	margin-top: 52px;
 }
-.events_item
+.team_col
 {
-	width: calc((100% - 150px) / 3);
+	margin-bottom: 30px;
+}
+.team_item
+{
+	width: 100%;
 	padding-bottom: 30px;
 }
-.events_item_image
+.team_image
 {
 	width: 100%;
 }
-.events_item_image img
+.team_image img
 {
 	max-width: 100%;
 }
-.events_item_content
+.team_name
 {
-	margin-top: 30px;
+	font-size: 20px;
+	color: #181818;
+	text-transform: uppercase;
+	font-weight: 700;
+	margin-top: 29px;
 }
-.events_item .event_content
+.team_title
 {
-	padding-left: 30px;
-	margin-top: -5px;
+	font-family: 'Old Standard TT', serif;
+	font-size: 16px;
+	font-style: italic;
+	color: #0782b1;
+	margin-top: 4px;
 }
-
-/*********************************
-11. Donations
-*********************************/
-
-.donations
-{
-	width: 100%;
-	padding-top: 97px;
-	padding-bottom: 94px;
-}
-.donations_background
+.team_overlay
 {
 	position: absolute;
 	top: 0;
 	left: 0;
 	width: 100%;
 	height: 100%;
-}
-.donations_content
-{
-	padding-top: 35px;
-}
-.donation_title
-{
-	font-size: 34px;
-	font-weight: 700;
+	background: rgba(7, 109, 177, 0.5);
 	color: #FFFFFF;
-	text-transform: uppercase;
-}
-.donation_info_container
-{
-	margin-top: 23px;
-}
-.donation_info_title
-{
-	display: inline-block;
-	font-family: 'Old Standard TT', serif;
-	font-size: 14px;
-	font-style: italic;
-	color: #c0c0c0;
-}
-.donation_info_list
-{
-	display: inline-block;
-	margin-left: 4px;
-}
-.donation_info_list li
-{
-	display: inline-block;
-}
-.donation_info_list li a
-{
-	font-family: 'Old Standard TT', serif;
-	font-size: 14px;
-	font-style: italic;
-	color: #FFFFFF;
-	-webkit-transition: all 200ms ease;
-	-moz-transition: all 200ms ease;
-	-ms-transition: all 200ms ease;
-	-o-transition: all 200ms ease;
-	transition: all 200ms ease;
-}
-.donation_info_list li a:hover
-{
-	color: #0782b1;
-}
-.donation_text
-{
-	margin-top: 14px;
-}
-.donation_text p
-{
-	color: #FFFFFF;
-}
-.donation_details_container
-{
-	width: 100%;
-	padding-left: 70px;
-	padding-right: 70px;
-}
-.donation_details
-{
-	background: #FFFFFF;
-	padding-top: 40px;
-	padding-bottom: 40px;
 	padding-left: 30px;
 	padding-right: 30px;
+	padding-bottom: 44px;
+	visibility: hidden;
+	opacity: 0;
 }
-.donation_funds
+.team_item:hover .team_overlay
 {
-
+	visibility: visible;
+	opacity: 1;
 }
-.donation_funds_title
+.team_overlay_text p
+{
+	font-size: 14px;
+	color: #FFFFFF;
+	line-height: 1.57;
+}
+.team_overlay_contact
+{
+	margin-top: 15px;
+}
+.team_overlay_contact ul li i,
+.team_overlay_contact ul li div
 {
 	display: inline-block;
-	font-family: 'Old Standard TT', serif;
-	font-style: italic;
-	font-size: 20px;
-	color: #181818;
-	font-weight: 400;
 }
-.donations_funds_value
+.team_overlay_contact ul li div
 {
-	display: inline-block;
-	font-size: 36px;
-	color: #181818;
-	font-weight: 700;
-	margin-left: 10px;
-}
-.donation_progress_container
-{
-	margin-top: 54px;
-}
-.donation_progress_outer
-{
-	width: 100%;
-	height: 14px;
-	background: #d7d7d7;
-	border-radius: 7px;
-}
-.donation_progress
-{
-	height: 100%;
-	background: #0782b1;
-	border-radius: 7px;
-}
-.donation_progress_value
-{
-	position: absolute;
-	top: -38px;
-	right: -25px;
-	font-size: 24px;
-	font-weight: 600;
-	color: #181818;
-	line-height: 0.75;
-}
-.donation_info
-{
-	margin-top: 13px;
-}
-.donation_current,
-.donation_goal
-{
-	font-size: 18px;
-	color: #7c7c7c;
-}
-.donation_current span,
-.donation_goal span
-{
-	color: #181818;
-	font-weight: 700;
-}
-.donation_button
-{
-	width: 100%;
-	margin-top: 52px;
+	font-size: 14px;
+	color: #FFFFFF;
 }
 
 /*********************************
-12. Quote
+9. Quote
 *********************************/
 
 .quote
 {
 	width: 100%;
-	background: #FFFFFF;
-	padding-top: 134px;
-	padding-bottom: 134px;
+	background: #f7f7f7;
+	padding-top: 100px;
+	padding-bottom: 99px;
 }
 .quote_container
 {
@@ -1309,125 +962,7 @@ section
 }
 
 /*********************************
-13. Gallery
-*********************************/
-
-.gallery
-{
-
-}
-.gallery_item
-{
-	width: 20%;
-}
-.gallery_item a
-{
-	display: block;
-	width: 100%;
-}
-.gallery_item a img
-{
-	max-width: 100%;
-}
-
-/*********************************
-14. Latest News
-*********************************/
-
-.latest_news
-{
-	padding-top: 97px;
-	padding-bottom: 54px;
-	background: #FFFFFF;
-}
-.news_row
-{
-	margin-top: 52px;
-}
-.news_post
-{
-	width: 100%;
-}
-.news_image
-{
-	width: 100%;
-}
-.news_image img
-{
-	max-width: 100%;
-}
-.news_post_title
-{
-	margin-top: 24px;
-}
-.news_post_col
-{
-	margin-bottom: 40px;
-}
-.news_post_title a
-{
-	font-size: 18px;
-	text-transform: uppercase;
-	color: #181818;
-	font-weight: 700;
-	line-height: 1.33;
-	-webkit-transition: all 200ms ease;
-	-moz-transition: all 200ms ease;
-	-ms-transition: all 200ms ease;
-	-o-transition: all 200ms ease;
-	transition: all 200ms ease;
-}
-.news_post_title a:hover
-{
-	color: #0782b1;
-}
-.news_post_meta
-{
-	margin-top: 9px;
-}
-.news_post_meta ul li
-{
-	display: inline-block;
-}
-.news_post_meta ul li:not(:last-child)
-{
-	margin-right: 18px;
-}
-.news_post_meta ul li i
-{
-	color: #0782b1;
-}
-.news_post_meta ul li a
-{
-	display: inline-block;
-	font-family: 'Old Standard TT', serif;
-	font-size: 12px;
-	font-style: italic;
-	color: #7c7c7c;
-	margin-left: 6px;
-	-webkit-transition: all 200ms ease;
-	-moz-transition: all 200ms ease;
-	-ms-transition: all 200ms ease;
-	-o-transition: all 200ms ease;
-	transition: all 200ms ease;
-}
-.news_post_meta ul li a:hover
-{
-	color: #0782b1;
-}
-.news_post_text
-{
-	margin-top: 19px;
-}
-.news_post_text p
-{
-	font-size: 14px;
-	color: #7c7c7c;
-	line-height: 1.57;
-}
-
-/*********************************
-15. Footer
+10. Footer
 *********************************/
 
 .footer

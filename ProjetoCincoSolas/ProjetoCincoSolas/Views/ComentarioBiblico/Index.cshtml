@@ -2,45 +2,64 @@
 
 @{
     ViewBag.Title = "Comentarios Bíblicos";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
+<link href="~/Content/about.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/about_responsive.css" rel="stylesheet" type="text/css" />
 
-<div class="row">
-    <div class="col-md-12">
-        <h2>Comentarios Bíblicos</h2>
-
-        <div class="box-busca">
+<div class="home">
+    <div class="home_background" style="background-image:url(../../Imagens/events.jpg)"></div>
+    <div class="home_content">
+        <div class="container">
             <div class="row">
-                <div class="form-group col-xs-12 col-md-2">
-                    <label>Livro:</label>
-                    @Html.DropDownListFor(x => x.IdLivro, Model.Livros, "Selecione", new { @class = "form-control" })
-                </div>
-
-                <div class="form-group col-xs-12 col-md-2">
-                    <label>Capítulo:</label>
-                    @Html.DropDownListFor(x => x.IdCapitulo, Model.Capitulos, "Selecione", new { @class = "form-control" })
+                <div class="col d-flex flex-row align-items-center justify-content-start">
+                    <div class="home_title">Comentários Bíblicos</div>
+                    <div class="breadcrumbs ml-auto">
+                        <ul>
+                            <li><a href="index.html">Início</a></li>
+                            <li>Comentários Bíblicos</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<br />
+<div class="container" >
+    <div class="alert alert-warning" role="alert" id="alert" style="display:none;">
+        <span></span>
+    </div>
+    <form style="width: 50%; margin: 0 auto;" role="form" action="@Url.Action("ListarComentarios","ComentarioBiblico")" method="post">
+        <div class="row">
+            <div class="form-group col-md-4">
+                <label for="livros">Livros:</label>
+                @Html.DropDownListFor(x => x.IdLivro, Model.Livros, "Selecione", new { @class = "form-control select2" })
+            </div>
+            <div class="form-group col-md-4">
+                <label for="capitulos">Capitulos:</label>
+                @Html.DropDownListFor(x => x.IdCapitulo, Model.Capitulos, "Selecione", new { @class = "form-control select2" })
+            </div>
+
+            <div class="form-group col-md-2">
+                <label for="capitulos"> </label>
+                <button type="submit" class="btn btn-primary mb-2">
+                    <i class="fa fa-search" aria-hidden="true"></i> Buscar
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
 
 <script>
-    $('#idLivro').on('change', function () {
+    $(document).ready(function () {
+    });
+
+    $('#IdLivro').change(function () {
         var idLivro = $('#IdLivro').val();
         var idCapitulo = $('#IdCapitulo').val();
 
-        $('#IdLivro').empty().prop('disabled', !idLivro);
         $('#IdCapitulo').empty().prop('disabled', !idCapitulo);
 
         if (!idLivro) {
@@ -54,22 +73,34 @@
             dataType: 'json',
             cache: false,
             success: function (json) {
-                if (!json.Erro) {
-                    var combo = $('#idLivro');
+                if (!json.retorno.Erro) {
+                    var combo = $('#IdCapitulo');
                     combo.empty();
-                    $.each(json.campos, function () {
+                    $("#IdCapitulo").attr("disabled", false);
+
+                    $.each(json.capitulos, function (index, element) {
                         combo.append(
-                            $('<option/>', {
-                                value: this.Value,
-                                html: this.Text
+                            $('<option>', {
+                                value: element,
+                                html: element
                             })
                         );
                     });
-                    $('#IdCampoTabelaCadastro').val(json.idCampo);
+                }
+                else {
+
+                    for (var i = 0; i < json.retorno.Mensagens.length; i++) {
+                        $('#alert').append(json.retorno.Mensagens[i] + "<br>");
+                    }
+
+                    $("#alert").fadeIn(700, function () {
+                        window.setTimeout(function () {
+                            $('#alert').fadeOut();
+                        }, 1500);
+                    });
                 }
             }
         });
-        event.preventDefault();
     }).change();
 
 </script>

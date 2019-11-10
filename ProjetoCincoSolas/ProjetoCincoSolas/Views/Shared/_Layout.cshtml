@@ -8,7 +8,9 @@
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/js")
-
+    <link href="~/Content/select2-bootstrap.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
 </head>
 <body>
     <div class="super_container">
@@ -34,11 +36,11 @@
                                     </ul>
                                     <div class="top_bar_social ml-auto">
                                         <ul class="social_list">
-                                            <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                                            <li><a href="https://www.facebook.com/I.A.R.Altar/" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                            @*<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>*@
                                         </ul>
                                     </div>
                                 </div>
@@ -55,19 +57,22 @@
                         <div class="col">
                             <div class="header_content d-flex flex-row align-items-center justify-content-start">
                                 <div class="logo_container">
-                                    <a href="#">
-                                        <div class="logo"><img src="http://inova.gov.br/wp-content/themes/inovagov2.1.1/img/default-thumbnail.jpg" alt=""></div>
+                                    <a href="@Url.Action("Index", "Home")">
+                                        <div class="logo"><img src="~/Imagens/logo.png" alt=""></div>
                                         <div class="logo_text">PROJETO CINCO SOLAS</div>
                                     </a>
                                 </div>
                                 <nav class="main_nav_contaner ml-auto">
                                     <ul class="main_nav">
-                                        <li class="active"><a href="#">início</a></li>
-                                        <li><a href="about.html">sobre</a></li>
-                                        <li><a href="sermons.html">sermões</a></li>
-                                        <li><a href="events.html">eventos</a></li>
-                                        <li><a href="blog.html">blog</a></li>
-                                        <li><a href="contact.html">contato</a></li>
+                                        <li class="active"><a href="@Url.Action("Index", "Home")">início</a></li>
+                                        <li><a href="@Url.Action("Index", "Sobre")">sobre</a></li>
+                                        <li><a href="@Url.Action("Perolas", "ComentarioBiblico")">Perolas</a></li>
+                                        <li><a href="@Url.Action("Index", "ComentarioBiblico")">Comentários Bíblico</a></li>
+                                        <li><a href="@Url.Action("Index", "DevocionalDiario")">Devocional</a></li>
+                                        @*<li><a href="sermons.html">sermões</a></li>
+                                            <li><a href="events.html">eventos</a></li>
+                                            <li><a href="blog.html">blog</a></li>
+                                            <li><a href="contact.html">contato</a></li>*@
                                     </ul>
                                     <div class="search_button"><i class="fa fa-search" aria-hidden="true"></i></div>
                                 </nav>
@@ -102,9 +107,11 @@
                 </div>
             </div>
         </header>
+
+        @RenderBody()
+
     </div>
 
-    <!-- Menu -->
     <div class="menu d-flex flex-column align-items-center justify-content-center">
         <div class="menu_content">
             <div class="cross_1 d-flex flex-column align-items-center justify-content-center"><img src="http://inova.gov.br/wp-content/themes/inovagov2.1.1/img/default-thumbnail.jpg" alt=""></div>
@@ -117,7 +124,7 @@
             <nav class="menu_nav">
                 <ul>
                     <li class="active"><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About</a></li>
+                    <li><a href="~/Views/Sobre/Sobre.cshtml">About</a></li>
                     <li><a href="sermons.html">Sermons</a></li>
                     <li><a href="events.html">Events</a></li>
                     <li><a href="blog.html">Blog</a></li>
@@ -128,15 +135,16 @@
         <div class="menu_close"><i class="fa fa-times" aria-hidden="true"></i></div>
     </div>
 
-    @RenderBody()
-    
+
     <hr />
 
     @RenderSection("scripts", required: false)
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="footer_background parallax-window" data-parallax="scroll" data-image-src="http://inova.gov.br/wp-content/themes/inovagov2.1.1/img/default-thumbnail.jpg" data-speed="0.8"></div>
+        @*        <div class="footer_background parallax-window" data-parallax="scroll" data-image-src="http://inova.gov.br/wp-content/themes/inovagov2.1.1/img/default-thumbnail.jpg" data-speed="0.8"></div>*@
+        <div class="footer_background parallax-window" data-parallax="scroll" style="background-color:#2a1c1c" data-speed="0.8"></div>
+
         <div class="container">
             <div class="row">
 
@@ -152,7 +160,7 @@
                         <div class="footer_contact">
                             <ul>
                                 <li><div><i class="fa fa-map-marker" aria-hidden="true"></i></div><span>Rua Eurico Sodré, 105 - Vila Medeiros</span></li>
-                                <li><div><i class="fa fa-phone" aria-hidden="true"></i></div><span>+55 11 2636-5659</span></li>
+                                <li><div><i class="fa fa-phone" aria-hidden="true"></i></div><span>+55 11 94527-5577</span></li>
                                 <li><div><i class="fa fa-envelope" aria-hidden="true"></i></div><span>projetocincosolas@gmail.com</span></li>
                             </ul>
                         </div>
@@ -204,11 +212,11 @@
                         </div>
                         <div class="footer_social ml-lg-auto">
                             <ul>
-                                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                                <li><a href="https://www.facebook.com/I.A.R.Altar/" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                @*<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>*@
                             </ul>
                         </div>
                     </div>

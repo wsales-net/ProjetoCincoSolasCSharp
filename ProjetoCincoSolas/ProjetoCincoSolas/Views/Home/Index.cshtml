@@ -1,7 +1,10 @@
-﻿@{
+﻿
+<link href="~/Content/main_styles.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/responsive.css" rel="stylesheet" type="text/css" />
+
+@{
     ViewBag.Title = "Home Page";
 }
-
 <!-- Home -->
 <div class="home">
     <div class="home_background" style="background-image:url(Imagens/home.jpg)"></div>
@@ -68,7 +71,7 @@
         </div>
         <div class="row about_row">
             <div class="col-lg-6">
-                <div class="about_image"><img src="http://inova.gov.br/wp-content/themes/inovagov2.1.1/img/default-thumbnail.jpg" alt=""></div>
+                <div class="about_image"><img src="../Imagens/oprojeto.jpg" alt=""></div>
             </div>
             <div class="col-lg-6">
                 <div class="about_content">
@@ -195,36 +198,8 @@
 </div>
 
 <!-- Mission -->
-<div class="mission">
-    <div class="mission_background parallax-window" data-parallax="scroll" data-image-src="http://inova.gov.br/wp-content/themes/inovagov2.1.1/img/default-thumbnail.jpg" data-speed="0.8"></div>
-    <div class="mission_items d-flex flex-row flex-wrap align-items-start justify-content-start">
+@Html.Partial("_Missao");
 
-        <div class="mission_item text-center">
-            <div class="mission_icon"><i class="fa fa-bell-o" aria-hidden="true"></i></div>
-            <div class="mission_title">nossa missão</div>
-            <div class="mission_text">Lorem ipsum dolor amet, consectet adipiscing doelit. Sed a mauri suscipita utrum arcu , gravida nisl. Interdum mante ipsum.</div>
-        </div>
-
-        <div class="mission_item text-center">
-            <div class="mission_icon"><i class="fa fa-flag-o" aria-hidden="true"></i></div>
-            <div class="mission_title">nossa comunidade</div>
-            <div class="mission_text">Lorem ipsum dolor amet, consectet adipiscing doelit. Sed a mauri suscipita utrum arcu , gravida nisl. Interdum mante ipsum.</div>
-        </div>
-
-        <div class="mission_item text-center">
-            <div class="mission_icon"><i class="fa fa-heart-o" aria-hidden="true"></i></div>
-            <div class="mission_title">nossa crença</div>
-            <div class="mission_text">Lorem ipsum dolor amet, consectet adipiscing doelit. Sed a mauri suscipita utrum arcu , gravida nisl. Interdum mante ipsum.</div>
-        </div>
-
-        <div class="mission_item text-center">
-            <div class="mission_icon"><i class="fa fa-moon-o" aria-hidden="true"></i></div>
-            <div class="mission_title">nossa fé</div>
-            <div class="mission_text">Lorem ipsum dolor amet, consectet adipiscing doelit. Sed a mauri suscipita utrum arcu , gravida nisl. Interdum mante ipsum.</div>
-        </div>
-
-    </div>
-</div>
 
 <!-- Events -->
 <div class="events">
@@ -388,8 +363,6 @@
     </div>
 </div>
 
-
-<hr>
 
 <!-- Latest News -->
 <div class="latest_news">
