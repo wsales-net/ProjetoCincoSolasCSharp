@@ -22,6 +22,7 @@ namespace ProjetoCincoSolas
 
             bundles.Add(new ScriptBundle("~/bundles/js").Include(
                       "~/Scripts/popper.js",
+                      "~/Scripts/select2.js",
                       "~/Scripts/bootstrap.min.js",
                       "~/Scripts/respond.js",
                       "~/Scripts/custom.js",

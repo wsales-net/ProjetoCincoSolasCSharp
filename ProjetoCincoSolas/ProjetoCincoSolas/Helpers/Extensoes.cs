@@ -4,15 +4,16 @@ namespace ProjetoCincoSolas.Helpers
 {
     public static class Extensoes
     {
+        /// <summary>
+        /// Retorna uma cadeia de caracteres que representa o objeto atual.
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
         public static int IntToString(this string str)
         {
-            if (!string.IsNullOrEmpty(str))
-            {
-                return Int32.Parse(str);
-            }
-
-            return 0;
+            return !string.IsNullOrEmpty(str) ? int.Parse(str) : 0;
         }
+
         /// <summary>
         /// Retorna uma cadeia de caracteres que representa o objeto atual.
         /// </summary>
@@ -20,12 +21,7 @@ namespace ProjetoCincoSolas.Helpers
         /// <returns></returns>
         public static int ObjectToInt(this object str)
         {
-            if (str != null)
-            {
-                return Int32.Parse(str.ToString());
-            }
-
-            return 0;
+            return str != null ? int.Parse(str.ToString()) : 0;
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace ProjetoCincoSolas.Models
 {
-    public class LivroBiblia
+    public class LivroBiblia : Entidade
     {
         public int NumeroLivro { get; set; }
         public int Capitulo { get; set; }

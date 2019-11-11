@@ -1,0 +1,28 @@
+﻿@*MODAL DE CONFIRMACAO*@
+<div id="modal-confirmacao" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Atenção</h4>
+            </div>
+            <form>
+                <input type="hidden" name="id" />
+                <input type="hidden" name="identificacao" />
+
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="msg_confirmacao col-md-12" style="padding: 0 10px">
+                            <p>Deseja realmente gerar uma nova senha para este usuário?</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary btn-confirmar" data-loading-text="Aguarde..." autocomplete="off">Confirmar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@*FIM:MODAL CONFIRMACAO*@

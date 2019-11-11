@@ -26,24 +26,25 @@
     </div>
 </div>
 <br />
-<div class="container" >
+<div class="container">
     <div class="alert alert-warning" role="alert" id="alert" style="display:none;">
         <span></span>
     </div>
-    @*<form style="width: 50%; margin: 0 auto;" role="form" action="@Url.Action("ListarComentarios","ComentarioBiblico")" method="post">*@
+
+
     <form style="width: 50%; margin: 0 auto;" role="form" method="get">
         <div class="row">
             <div class="form-group col-md-4">
-                <label for="livros">Livros:</label>
+                <label>Livros:</label>
                 @Html.DropDownListFor(x => x.IdLivro, Model.Livros, "Selecione", new { @class = "form-control select2" })
             </div>
             <div class="form-group col-md-4">
-                <label for="capitulos">Capitulos:</label>
+                <label>Capitulos:</label>
                 @Html.DropDownListFor(x => x.IdCapitulo, Model.Capitulos, "Selecione", new { @class = "form-control select2" })
             </div>
 
             <div class="form-group col-md-2">
-                <label for="capitulos"> </label>
+                <label> </label>
                 <button id="idBuscar" type="submit" class="btn btn-primary mb-2">
                     <i class="fa fa-search" aria-hidden="true"></i> Buscar
                 </button>
@@ -52,7 +53,11 @@
     </form>
 </div>
 
-
+<div class="card">
+    <div class="card-header">
+        Destaque
+    </div>
+</div>
 <script>
     $(document).ready(function () {
     });
@@ -81,7 +86,7 @@
                     combo.empty();
                     $("#IdCapitulo").attr("disabled", false);
 
-                    $.each(json.capitulos, function (index, element) {
+                    $.each(json.capitulos, function (element) {
                         combo.append(
                             $('<option>', {
                                 value: element,
@@ -105,13 +110,10 @@
             }
         });
     }).change();
-
-
-    $("#idBuscar").click(function (e) {
-
+</script>
+<script>
+    $("#btnBuscar").on('click', (function (e) {
         e.preventDefault();
-
-        //code here
 
         var idLivro = $('#IdLivro').val();
         var idCapitulo = $('#IdCapitulo').val();
@@ -127,18 +129,8 @@
                     var combo = $('#IdCapitulo');
                     combo.empty();
                     $("#IdCapitulo").attr("disabled", false);
-
-                    $.each(json.capitulos, function (index, element) {
-                        combo.append(
-                            $('<option>', {
-                                value: element,
-                                html: element
-                            })
-                        );
-                    });
                 }
                 else {
-
                     for (var i = 0; i < json.retorno.Mensagens.length; i++) {
                         $('#alert').append(json.retorno.Mensagens[i] + "<br>");
                     }
@@ -153,5 +145,5 @@
         });
 
         return false;
-    });
+    }));
 </script>

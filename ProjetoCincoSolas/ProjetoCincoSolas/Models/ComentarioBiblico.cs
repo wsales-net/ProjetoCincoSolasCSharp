@@ -1,11 +1,9 @@
 ﻿namespace ProjetoCincoSolas.Models
 {
-    public class ComentarioBiblico
+    public class ComentarioBiblico : Entidade
     {
-        public int NumeroLivro { get; set; }
-        public string Livro { get; set; }
-        public string Abreviatura { get; set; }
-        public int Capitulo { get; set; }
-        public int Versiculo { get; set; }
+        public Comentario Comentario { get; set; }
+        public LivroBiblia LivroBiblia { get; set; }
+        public string ComentarioLivroBiblia { get; set; }
     }
 }

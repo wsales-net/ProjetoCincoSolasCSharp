@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Microsoft.Ajax.Utilities;
-using ProjetoCincoSolas.DAO;
+using ProjetoCincoSolas.Business;
 using ProjetoCincoSolas.Helpers;
 using ProjetoCincoSolas.Models;
 using ProjetoCincoSolas.ViewModel;
@@ -14,126 +11,144 @@ namespace ProjetoCincoSolas.Controllers
 {
     public class ComentarioBiblicoController : Controller
     {
-        private readonly ComentarioBiblicoRepository _comentarioBiblico;
+        private readonly ComentarioBiblicoNegocio _comentarioBiblicoNegocio;
 
         public ComentarioBiblicoController()
         {
-            _comentarioBiblico = new ComentarioBiblicoRepository();
+            _comentarioBiblicoNegocio = new ComentarioBiblicoNegocio();
         }
 
-        // GET: ComentarioBiblico
+        /// <summary>
+        /// Carrega a página com os livros da Bíblia.
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
-            var model = new ComentarioBiblicoViewModel();
-            model.Livros = MontarComboLivros();
-            model.Capitulos = new List<SelectListItem>();
+            try
+            {
+                var model = new ComentarioBiblicoViewModel
+                {
+                    Livros = new List<SelectListItem>(),//MontarComboLivros(),
+                    Capitulos = new List<SelectListItem>()
+                };
 
-            return View(model);
+                return View(model);
+            }
+            catch (Exception)
+            {
+                throw new HttpException(403, "Acesso Negado");
+            }
         }
 
-        // GET: ComentarioBiblico
+
+        /// <summary>
+        /// Retorna lista de capítulos do livro selecionado da bíblia.
+        /// </summary>
+        /// <param name="idLivro"></param>
+        /// <returns></returns>
+        public JsonResult ListarCapitulos(int idLivro)
+        {
+            var retorno = new Retorno();
+
+            try
+            {
+                var capitulos = _comentarioBiblicoNegocio.GetAllCapitulosLivro(idLivro);
+
+                if (capitulos == null)
+                {
+                    retorno.AddErro("Erro na requisição");
+                }
+
+                return new JsonResult
+                {
+                    Data = new
+                    {
+                        capitulos,
+                        retorno
+                    }
+                };
+            }
+            catch (Exception)
+            {
+                throw new HttpException(403, "Acesso Negado");
+            }
+        }
+
+        /// <summary>
+        /// Retorna lista de comentários da Bíblia.
+        /// </summary>
+        /// <param name="idLivro"></param>
+        /// <param name="idCapitulo"></param>
+        /// <returns></returns>
+        public ActionResult ListarComentarios(int idLivro, int idCapitulo)
+        {
+            var retorno = new Retorno();
+
+            try
+            {
+                var comentarios = _comentarioBiblicoNegocio.GetAllComentarios(idLivro, idCapitulo);
+
+                if (comentarios == null)
+                {
+                    retorno.AddErro("Erro na requisição");
+                }
+
+                return new JsonResult
+                {
+                    Data = new
+                    {
+                        comentarios,
+                        retorno
+                    }
+                };
+            }
+            catch (Exception)
+            {
+                throw new HttpException(403, "Acesso Negado");
+            }
+        }
+
+        // GET: ComentarioBiblico/ListarComentarios/5
+        /// <summary>
+        /// Retorna o comentário do livro da Bíblia e o capítulo selecionado.
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult ConsultarComentario(int idComentario, int idNumeroLivroBiblia, int idCapitulo)
+        {
+            var retorno = new Retorno();
+            try
+            {
+                var comentarioLivroBiblia = _comentarioBiblicoNegocio.GetAllComentarioLivroBiblia(idComentario, idNumeroLivroBiblia, idCapitulo);
+
+                if (comentarioLivroBiblia == null)
+                {
+                    retorno.AddErro("Erro na requisição");
+                }
+
+                return new JsonResult
+                {
+                    Data = new
+                    {
+                        comentariosBiblicos = comentarioLivroBiblia,
+                        retorno
+                    }
+                };
+            }
+            catch (Exception)
+            {
+                throw new HttpException(403, "Acesso Negado");
+            }
+        }
+
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Perolas()
         {
             return View();
         }
-
-        public IEnumerable<SelectListItem> MontarComboLivros()
-        {
-            var livros = _comentarioBiblico.GetAllLivros();
-
-            return livros.Select(x => new SelectListItem
-            {
-                Value = x.NumeroLivro.ToString(),
-                Text = x.Livro
-            }).ToList();
-        }
-
-        // GET: ComentarioBiblico/ListarCapitulos/5
-        public ActionResult ListarCapitulos(int idLivro)
-        {
-            var retorno = new Retorno();
-            var capitulos = _comentarioBiblico.GetAllCapitulosLivro(idLivro);
-
-            if (capitulos == null)
-            {
-                retorno.AddErro("Erro na requisição");
-                retorno.AddErro("Erro");
-            }
-
-            return new JsonResult
-            {
-                Data = new
-                {
-                    capitulos,
-                    retorno
-                }
-            };
-        }
-
-
-        // GET: ComentarioBiblico/ListarComentarios/5
-        /// <summary>
-        /// Retorna todos os camentários do banco de acordo com o livro e capítulo
-        /// </summary>
-        /// <param name="idLivro"></param>
-        /// <param name="idCapitulo"></param>
-        /// <returns>Retorna todos os camentários do banco de acordo com o livro e capítulo</returns>
-        //public ActionResult ListarComentarios(ComentarioBiblicoViewModel comentarioBiblicoViewModel)
-        //{
-        //    var comentariosBiblicos = new List<ComentarioBiblico>();
-
-        //    return new JsonResult
-        //    {
-        //        Data = new
-        //        {
-        //            comentariosBiblicos,
-        //            Erro = false,
-        //            Mensagem = "",
-        //        }
-        //    };
-        //}
-
-        public ActionResult ListarComentarios(int IdLivro, int IdCapitulo)
-        {
-            var retorno = new Retorno();
-            var capitulos = _comentarioBiblico.GetAllCapitulosLivro(IdLivro);
-
-            if (capitulos == null)
-            {
-                retorno.AddErro("Erro na requisição");
-                retorno.AddErro("Erro");
-            }
-
-            return new JsonResult
-            {
-                Data = new
-                {
-                    capitulos,
-                    retorno
-                }
-            };
-        }
-
-        // GET: ComentarioBiblico/ListarComentarios/5
-        /// <summary>
-        /// Retorna todos o camentário do banco de acordo com o livro e capítulo
-        /// </summary>
-        /// <returns></returns>
-        public ActionResult ConsultarComentario(int idComentario)
-        {
-            var comentariosBiblicos = new List<ComentarioBiblico>();
-
-            return new JsonResult
-            {
-                Data = new
-                {
-                    comentariosBiblicos,
-                    Erro = false,
-                    Mensagem = "",
-                }
-            };
-        }
-
-
     }
 }

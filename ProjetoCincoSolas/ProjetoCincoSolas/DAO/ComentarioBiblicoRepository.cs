@@ -3,7 +3,6 @@ using ProjetoCincoSolas.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
 using System.Data.SQLite;
 using System.Configuration;
 
@@ -11,60 +10,49 @@ namespace ProjetoCincoSolas.DAO
 {
     public class ComentarioBiblicoRepository
     {
-        private readonly string conStr = ConfigurationManager.ConnectionStrings["sqlLite"].ConnectionString;
+        private readonly string _conStr = ConfigurationManager.ConnectionStrings["sqlLite"].ConnectionString;
 
         public IList<LivroBiblia> GetAllLivros()
         {
-            List<LivroBiblia> listaLivroBiblia = new List<LivroBiblia>();
+            var listaLivroBiblia = new List<LivroBiblia>();
 
-            using (var conn = new SQLiteConnection(conStr))
+            try
             {
-                string sql = "Select Distinct NumeroLivroBiblia, LivroBiblia From LivroBiblia";
-
-                try
+                using (var conn = new SQLiteConnection(_conStr))
                 {
+                    const string sql = "Select Distinct NumeroLivroBiblia, LivroBiblia From LivroBiblia";
+
                     conn.Open();
                     var cmd = new SQLiteCommand(sql, conn);
                     using (var reader = cmd.ExecuteReader(CommandBehavior.CloseConnection))
                     {
                         while (reader.Read())
                         {
-                            var livroBiblia = new LivroBiblia();
+                            var livroBiblia = new LivroBiblia
+                            {
+                                NumeroLivro = reader["NumeroLivroBiblia"].ObjectToInt(),
+                                Livro = reader["LivroBiblia"].ToString()
+                            };
 
-                            livroBiblia.NumeroLivro = reader["NumeroLivroBiblia"].ObjectToInt();
-                            livroBiblia.Livro = reader["LivroBiblia"].ToString();
                             listaLivroBiblia.Add(livroBiblia);
                         }
                     }
                     return listaLivroBiblia;
                 }
-                catch (Exception e)
-                {
-                    throw e;
-                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
             }
         }
 
-        /*
-         select distinct idcomentario, nome from ComentarioLivroBiblia clb
-         join Comentario c on c.id = clb.idcomentario
-         where idnumerolivrobiblia = 48 and idcapitulo = 2
-
-        select comentario from ComentarioLivroBiblia
-        where idcomentario = 4 
-        and idnumerolivrobiblia = 48 
-        and idcapitulo = 2
-
-        */
-
-
         public IList<int> GetAllCapitulosLivro(int numeroLivro)
         {
-            List<int> listaLivroBiblia = new List<int>();
+            var listaLivroBiblia = new List<int>();
 
-            using (var conn = new SQLiteConnection(conStr))
+            using (var conn = new SQLiteConnection(_conStr))
             {
-                string sql = "Select Distinct Capitulo From Livrobiblia Where NumeroLivroBiblia = " + numeroLivro;
+                var sql = "Select Distinct Capitulo From Livrobiblia Where NumeroLivroBiblia = " + numeroLivro;
 
                 try
                 {
@@ -81,7 +69,85 @@ namespace ProjetoCincoSolas.DAO
                 }
                 catch (Exception e)
                 {
-                    throw e;
+                    throw new Exception(e.Message);
+                }
+            }
+        }
+
+        public IList<ComentarioBiblico> GetAllComentarios(int idLivro, int idCapitulo)
+        {
+            var listaComentarioLivroBiblia = new List<ComentarioBiblico>();
+
+            using (var conn = new SQLiteConnection(_conStr))
+            {
+                var sql = @"Select Distinct c.Id, c.Nome, clb.IdNumeroLivroBiblia From ComentarioLivroBiblia clb 
+                            Join Comentario c on c.Id = clb.IdComentario 
+                            Where IdNumeroLivroBiblia = " + idLivro + " And IdCapitulo = " + idCapitulo;
+                try
+                {
+                    conn.Open();
+                    var cmd = new SQLiteCommand(sql, conn);
+                    using (var reader = cmd.ExecuteReader(CommandBehavior.CloseConnection))
+                    {
+                        while (reader.Read())
+                        {
+                            var comentarioLivroBiblia = new ComentarioBiblico
+                            {
+                                Comentario = new Comentario
+                                {
+                                    Id = reader["Id"].ObjectToInt(),
+                                    Nome = reader["Nome"].ToString()
+                                },
+                                LivroBiblia = new LivroBiblia
+                                {
+                                    NumeroLivro = reader["IdNumeroLivroBiblia"].ObjectToInt()
+                                }
+                            };
+
+                            listaComentarioLivroBiblia.Add(comentarioLivroBiblia);
+                        }
+                    }
+                    return listaComentarioLivroBiblia;
+                }
+                catch (Exception e)
+                {
+                    throw new Exception(e.Message);
+                }
+            }
+        }
+
+        public IList<Comentario> GetAllComentarioLivroBiblia(int idComentario, int idNumeroLivroBiblia, int idCapitulo)
+        {
+            var listaComentarioLivroBiblia = new List<Comentario>();
+
+            using (var conn = new SQLiteConnection(_conStr))
+            {
+                var sql = @"Select Comentario From Comentario
+                            Where IdComentario = " + idComentario +
+                            "And IdNumeroLivroBiblia = " + idNumeroLivroBiblia + 
+                            "And IdCapitulo = " + idCapitulo;
+                try
+                {
+                    conn.Open();
+                    var cmd = new SQLiteCommand(sql, conn);
+                    using (var reader = cmd.ExecuteReader(CommandBehavior.CloseConnection))
+                    {
+                        while (reader.Read())
+                        {
+                            var comentarioLivroBiblia = new Comentario
+                            {
+                                Id = reader["Id"].ObjectToInt(),
+                                Nome = reader["Nome"].ToString()
+                            };
+
+                            listaComentarioLivroBiblia.Add(comentarioLivroBiblia);
+                        }
+                    }
+                    return listaComentarioLivroBiblia;
+                }
+                catch (Exception e)
+                {
+                    throw new Exception(e.Message);
                 }
             }
         }
