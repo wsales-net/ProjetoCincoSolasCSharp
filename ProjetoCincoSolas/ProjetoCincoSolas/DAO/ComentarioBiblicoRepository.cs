@@ -45,6 +45,19 @@ namespace ProjetoCincoSolas.DAO
             }
         }
 
+        /*
+         select distinct idcomentario, nome from ComentarioLivroBiblia clb
+         join Comentario c on c.id = clb.idcomentario
+         where idnumerolivrobiblia = 48 and idcapitulo = 2
+
+        select comentario from ComentarioLivroBiblia
+        where idcomentario = 4 
+        and idnumerolivrobiblia = 48 
+        and idcapitulo = 2
+
+        */
+
+
         public IList<int> GetAllCapitulosLivro(int numeroLivro)
         {
             List<int> listaLivroBiblia = new List<int>();
