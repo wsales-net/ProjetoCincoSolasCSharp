@@ -5,18 +5,19 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Data.SQLite;
+using System.Configuration;
 
 namespace ProjetoCincoSolas.DAO
 {
     public class ComentarioBiblicoRepository
     {
+        private readonly string conStr = ConfigurationManager.ConnectionStrings["sqlLite"].ConnectionString;
+
         public IList<LivroBiblia> GetAllLivros()
         {
             List<LivroBiblia> listaLivroBiblia = new List<LivroBiblia>();
 
-            string strConn = "Data Source=C:\\ComentarioBiblia.db";
-
-            using (var conn = new SQLiteConnection(strConn))
+            using (var conn = new SQLiteConnection(conStr))
             {
                 string sql = "Select Distinct NumeroLivroBiblia, LivroBiblia From LivroBiblia";
 
@@ -48,9 +49,7 @@ namespace ProjetoCincoSolas.DAO
         {
             List<int> listaLivroBiblia = new List<int>();
 
-            string strConn = "Data Source=C:\\ComentarioBiblia.db";
-
-            using (var conn = new SQLiteConnection(strConn))
+            using (var conn = new SQLiteConnection(conStr))
             {
                 string sql = "Select Distinct Capitulo From Livrobiblia Where NumeroLivroBiblia = " + numeroLivro;
 
@@ -74,29 +73,5 @@ namespace ProjetoCincoSolas.DAO
             }
         }
 
-        public void exibirDados()
-        {
-            SqlConnection conexao = new SqlConnection("connString");
-            SqlCommand comando = new SqlCommand("SELECT * FROM TABELA", conexao);
-            SqlDataReader dr = null;
-
-            try
-            {
-                conexao.Open();
-                dr = comando.ExecuteReader(CommandBehavior.CloseConnection);
-                while (dr.Read())
-                {
-                    Console.WriteLine(dr.GetString(1));
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Erro.");
-            }
-            finally
-            {
-                dr.Close();
-            }
-        }
     }
 }

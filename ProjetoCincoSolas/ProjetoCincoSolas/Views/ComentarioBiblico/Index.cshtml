@@ -30,7 +30,8 @@
     <div class="alert alert-warning" role="alert" id="alert" style="display:none;">
         <span></span>
     </div>
-    <form style="width: 50%; margin: 0 auto;" role="form" action="@Url.Action("ListarComentarios","ComentarioBiblico")" method="post">
+    @*<form style="width: 50%; margin: 0 auto;" role="form" action="@Url.Action("ListarComentarios","ComentarioBiblico")" method="post">*@
+    <form style="width: 50%; margin: 0 auto;" role="form" method="get">
         <div class="row">
             <div class="form-group col-md-4">
                 <label for="livros">Livros:</label>
@@ -43,7 +44,7 @@
 
             <div class="form-group col-md-2">
                 <label for="capitulos"> </label>
-                <button type="submit" class="btn btn-primary mb-2">
+                <button id="idBuscar" type="submit" class="btn btn-primary mb-2">
                     <i class="fa fa-search" aria-hidden="true"></i> Buscar
                 </button>
             </div>
@@ -56,7 +57,9 @@
     $(document).ready(function () {
     });
 
-    $('#IdLivro').change(function () {
+
+    $('#IdLivro').on('change', function () {
+
         var idLivro = $('#IdLivro').val();
         var idCapitulo = $('#IdCapitulo').val();
 
@@ -94,7 +97,7 @@
                     }
 
                     $("#alert").fadeIn(700, function () {
-                        window.setTimeout(function () {
+                        setTimeout(function () {
                             $('#alert').fadeOut();
                         }, 1500);
                     });
@@ -103,4 +106,52 @@
         });
     }).change();
 
+
+    $("#idBuscar").click(function (e) {
+
+        e.preventDefault();
+
+        //code here
+
+        var idLivro = $('#IdLivro').val();
+        var idCapitulo = $('#IdCapitulo').val();
+
+        $.ajax({
+            url: '@Url.Action("ListarComentarios", "ComentarioBiblico")',
+            data: { IdLivro: idLivro, IdCapitulo: idCapitulo },
+            method: 'POST',
+            dataType: 'json',
+            cache: false,
+            success: function (json) {
+                if (!json.retorno.Erro) {
+                    var combo = $('#IdCapitulo');
+                    combo.empty();
+                    $("#IdCapitulo").attr("disabled", false);
+
+                    $.each(json.capitulos, function (index, element) {
+                        combo.append(
+                            $('<option>', {
+                                value: element,
+                                html: element
+                            })
+                        );
+                    });
+                }
+                else {
+
+                    for (var i = 0; i < json.retorno.Mensagens.length; i++) {
+                        $('#alert').append(json.retorno.Mensagens[i] + "<br>");
+                    }
+
+                    $("#alert").fadeIn(700, function () {
+                        setTimeout(function () {
+                            $('#alert').fadeOut();
+                        }, 1500);
+                    });
+                }
+            }
+        });
+
+        return false;
+    });
 </script>

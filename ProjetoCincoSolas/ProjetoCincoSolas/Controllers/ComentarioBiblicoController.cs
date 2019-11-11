@@ -78,21 +78,41 @@ namespace ProjetoCincoSolas.Controllers
         /// <param name="idLivro"></param>
         /// <param name="idCapitulo"></param>
         /// <returns>Retorna todos os camentários do banco de acordo com o livro e capítulo</returns>
-        public ActionResult ListarComentarios(ComentarioBiblicoViewModel comentarioBiblicoViewModel)
+        //public ActionResult ListarComentarios(ComentarioBiblicoViewModel comentarioBiblicoViewModel)
+        //{
+        //    var comentariosBiblicos = new List<ComentarioBiblico>();
+
+        //    return new JsonResult
+        //    {
+        //        Data = new
+        //        {
+        //            comentariosBiblicos,
+        //            Erro = false,
+        //            Mensagem = "",
+        //        }
+        //    };
+        //}
+
+        public ActionResult ListarComentarios(int IdLivro, int IdCapitulo)
         {
-            var comentariosBiblicos = new List<ComentarioBiblico>();
+            var retorno = new Retorno();
+            var capitulos = _comentarioBiblico.GetAllCapitulosLivro(IdLivro);
+
+            if (capitulos == null)
+            {
+                retorno.AddErro("Erro na requisição");
+                retorno.AddErro("Erro");
+            }
 
             return new JsonResult
             {
                 Data = new
                 {
-                    comentariosBiblicos,
-                    Erro = false,
-                    Mensagem = "",
+                    capitulos,
+                    retorno
                 }
             };
         }
-
 
         // GET: ComentarioBiblico/ListarComentarios/5
         /// <summary>
