@@ -32,7 +32,7 @@
     </div>
 
 
-    <form style="width: 50%; margin: 0 auto;" role="form" method="get">
+    <form style="width: 50%; margin: 0 auto;" role="form">
         <div class="row">
             <div class="form-group col-md-4">
                 <label>Livros:</label>
@@ -45,18 +45,14 @@
 
             <div class="form-group col-md-2">
                 <label> </label>
-                <button id="idBuscar" type="submit" class="btn btn-primary mb-2">
+                <button id="btnBuscar" class="btn btn-primary mb-2">
                     <i class="fa fa-search" aria-hidden="true"></i> Buscar
                 </button>
             </div>
         </div>
     </form>
-</div>
 
-<div class="card">
-    <div class="card-header">
-        Destaque
-    </div>
+    <div class="comentario"></div>
 </div>
 <script>
     $(document).ready(function () {
@@ -89,8 +85,8 @@
                     $.each(json.capitulos, function (element) {
                         combo.append(
                             $('<option>', {
-                                value: element,
-                                html: element
+                                value: element + 1,
+                                html: element + 1
                             })
                         );
                     });
@@ -120,19 +116,28 @@
 
         $.ajax({
             url: '@Url.Action("ListarComentarios", "ComentarioBiblico")',
-            data: { IdLivro: idLivro, IdCapitulo: idCapitulo },
-            method: 'POST',
+            data: { idLivro, idCapitulo },
+            method: 'GET',
             dataType: 'json',
             cache: false,
             success: function (json) {
-                if (!json.retorno.Erro) {
-                    var combo = $('#IdCapitulo');
-                    combo.empty();
-                    $("#IdCapitulo").attr("disabled", false);
+                if (!json.Data.retorno.Erro) {
+                    for (var i = 0; i < json.Data.comentarios.length; i++) {
+
+                        var div1 = $('<div/>', {
+                            class: 'card'
+                        }).append(div2);
+
+                        var div2 = $('<div/>', {
+                            class: 'card-header'
+                        }).append(json.Data.comentarios[i].Comentario.Nome + '<br/>');
+
+                        $('.comentario').append(div2);
+                    }
                 }
                 else {
                     for (var i = 0; i < json.retorno.Mensagens.length; i++) {
-                        $('#alert').append(json.retorno.Mensagens[i] + "<br>");
+                        $('#alert').append(json.retorno.Mensagens[i] + '<br>');
                     }
 
                     $("#alert").fadeIn(700, function () {

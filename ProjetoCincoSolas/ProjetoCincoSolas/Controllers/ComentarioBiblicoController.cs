@@ -28,7 +28,7 @@ namespace ProjetoCincoSolas.Controllers
             {
                 var model = new ComentarioBiblicoViewModel
                 {
-                    Livros = new List<SelectListItem>(),//MontarComboLivros(),
+                    Livros = _comentarioBiblicoNegocio.MontarComboLivros(),
                     Capitulos = new List<SelectListItem>()
                 };
 
@@ -80,7 +80,8 @@ namespace ProjetoCincoSolas.Controllers
         /// <param name="idLivro"></param>
         /// <param name="idCapitulo"></param>
         /// <returns></returns>
-        public ActionResult ListarComentarios(int idLivro, int idCapitulo)
+        [HttpGet]
+        public JsonResult ListarComentarios(int idLivro, int idCapitulo)
         {
             var retorno = new Retorno();
 
@@ -93,14 +94,15 @@ namespace ProjetoCincoSolas.Controllers
                     retorno.AddErro("Erro na requisição");
                 }
 
-                return new JsonResult
+                return Json(new JsonResult
                 {
                     Data = new
                     {
                         comentarios,
                         retorno
-                    }
-                };
+                    },
+                }, JsonRequestBehavior.AllowGet);
+
             }
             catch (Exception)
             {
