@@ -9,9 +9,11 @@ namespace ProjetoCincoSolas.Business
     public class ComentarioBiblicoNegocio
     {
         private readonly ComentarioBiblicoRepository _comentarioBiblicoRepository;
+        private readonly BaseRepository _baseRepository;
 
-        public ComentarioBiblicoNegocio()
+        public ComentarioBiblicoNegocio(BaseRepository baseRepository)
         {
+            _baseRepository = baseRepository;
             _comentarioBiblicoRepository = new ComentarioBiblicoRepository();
         }
 

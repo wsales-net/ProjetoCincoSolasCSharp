@@ -3,7 +3,6 @@
 @{
     ViewBag.Title = "Comentarios Bíblicos";
 }
-
 <link href="~/Content/about.css" rel="stylesheet" type="text/css" />
 <link href="~/Content/about_responsive.css" rel="stylesheet" type="text/css" />
 
@@ -122,17 +121,18 @@
             cache: false,
             success: function (json) {
                 if (!json.Data.retorno.Erro) {
+                    $('.comentario').empty();
+
                     for (var i = 0; i < json.Data.comentarios.length; i++) {
+                        var div2 = $('<div/>', {
+                            class: 'card-header'
+                        }).append(json.Data.comentarios[i].Comentario.Nome + '<br/>');
 
                         var div1 = $('<div/>', {
                             class: 'card'
                         }).append(div2);
 
-                        var div2 = $('<div/>', {
-                            class: 'card-header'
-                        }).append(json.Data.comentarios[i].Comentario.Nome + '<br/>');
-
-                        $('.comentario').append(div2);
+                        $('.comentario').append(div1);
                     }
                 }
                 else {
