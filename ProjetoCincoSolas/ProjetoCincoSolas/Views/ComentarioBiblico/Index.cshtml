@@ -55,10 +55,6 @@
     <div class="comentario"></div>
 </div>
 <script>
-    $(document).ready(function () {
-    });
-
-
     $('#IdLivro').on('change', function () {
 
         var idLivro = $('#IdLivro').val();
@@ -122,17 +118,21 @@
             cache: false,
             success: function (json) {
                 if (!json.Data.retorno.Erro) {
+                    $('.comentario').html("");
                     for (var i = 0; i < json.Data.comentarios.length; i++) {
+                        var div2 = $('<div/>', {
+                            css: {
+                                'font-weight': 600
+                            },
+                            class: 'card-header'
+                        }).append('📖 ' + json.Data.comentarios[i].Comentario.Nome);
 
                         var div1 = $('<div/>', {
-                            class: 'card'
+                            class: 'card',
+                            id: json.Data.comentarios[i].Comentario.Id
                         }).append(div2);
 
-                        var div2 = $('<div/>', {
-                            class: 'card-header'
-                        }).append(json.Data.comentarios[i].Comentario.Nome + '<br/>');
-
-                        $('.comentario').append(div2);
+                        $('.comentario').append(div1).append('<br>');
                     }
                 }
                 else {
@@ -152,3 +152,48 @@
         return false;
     }));
 </script>
+<script>
+    $('.comentario').on('click', '.card', function (index) {
+        var idComentario = this.id;
+        console.log(index);
+        var idNumeroLivroBiblia = $('#IdLivro').val();
+        var idCapitulo = $('#IdCapitulo').val();
+
+        $.ajax({
+            url: '@Url.Action("ConsultarComentario", "ComentarioBiblico")',
+            data: { idComentario, idNumeroLivroBiblia, idCapitulo},
+            method: 'POST',
+            dataType: 'json',
+            cache: false,
+            success: function (json) {
+                if (!json.retorno.Erro) {
+
+                    var p = $('<p/>', {
+                        class: 'card-text',
+                    }).append(json.comentariosBiblicos[0].ComentarioLivroBiblia);
+
+                    var div1 = $('<div/>', {
+                        class: 'card-body',
+                    }).append(p);
+
+                    $('#' + json.comentariosBiblicos[0].Comentario.Id).append(div1);
+                }
+            }
+        });
+    });
+</script>
+
+
+<style>
+    .card-header {
+        cursor: pointer;
+        transition: 0.3s;
+        border-left: 3px solid #dc3545;
+    }
+
+        .card-header:hover {
+            background-color: #f4e0e0;
+            color: #852020;
+            font-weight: 600;
+        }
+</style>

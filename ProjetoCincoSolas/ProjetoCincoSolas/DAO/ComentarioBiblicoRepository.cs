@@ -116,16 +116,16 @@ namespace ProjetoCincoSolas.DAO
             }
         }
 
-        public IList<Comentario> GetAllComentarioLivroBiblia(int idComentario, int idNumeroLivroBiblia, int idCapitulo)
+        public IList<ComentarioBiblico> GetAllComentarioLivroBiblia(int idComentario, int idNumeroLivroBiblia, int idCapitulo)
         {
-            var listaComentarioLivroBiblia = new List<Comentario>();
+            var listaComentarioLivroBiblia = new List<ComentarioBiblico>();
 
             using (var conn = new SQLiteConnection(_conStr))
             {
-                var sql = @"Select Comentario From Comentario
+                var sql = @"Select IdComentario, Comentario From ComentarioLivroBiblia
                             Where IdComentario = " + idComentario +
-                            "And IdNumeroLivroBiblia = " + idNumeroLivroBiblia + 
-                            "And IdCapitulo = " + idCapitulo;
+                            " And IdNumeroLivroBiblia = " + idNumeroLivroBiblia + 
+                            " And IdCapitulo = " + idCapitulo;
                 try
                 {
                     conn.Open();
@@ -134,10 +134,13 @@ namespace ProjetoCincoSolas.DAO
                     {
                         while (reader.Read())
                         {
-                            var comentarioLivroBiblia = new Comentario
+                            var comentarioLivroBiblia = new ComentarioBiblico
                             {
-                                Id = reader["Id"].ObjectToInt(),
-                                Nome = reader["Nome"].ToString()
+                                ComentarioLivroBiblia = reader["Comentario"].ToString(),
+                                Comentario = new Comentario
+                                {
+                                    Id = reader["IdComentario"].ObjectToInt()
+                                }
                             };
 
                             listaComentarioLivroBiblia.Add(comentarioLivroBiblia);

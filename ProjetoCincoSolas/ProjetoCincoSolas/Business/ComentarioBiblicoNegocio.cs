@@ -30,7 +30,7 @@ namespace ProjetoCincoSolas.Business
             return _comentarioBiblicoRepository.GetAllComentarios(idLivro, idCapitulo);
         }
 
-        public IList<Comentario> GetAllComentarioLivroBiblia(int idComentario, int idNumeroLivroBiblia, int idCapitulo)
+        public IList<ComentarioBiblico> GetAllComentarioLivroBiblia(int idComentario, int idNumeroLivroBiblia, int idCapitulo)
         {
             return _comentarioBiblicoRepository.GetAllComentarioLivroBiblia(idComentario, idNumeroLivroBiblia, idCapitulo);
         }
