@@ -38,9 +38,14 @@
                 <label>Livros:</label>
                 @Html.DropDownListFor(x => x.IdLivro, Model.Livros, "Selecione", new { @class = "form-control select2" })
             </div>
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-2">
                 <label>Capitulos:</label>
                 @Html.DropDownListFor(x => x.IdCapitulo, Model.Capitulos, "Selecione", new { @class = "form-control select2" })
+            </div>
+            <div class="form-group col-md-2">
+                <label for="exibir">Expandir:</label>
+                <br />
+                <input type="checkbox" name="Expandir" value="Expandir" class="btn btn-primary mb-2">
             </div>
 
             <div class="form-group col-md-2">
@@ -124,12 +129,13 @@
                             css: {
                                 'font-weight': 600
                             },
-                            class: 'card-header'
+                            class: 'card-header',
+                            id: json.Data.comentarios[i].Comentario.Id
                         }).append('📖 ' + json.Data.comentarios[i].Comentario.Nome);
 
                         var div1 = $('<div/>', {
                             class: 'card',
-                            id: json.Data.comentarios[i].Comentario.Id
+                            id: 'card-' + json.Data.comentarios[i].Comentario.Id
                         }).append(div2);
 
                         $('.comentario').append(div1).append('<br>');
@@ -153,9 +159,15 @@
     }));
 </script>
 <script>
-    $('.comentario').on('click', '.card', function (index) {
+    $('.comentario').on('click', '.card > .card-header', function (index) {
+        if ($(this)[0].offsetParent.children[1] != null) {
+            $(this).closest('.card').children('.card-body').animate({
+                height: 'toggle'
+            });
+            return;
+        }
+        
         var idComentario = this.id;
-        console.log(index);
         var idNumeroLivroBiblia = $('#IdLivro').val();
         var idCapitulo = $('#IdCapitulo').val();
 
@@ -176,13 +188,19 @@
                         class: 'card-body',
                     }).append(p);
 
-                    $('#' + json.comentariosBiblicos[0].Comentario.Id).append(div1);
+                    $('#card-' + json.comentariosBiblicos[0].Comentario.Id).append(div1);
                 }
             }
         });
     });
 </script>
+<script>
+    var countChecked = function () {
+        $('.card-header').click();
+    };
 
+    $("input[type=checkbox]").on("click", countChecked);
+</script>
 
 <style>
     .card-header {
