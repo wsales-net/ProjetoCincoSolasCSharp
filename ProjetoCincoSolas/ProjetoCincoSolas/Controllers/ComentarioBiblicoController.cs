@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Web;
 using System.Web.Mvc;
 using ProjetoCincoSolas.Business;
+using ProjetoCincoSolas.DAO;
 using ProjetoCincoSolas.Helpers;
 using ProjetoCincoSolas.Models;
 using ProjetoCincoSolas.ViewModel;
@@ -13,9 +14,9 @@ namespace ProjetoCincoSolas.Controllers
     {
         private readonly ComentarioBiblicoNegocio _comentarioBiblicoNegocio;
 
-        public ComentarioBiblicoController()
+        public ComentarioBiblicoController(BaseRepository baseRepository)
         {
-            _comentarioBiblicoNegocio = new ComentarioBiblicoNegocio();
+            _comentarioBiblicoNegocio = new ComentarioBiblicoNegocio(baseRepository);
         }
 
         /// <summary>
@@ -91,6 +92,25 @@ namespace ProjetoCincoSolas.Controllers
 
                 if (comentarios == null)
                 {
+                    comentarios = new List<ComentarioBiblico>();
+
+                    for (var i = 0; i < 10; i++)
+                    {
+                        var comentarioLivroBiblia = new ComentarioBiblico
+                        {
+                            Comentario = new Comentario
+                            {
+                                Id = i,
+                                Nome = "Comentario" + i
+                            },
+                            LivroBiblia = new LivroBiblia
+                            {
+                                NumeroLivro = i
+                            }
+                        };
+                        comentarios.Add(comentarioLivroBiblia);
+                    }
+
                     retorno.AddErro("Erro na requisição");
                 }
 

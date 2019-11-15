@@ -8,9 +8,8 @@ using System.Configuration;
 
 namespace ProjetoCincoSolas.DAO
 {
-    public class ComentarioBiblicoRepository
+    public class ComentarioBiblicoRepository : BaseRepository
     {
-        private readonly string _conStr = ConfigurationManager.ConnectionStrings["sqlLite"].ConnectionString;
 
         public IList<LivroBiblia> GetAllLivros()
         {
@@ -18,7 +17,7 @@ namespace ProjetoCincoSolas.DAO
 
             try
             {
-                using (var conn = new SQLiteConnection(_conStr))
+                using (var conn = new SQLiteConnection(SrtCon))
                 {
                     const string sql = "Select Distinct NumeroLivroBiblia, LivroBiblia From LivroBiblia";
 
@@ -50,7 +49,7 @@ namespace ProjetoCincoSolas.DAO
         {
             var listaLivroBiblia = new List<int>();
 
-            using (var conn = new SQLiteConnection(_conStr))
+            using (var conn = new SQLiteConnection(SrtCon))
             {
                 var sql = "Select Distinct Capitulo From Livrobiblia Where NumeroLivroBiblia = " + numeroLivro;
 
@@ -78,7 +77,7 @@ namespace ProjetoCincoSolas.DAO
         {
             var listaComentarioLivroBiblia = new List<ComentarioBiblico>();
 
-            using (var conn = new SQLiteConnection(_conStr))
+            using (var conn = new SQLiteConnection(SrtCon))
             {
                 var sql = @"Select Distinct c.Id, c.Nome, clb.IdNumeroLivroBiblia From ComentarioLivroBiblia clb 
                             Join Comentario c on c.Id = clb.IdComentario 
@@ -120,7 +119,7 @@ namespace ProjetoCincoSolas.DAO
         {
             var listaComentarioLivroBiblia = new List<ComentarioBiblico>();
 
-            using (var conn = new SQLiteConnection(_conStr))
+            using (var conn = new SQLiteConnection(SrtCon))
             {
                 var sql = @"Select IdComentario, Comentario From ComentarioLivroBiblia
                             Where IdComentario = " + idComentario +
