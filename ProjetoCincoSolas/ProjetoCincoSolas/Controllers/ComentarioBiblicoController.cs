@@ -13,11 +13,13 @@ namespace ProjetoCincoSolas.Controllers
     public class ComentarioBiblicoController : Controller
     {
         private readonly ComentarioBiblicoNegocio _comentarioBiblicoNegocio;
+        private readonly BaseRepository baseRepository;
 
-        public ComentarioBiblicoController(BaseRepository baseRepository)
+        public ComentarioBiblicoController()
         {
             _comentarioBiblicoNegocio = new ComentarioBiblicoNegocio(baseRepository);
         }
+
 
         /// <summary>
         /// Carrega a página com os livros da Bíblia.
@@ -35,7 +37,7 @@ namespace ProjetoCincoSolas.Controllers
 
                 return View(model);
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 throw new HttpException(403, "Acesso Negado");
             }
@@ -81,7 +83,6 @@ namespace ProjetoCincoSolas.Controllers
         /// <param name="idLivro"></param>
         /// <param name="idCapitulo"></param>
         /// <returns></returns>
-        [HttpGet]
         public JsonResult ListarComentarios(int idLivro, int idCapitulo)
         {
             var retorno = new Retorno();
@@ -114,15 +115,14 @@ namespace ProjetoCincoSolas.Controllers
                     retorno.AddErro("Erro na requisição");
                 }
 
-                return Json(new JsonResult
+                return new JsonResult
                 {
                     Data = new
                     {
                         comentarios,
                         retorno
-                    },
-                }, JsonRequestBehavior.AllowGet);
-
+                    }
+                };
             }
             catch (Exception)
             {
@@ -140,9 +140,9 @@ namespace ProjetoCincoSolas.Controllers
             var retorno = new Retorno();
             try
             {
-                var comentarioLivroBiblia = _comentarioBiblicoNegocio.GetAllComentarioLivroBiblia(idComentario, idNumeroLivroBiblia, idCapitulo);
+                var comentariosBiblicos = _comentarioBiblicoNegocio.GetAllComentarioLivroBiblia(idComentario, idNumeroLivroBiblia, idCapitulo);
 
-                if (comentarioLivroBiblia == null)
+                if (comentariosBiblicos == null)
                 {
                     retorno.AddErro("Erro na requisição");
                 }
@@ -151,7 +151,7 @@ namespace ProjetoCincoSolas.Controllers
                 {
                     Data = new
                     {
-                        comentariosBiblicos = comentarioLivroBiblia,
+                        comentariosBiblicos,
                         retorno
                     }
                 };
@@ -162,7 +162,69 @@ namespace ProjetoCincoSolas.Controllers
             }
         }
 
+        /// <summary>
+        /// Retorna o comentário do livro da Bíblia e o capítulo selecionado.
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult ConsultarPalavra(string palavra)
+        {
+            var retorno = new Retorno();
+            try
+            {
+                var palavras = _comentarioBiblicoNegocio.GetAllPalavra(palavra);
 
+                if (palavras == null)
+                {
+                    retorno.AddErro("Erro na requisição");
+                }
+
+                return new JsonResult
+                {
+                    Data = new
+                    {
+                        palavras,
+                        retorno
+                    },
+                    JsonRequestBehavior = JsonRequestBehavior.AllowGet
+                };
+            }
+            catch (Exception e)
+            {
+                throw new HttpException(403, "Acesso Negado");
+            }
+        }
+
+        /// <summary>
+        /// Retorna o comentário do livro da Bíblia e o capítulo selecionado.
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult ConsultarSignificadoPalavra(string id)
+        {
+            var retorno = new Retorno();
+            try
+            {
+                var palavra = _comentarioBiblicoNegocio.GetSignificadoPalavra(Convert.ToInt32(id));
+
+                if (string.IsNullOrEmpty(palavra))
+                {
+                    retorno.AddErro("Erro na requisição");
+                }
+
+                return new JsonResult
+                {
+                    Data = new
+                    {
+                        palavra,
+                        retorno
+                    },
+                    JsonRequestBehavior = JsonRequestBehavior.AllowGet
+                };
+            }
+            catch (Exception e)
+            {
+                throw new HttpException(403, "Acesso Negado");
+            }
+        }
 
         /// <summary>
         /// 

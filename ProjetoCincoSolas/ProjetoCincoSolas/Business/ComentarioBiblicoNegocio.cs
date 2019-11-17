@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using ProjetoCincoSolas.DAO;
@@ -37,6 +38,12 @@ namespace ProjetoCincoSolas.Business
             return _comentarioBiblicoRepository.GetAllComentarioLivroBiblia(idComentario, idNumeroLivroBiblia, idCapitulo);
         }
 
+        public IList<Dicionario> GetAllPalavra(string palavra)
+        {
+            return _comentarioBiblicoRepository.GetAllPalavra(palavra);
+        }
+
+
         /// <summary>
         /// Retona lista de livros.
         /// </summary>
@@ -50,6 +57,11 @@ namespace ProjetoCincoSolas.Business
                 Value = x.NumeroLivro.ToString(),
                 Text = x.Livro
             }).ToList();
+        }
+
+        public string GetSignificadoPalavra(int id)
+        {
+            return _comentarioBiblicoRepository.GetSignificadoPalavra(id);
         }
     }
 }

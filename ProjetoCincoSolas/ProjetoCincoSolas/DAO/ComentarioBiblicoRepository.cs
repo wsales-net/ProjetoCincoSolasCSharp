@@ -73,6 +73,34 @@ namespace ProjetoCincoSolas.DAO
             }
         }
 
+        public string GetSignificadoPalavra(int id)
+        {
+            var palavras = "";
+
+            using (var conn = new SQLiteConnection(SrtCon))
+            {
+                var sql = @"Select Significado From Dicionario Where Id = " + id;
+
+                try
+                {
+                    conn.Open();
+                    var cmd = new SQLiteCommand(sql, conn);
+                    using (var reader = cmd.ExecuteReader(CommandBehavior.CloseConnection))
+                    {
+                        if (reader.Read())
+                        {
+                            return reader["Significado"].ToString();
+                        }
+                    }
+                    return palavras;
+                }
+                catch (Exception e)
+                {
+                    throw new Exception(e.Message);
+                }
+            }
+        }
+
         public IList<ComentarioBiblico> GetAllComentarios(int idLivro, int idCapitulo)
         {
             var listaComentarioLivroBiblia = new List<ComentarioBiblico>();
@@ -146,6 +174,38 @@ namespace ProjetoCincoSolas.DAO
                         }
                     }
                     return listaComentarioLivroBiblia;
+                }
+                catch (Exception e)
+                {
+                    throw new Exception(e.Message);
+                }
+            }
+        }
+
+        public IList<Dicionario> GetAllPalavra(string palavra)
+        {
+            var palavras = new List<Dicionario>();
+
+            using (var conn = new SQLiteConnection(SrtCon))
+            {
+                var sql = @"Select Id, Palavra, LivroDicionario From Dicionario Where Palavra like '" + palavra + "%'";
+
+                try
+                {
+                    conn.Open();
+                    var cmd = new SQLiteCommand(sql, conn);
+                    using (var reader = cmd.ExecuteReader(CommandBehavior.CloseConnection))
+                    {
+                        while (reader.Read())
+                        {
+                            var dicionario = new Dicionario();
+                            dicionario.Id = reader["Id"].ObjectToInt();
+                            dicionario.Palavra = reader["Palavra"].ToString();
+                            dicionario.LivroDicionario = reader["LivroDicionario"].ToString();
+                            palavras.Add(dicionario);
+                        }
+                    }
+                    return palavras;
                 }
                 catch (Exception e)
                 {

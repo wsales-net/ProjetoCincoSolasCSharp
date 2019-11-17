@@ -232,6 +232,7 @@
     <Compile Include="Helpers\Retorno.cs" />
     <Compile Include="Models\ComentarioBiblico.cs" />
     <Compile Include="Models\Comentario.cs" />
+    <Compile Include="Models\Dicionario.cs" />
     <Compile Include="Models\Entidade.cs" />
     <Compile Include="Models\LivroBiblia.cs" />
     <Compile Include="ViewModel\AccountViewModels.cs" />

@@ -31,34 +31,79 @@
         <span></span>
     </div>
 
+    <div class="tabs-container w30">
+        <ul class="tabs"></ul>
+        <div id="tab-1" data-tab-title="Comentário" class="tab-content current">
 
-    <form style="width: 50%; margin: 0 auto;" role="form">
-        <div class="row">
-            <div class="form-group col-md-4">
-                <label>Livros:</label>
-                @Html.DropDownListFor(x => x.IdLivro, Model.Livros, "Selecione", new { @class = "form-control select2" })
-            </div>
-            <div class="form-group col-md-2">
-                <label>Capitulos:</label>
-                @Html.DropDownListFor(x => x.IdCapitulo, Model.Capitulos, "Selecione", new { @class = "form-control select2" })
-            </div>
-            <div class="form-group col-md-2">
-                <label for="exibir">Expandir:</label>
-                <br />
-                <input type="checkbox" name="Expandir" value="Expandir" class="btn btn-primary mb-2">
-            </div>
+            <form style="width: 50%; margin: 0 auto;" role="form">
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <label>Livros:</label>
+                        @Html.DropDownListFor(x => x.IdLivro, Model.Livros, "Selecione", new { @class = "form-control select2" })
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label>Capitulos:</label>
+                        @Html.DropDownListFor(x => x.IdCapitulo, Model.Capitulos, "Selecione", new { @class = "form-control select2" })
+                    </div>
+                    <div>
+                        <br>
+                        <br>
+                        <label class="exibicao">Expandir: </label> <input type="checkbox" name="Expandir" value="Expandir" class="btn btn-primary mb-12">
+                    </div>
 
-            <div class="form-group col-md-2">
-                <label> </label>
-                <button id="btnBuscar" class="btn btn-primary mb-2">
-                    <i class="fa fa-search" aria-hidden="true"></i> Buscar
-                </button>
-            </div>
+                    <div class="form-group col-md-2">
+                        <label> </label>
+                        <button id="btnBuscar" class="btn btn-primary mb-2">
+                            <i class="fa fa-search" aria-hidden="true"></i> Buscar
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <div class="comentario"></div>
         </div>
-    </form>
 
-    <div class="comentario"></div>
+        <div id="tab-2" data-tab-title="Dicionário" class="tab-content">
+            <div class="form-group col-md-4" style="width: 50%; margin: 0 auto;">
+                <div class="input-group mb-3">
+                    <input id="palavra-dicionario" type="text" class="form-control" placeholder="Digite a palavra" aria-label="Digite a palavra" aria-describedby="basic-addon2">
+                </div>
+            </div>
+            <div class="dicionario"></div>
+        </div>
+
+    </div>
 </div>
+<!--Controle de abas-->
+<script>
+    $('.tab-content').each(function (i) {
+        var tabTitle = $(this).data('tab-title');
+        var current = $(this).hasClass('current') ? "current" : "";
+        var newTab = $('<li class="tab-link"></li>');
+        newTab.html(tabTitle)
+            .addClass(current)
+            .attr('data-tab', $(this).attr('id'));
+        $('ul.tabs').append(newTab);
+    });
+
+    $(document).on('click', '.tabs li', function () {
+        debugger;
+        var tab_id = $(this).attr('data-tab');
+
+        // Verifica se a aba atualiza a página
+        if (tab_id === "tab-0") {
+            location.reload();
+        }
+
+        $('.tabs li').removeClass('current');
+        $('.tab-content').removeClass('current');
+
+        $(this).addClass('current');
+        $("#" + tab_id).addClass('current');
+    });
+</script>
+
+<!--Seleção do livro-->
 <script>
     $('#IdLivro').on('change', function () {
 
@@ -108,6 +153,8 @@
         });
     }).change();
 </script>
+
+<!--Busca da lista de comentários-->
 <script>
     $("#btnBuscar").on('click', (function (e) {
         e.preventDefault();
@@ -118,24 +165,24 @@
         $.ajax({
             url: '@Url.Action("ListarComentarios", "ComentarioBiblico")',
             data: { idLivro, idCapitulo },
-            method: 'GET',
+            method: 'POST',
             dataType: 'json',
             cache: false,
             success: function (json) {
-                if (!json.Data.retorno.Erro) {
+                if (!json.retorno.Erro) {
                     $('.comentario').html("");
-                    for (var i = 0; i < json.Data.comentarios.length; i++) {
+                    for (var i = 0; i < json.comentarios.length; i++) {
                         var div2 = $('<div/>', {
                             css: {
                                 'font-weight': 600
                             },
                             class: 'card-header',
-                            id: json.Data.comentarios[i].Comentario.Id
-                        }).append('📖 ' + json.Data.comentarios[i].Comentario.Nome);
+                            id: json.comentarios[i].Comentario.Id
+                        }).append('📖 ' + json.comentarios[i].Comentario.Nome);
 
                         var div1 = $('<div/>', {
                             class: 'card',
-                            id: 'card-' + json.Data.comentarios[i].Comentario.Id
+                            id: 'card-' + json.comentarios[i].Comentario.Id
                         }).append(div2);
 
                         $('.comentario').append(div1).append('<br>');
@@ -158,6 +205,8 @@
         return false;
     }));
 </script>
+
+<!--Busca de comentários clicado-->
 <script>
     $('.comentario').on('click', '.card > .card-header', function (index) {
         if ($(this)[0].offsetParent.children[1] != null) {
@@ -166,7 +215,7 @@
             });
             return;
         }
-        
+
         var idComentario = this.id;
         var idNumeroLivroBiblia = $('#IdLivro').val();
         var idCapitulo = $('#IdCapitulo').val();
@@ -195,11 +244,90 @@
     });
 </script>
 <script>
-    var countChecked = function () {
+    $('input[type=checkbox]').change(function () {
+        this.checked ? $('.exibicao').html("Esconder: ") : $('.exibicao').html("Expandir: ");
         $('.card-header').click();
-    };
+    });
+</script>
 
-    $("input[type=checkbox]").on("click", countChecked);
+<!--Busca da lista de palavras-->
+<script>
+$(function () {
+    var minlength = 3;
+
+    $("#palavra-dicionario").keyup(function () {
+        var that = this,
+            value = $(this).val();
+
+        if (value.length >= minlength) {
+            //if (searchRequest != null) searchRequest.abort();
+
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("ConsultarPalavra", "ComentarioBiblico")',
+                data: { 'palavra': value },
+                dataType: 'json',
+                success: function (json) {
+                    if (!json.retorno.Erro) {
+                        $('.dicionario').html("");
+                        for (var i = 0; i < json.palavras.length; i++) {
+                            var div2 = $('<div/>', {
+                                css: {
+                                    'font-weight': 600
+                                },
+                                class: 'card-header',
+                                id: json.palavras[i].Id
+                            }).append('📚 ' + json.palavras[i].Palavra + " - " + json.palavras[i].LivroDicionario);
+
+                            var div1 = $('<div/>', {
+                                class: 'card',
+                                id: 'dic-card-' + json.palavras[i].Id
+                            }).append(div2);
+
+                            $('.dicionario').append(div1).append('<br>');
+                        }
+                    }
+                }
+            });
+        }
+    });
+});
+</script>
+
+<!--Busca de comentários clicado-->
+<script>
+    $('.dicionario').on('click', '.card > .card-header', function (index) {
+        var idDic = this.id;
+
+        if ($(this)[0].offsetParent.children[1] != null) {
+            $(this).closest('.card').children('.card-body').animate({
+                height: 'toggle'
+            });
+            return;
+        }
+
+        $.ajax({
+            url: '@Url.Action("ConsultarSignificadoPalavra", "ComentarioBiblico")',
+            data: { id: this.id },
+            method: 'POST',
+            dataType: 'json',
+            cache: false,
+            success: function (json) {
+                if (!json.retorno.Erro) {
+
+                    var p = $('<p/>', {
+                        class: 'card-text',
+                    }).append(json.palavra);
+
+                    var div1 = $('<div/>', {
+                        class: 'card-body',
+                    }).append(p);
+
+                    $('#dic-card-' + idDic).append(div1);
+                }
+            }
+        });
+    });
 </script>
 
 <style>
@@ -209,9 +337,50 @@
         border-left: 3px solid #dc3545;
     }
 
-        .card-header:hover {
-            background-color: #f4e0e0;
-            color: #852020;
-            font-weight: 600;
+    button {
+        cursor: pointer;
+    }
+
+    .card-header:hover {
+        background-color: #f4e0e0;
+        color: #852020;
+        font-weight: 600;
+    }
+
+    .tabs-container {
+        margin: 0 auto;
+    }
+
+    ul.tabs {
+        margin: 0px;
+        padding: 0px;
+        list-style: none;
+        border-bottom: 1px solid #d7d7d7;
+    }
+
+        ul.tabs li {
+            background: none;
+            color: #616161;
+            display: inline-block;
+            padding: 10px 15px;
+            cursor: pointer;
         }
+
+            ul.tabs li.current {
+                color: #484848;
+                border-bottom: 2px solid #F65314;
+            }
+
+    .tab-content {
+        display: none;
+        padding: 15px;
+    }
+
+        .tab-content.current {
+            display: block;
+        }
+
+    .tab-link:hover {
+        color: #FBBC05;
+    }
 </style>
