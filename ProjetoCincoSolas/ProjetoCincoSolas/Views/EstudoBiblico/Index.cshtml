@@ -1,0 +1,528 @@
+﻿@model ProjetoCincoSolas.ViewModel.EstudoBiblicoViewModel
+
+@{
+    ViewBag.Title = "Comentarios Bíblicos";
+}
+
+<link href="~/Content/about.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/about_responsive.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/tail.select-default.min.css" rel="stylesheet" />
+
+<div class="home">
+    <div class="home_background" style="background-image:url(../../Imagens/events.jpg)"></div>
+    <div class="home_content">
+        <div class="container">
+            <div class="row">
+                <div class="col d-flex flex-row align-items-center justify-content-start">
+                    <div class="home_title">Comentários Bíblicos</div>
+                    <div class="breadcrumbs ml-auto">
+                        <ul>
+                            <li><a href="index.html">Início</a></li>
+                            <li>Comentários Bíblicos</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<div class="container">
+    <div class="alert alert-warning" role="alert" id="alert" style="display:none;">
+        <span></span>
+    </div>
+
+    <div class="tabs-container w30">
+        <ul class="tabs"></ul>
+        <div id="tab-1" data-tab-title="Comentário" class="tab-content current">
+
+            <form style="width: 100%; margin: 0 auto;" role="form">
+                <div class="row">
+                    <div class="form-group col-md-3">
+                        <label>Livros:</label><br />
+                        @Html.DropDownListFor(x => x.IdLivro, Model.Livros, "Selecione", new { @class = "form-control" })
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label>Capitulos:</label>
+                        @Html.DropDownListFor(x => x.IdCapitulo, Model.Capitulos, "Selecione", new { @class = "form-control" })
+                    </div>
+                    <div>
+                        <br /><br />
+                        <label class="exibicao">Expandir: </label> <input type="checkbox" name="Expandir" value="Expandir" class="btn btn-primary mb-12">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label> </label><br />
+                        <button id="btnBuscar" class="btn btn-primary mb-2">
+                            <i class="fa fa-search" aria-hidden="true"></i> Buscar
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <div class="comentario"></div>
+        </div>
+
+        <div id="tab-2" data-tab-title="Dicionário" class="tab-content">
+            <div class="form-group col-md-4" style="width: 50%; margin: 0 auto;">
+                <div class="input-group mb-3">
+                    <input id="palavra-dicionario" type="text" class="form-control" placeholder="Digite a palavra" aria-label="Digite a palavra" aria-describedby="basic-addon2">
+                </div>
+            </div>
+            <div class="dicionario"></div>
+        </div>
+
+        <div id="tab-3" data-tab-title="Frases Inspiradas" class="tab-content">
+            <form style="width: 100%; margin: 0 auto;" role="form">
+                <div class="row">
+                    <div class="form-group col-md-3">
+                        <label>Autores:</label><br />
+                        @Html.DropDownListFor(x => x.IdAutor, Model.Autores, "Selecione", new { @class = "form-control" })
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label>Assuntos:</label>
+                        @Html.DropDownListFor(x => x.IdAssunto, Model.Assuntos, "Selecione", new { @class = "form-control" })
+                    </div>
+                    <div class="input-group col-md-12">
+                        <input id="texto-frase" type="text" class="form-control btnPesquisar" aria-label="Text input with dropdown button" placeholder="Digite a frase">
+                        <div class="input-group-append">
+                            <button id="btnPesquisar" type="button" class="btn btn-outline-primary my-2 my-sm-0">Pesquisar</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-12 frase-crista">
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<!--Controle de abas-->
+<script>
+    $('.tab-content').each(function (i) {
+        var tabTitle = $(this).data('tab-title');
+        var current = $(this).hasClass('current') ? "current" : "";
+        var newTab = $('<li class="tab-link"></li>');
+        newTab.html(tabTitle)
+            .addClass(current)
+            .attr('data-tab', $(this).attr('id'));
+        $('ul.tabs').append(newTab);
+    });
+
+    $(document).on('click', '.tabs li', function () {
+        var tab_id = $(this).attr('data-tab');
+
+        // Verifica se a aba atualiza a página
+        if (tab_id === "tab-0") {
+            location.reload();
+        }
+
+        $('.tabs li').removeClass('current');
+        $('.tab-content').removeClass('current');
+
+        $(this).addClass('current');
+        $("#" + tab_id).addClass('current');
+    });
+</script>
+<script src="~/Scripts/tail.select-full.min.js"></script>
+
+<!--RETORNA CAPITULOS DE ACORDO COM O LIVRO SELECIONADO-->
+<script>
+
+    $('#IdLivro').on('change', function () {
+
+        var idLivro = $('#IdLivro').val();
+        var idCapitulo = $('#IdCapitulo').val();
+
+        $('#IdCapitulo').empty().prop('disabled', !idCapitulo);
+
+        if (!idLivro) {
+            return;
+        }
+
+        $.ajax({
+            url: '@Url.Action("ListarCapitulos", "EstudoBiblico")',
+            data: { idLivro: idLivro },
+            method: 'POST',
+            dataType: 'json',
+            cache: false,
+            success: function (json) {
+                if (!json.retorno.Erro) {
+                    var combo = $('#IdCapitulo');
+                    combo.empty();
+                    $("#IdCapitulo").attr("disabled", false);
+
+                    $.each(json.capitulos, function (element) {
+                        combo.append(
+                            $('<option>', {
+                                value: element + 1,
+                                html: element + 1
+                            })
+                        );
+                    });
+                }
+                else {
+
+                    for (var i = 0; i < json.retorno.Mensagens.length; i++) {
+                        $('#alert').append(json.retorno.Mensagens[i] + "<br>");
+                    }
+
+                    $("#alert").fadeIn(700, function () {
+                        setTimeout(function () {
+                            $('#alert').fadeOut();
+                        }, 1500);
+                    });
+                }
+            }
+        });
+    }).change();
+</script>
+
+<!--SELECT BOX-->
+<script>
+    tail.select('#IdLivro', {
+        search: true
+    });
+
+    tail.select('#IdAutor', {
+        search: true
+        //search: true, descriptions: true, multiLimit: 15, hideSelected: true, hideDisabled: true, multiShowCount: false, multiContainer: true
+    });
+
+    tail.select('#IdAssunto', {
+        search: true
+    });
+</script>
+
+<!--Busca da lista de comentários-->
+<script>
+    $("#btnBuscar").on('click', (function (e) {
+        e.preventDefault();
+
+        var idLivro = $('#IdLivro').val();
+        var idCapitulo = $('#IdCapitulo').val();
+
+        $.ajax({
+            url: '@Url.Action("ListarComentarios", "EstudoBiblico")',
+            data: { idLivro, idCapitulo },
+            method: 'POST',
+            dataType: 'json',
+            cache: false,
+            success: function (json) {
+                if (!json.retorno.Erro) {
+                    $('.comentario').html("");
+                    for (var i = 0; i < json.comentarios.length; i++) {
+                        var div2 = $('<div/>', {
+                            css: {
+                                'font-weight': 600
+                            },
+                            class: 'card-header',
+                            id: json.comentarios[i].Comentario.Id
+                        }).append('📖 ' + json.comentarios[i].Comentario.Nome);
+
+                        var div1 = $('<div/>', {
+                            class: 'card',
+                            id: 'card-' + json.comentarios[i].Comentario.Id
+                        }).append(div2);
+
+                        $('.comentario').append(div1).append('<br>');
+                    }
+                }
+                else {
+                    for (var i = 0; i < json.retorno.Mensagens.length; i++) {
+                        $('#alert').append(json.retorno.Mensagens[i] + '<br>');
+                    }
+
+                    $("#alert").fadeIn(700, function () {
+                        setTimeout(function () {
+                            $('#alert').fadeOut();
+                        }, 1500);
+                    });
+                }
+            }
+        });
+
+        return false;
+    }));
+</script>
+
+<!--Busca de comentários clicado-->
+<script>
+    $('.comentario').on('click', '.card > .card-header', function (index) {
+        if ($(this)[0].offsetParent.children[1] != null) {
+            $(this).closest('.card').children('.card-body').animate({
+                height: 'toggle'
+            });
+            return;
+        }
+
+        var idComentario = this.id;
+        var idNumeroLivroBiblia = $('#IdLivro').val();
+        var idCapitulo = $('#IdCapitulo').val();
+
+        $.ajax({
+            url: '@Url.Action("ConsultarComentario", "EstudoBiblico")',
+            data: { idComentario, idNumeroLivroBiblia, idCapitulo},
+            method: 'POST',
+            dataType: 'json',
+            cache: false,
+            success: function (json) {
+                if (!json.retorno.Erro) {
+
+                    var p = $('<p/>', {
+                        class: 'card-text',
+                    }).append(json.comentariosBiblicos[0].ComentarioLivroBiblia);
+
+                    var div1 = $('<div/>', {
+                        class: 'card-body',
+                    }).append(p);
+
+                    $('#card-' + json.comentariosBiblicos[0].Comentario.Id).append(div1);
+                }
+            }
+        });
+    });
+</script>
+<script>
+    $('input[type=checkbox]').change(function () {
+        this.checked ? $('.exibicao').html("Esconder: ") : $('.exibicao').html("Expandir: ");
+        $('.card-header').click();
+    });
+</script>
+
+<!--Busca da lista de palavras-->
+<script>
+$(function () {
+    var minlength = 3;
+
+    $("#palavra-dicionario").keyup(function () {
+        var that = this,
+            value = $(this).val();
+
+        if (value.length >= minlength) {
+            //if (searchRequest != null) searchRequest.abort();
+
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("ConsultarPalavra", "EstudoBiblico")',
+                data: { 'palavra': value },
+                dataType: 'json',
+                success: function (json) {
+                    if (!json.retorno.Erro) {
+                        $('.dicionario').html("");
+                        for (var i = 0; i < json.palavras.length; i++) {
+                            var div2 = $('<div/>', {
+                                css: {
+                                    'font-weight': 600
+                                },
+                                class: 'card-header',
+                                id: json.palavras[i].Id
+                            }).append('📚 ' + json.palavras[i].Palavra + " - " + json.palavras[i].LivroDicionario);
+
+                            var div1 = $('<div/>', {
+                                class: 'card',
+                                id: 'dic-card-' + json.palavras[i].Id
+                            }).append(div2);
+
+                            $('.dicionario').append(div1).append('<br>');
+                        }
+                    }
+                }
+            });
+        }
+    });
+});
+</script>
+
+<!--Busca de palavras clicada-->
+<script>
+    $('.dicionario').on('click', '.card > .card-header', function (index) {
+        var idDic = this.id;
+
+        if ($(this)[0].offsetParent.children[1] != null) {
+            $(this).closest('.card').children('.card-body').animate({
+                height: 'toggle'
+            });
+            return;
+        }
+
+        $.ajax({
+            url: '@Url.Action("ConsultarSignificadoPalavra", "EstudoBiblico")',
+            data: { id: this.id },
+            method: 'POST',
+            dataType: 'json',
+            cache: false,
+            success: function (json) {
+                if (!json.retorno.Erro) {
+
+                    var p = $('<p/>', {
+                        class: 'card-text',
+                    }).append(json.palavra);
+
+                    var div1 = $('<div/>', {
+                        class: 'card-body',
+                    }).append(p);
+
+                    $('#dic-card-' + idDic).append(div1);
+                }
+            }
+        });
+    });
+</script>
+
+<!--Seleção de Assuntos-->
+<script>
+    $('#IdAutor').on('change', function () {
+
+        var idAutor = $('#IdAutor').val();
+        var idAssunto = $('#IdAssunto').val();
+
+        $.ajax({
+            url: '@Url.Action("ListarAssuntos", "EstudoBiblico")',
+            data: { idAutor: idAutor },
+            method: 'POST',
+            dataType: 'json',
+            cache: false,
+            success: function (json) {
+                if (!json.retorno.Erro) {
+                    tail.select('#IdAssunto').remove();
+
+                    var combo = $('#IdAssunto');
+                    combo.empty();
+                    $("#IdAssunto").attr("disabled", false);
+
+                    $('#IdAssunto').append(new Option("Selecione", ""));
+
+                    $.each(json.assuntos, function (key, obj) {
+                        combo.append($("<option></option>").attr("value", obj.Id).text(obj.Value));
+                    });
+
+                    tail.select('#IdAssunto', {
+                        search: true
+                    });
+                }
+                else {
+                    for (var i = 0; i < json.retorno.Mensagens.length; i++) {
+                        $('#alert').append(json.retorno.Mensagens[i] + "<br>");
+                    }
+
+                    $("#alert").fadeIn(700, function () {
+                        setTimeout(function () {
+                            $('#alert').fadeOut();
+                        }, 1500);
+                    });
+                }
+            }
+        });
+    }).change();
+</script>
+
+
+<!--Busca da lista de palavras-->
+<script>
+    $(function () {
+        var minlength = 3;
+
+        $("#texto-frase").keyup(function () {
+            pesquisarFrase();
+        });
+    });
+
+
+    $("#btnPesquisar").on('click', (function (e) {
+        e.preventDefault();
+
+        pesquisarFrase();
+
+        return false;
+    }));
+
+    function pesquisarFrase() {
+        var idAutor = $('#IdAutor').val();
+        var idAssunto = $('#IdAssunto').val();
+        var value = $("#texto-frase").val();
+
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("ConsultarFrase", "EstudoBiblico")',
+            data: { 'textoFrase': value, idAutor, idAssunto },
+            dataType: 'json',
+            success: function (json) {
+                if (!json.retorno.Erro) {
+                    $('.frase-crista').html("");
+                    for (var i = 0; i < json.frases.length; i++) {
+
+                        var tagP = $('<p/>', {
+                        }).append('📖 ' + json.frases[i].Frase + " - " + json.frases[i].AutorFraseCrista.Nome  + ' ✍🏻');
+
+                        var div2 = $('<div/>', {
+                            class: 'card-body'
+                        }).append(tagP);
+
+                        var div1 = $('<div/>', {
+                            class: 'card'
+                        }).append(div2);
+
+                        $('.frase-crista').append(div1).append('<br>');
+                    }
+                }
+            }
+        });
+    }
+</script>
+
+<style>
+    .card-header {
+        cursor: pointer;
+        transition: 0.3s;
+        border-left: 3px solid #dc3545;
+    }
+
+    button {
+        cursor: pointer;
+    }
+
+    .card-header:hover {
+        background-color: #f4e0e0;
+        color: #852020;
+        font-weight: 600;
+    }
+
+    .tabs-container {
+        margin: 0 auto;
+    }
+
+    ul.tabs {
+        margin: 0px;
+        padding: 0px;
+        list-style: none;
+        border-bottom: 1px solid #d7d7d7;
+    }
+
+        ul.tabs li {
+            background: none;
+            color: #616161;
+            display: inline-block;
+            padding: 10px 15px;
+            cursor: pointer;
+        }
+
+            ul.tabs li.current {
+                color: #484848;
+                border-bottom: 2px solid #F65314;
+            }
+
+    .tab-content {
+        display: none;
+        padding: 15px;
+    }
+
+        .tab-content.current {
+            display: block;
+        }
+
+    .tab-link:hover {
+        color: #FBBC05;
+    }
+</style>

@@ -1,11 +1,11 @@
-﻿using System.Configuration;
-using System.Web.Configuration;
+﻿using System.Web.Configuration;
 
 namespace ProjetoCincoSolas.DAO
 {
-    public class AbstractRepository
+    public abstract class AbstractRepository
     {
-        protected string StringConnection { get; } = WebConfigurationManager.ConnectionStrings["SqlLite"].ConnectionString;
-        protected string SrtCon { get; } = ConfigurationManager.ConnectionStrings["sqlLite"].ConnectionString;
+        protected string conSomee { get; } = WebConfigurationManager.ConnectionStrings["somee"].ConnectionString;
+        protected string conSqlLocal { get; } = WebConfigurationManager.ConnectionStrings["sqlLocal"].ConnectionString;
+        protected string conSqlite { get; } = WebConfigurationManager.ConnectionStrings["sqlLite"].ConnectionString;
     }
 }

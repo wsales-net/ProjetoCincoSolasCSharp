@@ -8,13 +8,7 @@
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/js")
-    <script>
-        // Select2 init
-        $('.select2').select2({
-            theme: "bootstrap"
-        });
-    </script>
-    <link href="~/Content/select2-bootstrap.css" rel="stylesheet" />
+
 </head>
 <body>
     <div class="super_container">
@@ -70,13 +64,15 @@
                                     <ul class="main_nav">
                                         <li class="active"><a href="@Url.Action("Index", "Home")">início</a></li>
                                         <li><a href="@Url.Action("Index", "Sobre")">sobre</a></li>
-                                        <li><a href="@Url.Action("Perolas", "ComentarioBiblico")">Perolas</a></li>
                                         <li><a href="@Url.Action("Index", "ComentarioBiblico")">Comentários Bíblico</a></li>
                                         <li><a href="@Url.Action("Index", "DevocionalDiario")">Devocional</a></li>
-                                        @*<li><a href="sermons.html">sermões</a></li>
+                                        @*<li><a href="@Url.Action("Index", "EstudoBiblico")">Estudo Bíblico</a></li>*@
+                                        @*
+                                            <li><a href="sermons.html">sermões</a></li>
                                             <li><a href="events.html">eventos</a></li>
                                             <li><a href="blog.html">blog</a></li>
-                                            <li><a href="contact.html">contato</a></li>*@
+                                            <li><a href="contact.html">contato</a></li>
+                                        *@
                                     </ul>
                                     <div class="search_button"><i class="fa fa-search" aria-hidden="true"></i></div>
                                 </nav>

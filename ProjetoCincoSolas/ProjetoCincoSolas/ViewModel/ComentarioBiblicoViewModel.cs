@@ -7,9 +7,11 @@ namespace ProjetoCincoSolas.ViewModel
     {
         public int? IdLivro { get; set; }
         public int? IdCapitulo { get; set; }
+        public int? IdTag { get; set; }
         public int? IdVersiculo { get; set; }
         public IEnumerable<SelectListItem> Livros { get; set; }
         public IEnumerable<SelectListItem> Capitulos { get; set; }
+        public IEnumerable<SelectListItem> Tags { get; set; }
         public IEnumerable<SelectListItem> Versiculos { get; set; }
     }
 }

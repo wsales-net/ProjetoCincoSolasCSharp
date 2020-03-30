@@ -6,6 +6,7 @@
 
 <link href="~/Content/about.css" rel="stylesheet" type="text/css" />
 <link href="~/Content/about_responsive.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/tail.select-default.min.css" rel="stylesheet" />
 
 <div class="home">
     <div class="home_background" style="background-image:url(../../Imagens/events.jpg)"></div>
@@ -35,24 +36,22 @@
         <ul class="tabs"></ul>
         <div id="tab-1" data-tab-title="Comentário" class="tab-content current">
 
-            <form style="width: 50%; margin: 0 auto;" role="form">
+            <form style="width: 100%; margin: 0 auto;" role="form">
                 <div class="row">
-                    <div class="form-group col-md-4">
-                        <label>Livros:</label>
-                        @Html.DropDownListFor(x => x.IdLivro, Model.Livros, "Selecione", new { @class = "form-control select2" })
+                    <div class="form-group col-md-3">
+                        <label>Livros:</label><br />
+                        @Html.DropDownListFor(x => x.IdLivro, Model.Livros, "Selecione", new { @class = "form-control" })
                     </div>
                     <div class="form-group col-md-2">
                         <label>Capitulos:</label>
-                        @Html.DropDownListFor(x => x.IdCapitulo, Model.Capitulos, "Selecione", new { @class = "form-control select2" })
+                        @Html.DropDownListFor(x => x.IdCapitulo, Model.Capitulos, "Selecione", new { @class = "form-control" })
                     </div>
                     <div>
-                        <br>
-                        <br>
+                        <br /><br />
                         <label class="exibicao">Expandir: </label> <input type="checkbox" name="Expandir" value="Expandir" class="btn btn-primary mb-12">
                     </div>
-
                     <div class="form-group col-md-2">
-                        <label> </label>
+                        <label> </label><br />
                         <button id="btnBuscar" class="btn btn-primary mb-2">
                             <i class="fa fa-search" aria-hidden="true"></i> Buscar
                         </button>
@@ -70,6 +69,31 @@
                 </div>
             </div>
             <div class="dicionario"></div>
+        </div>
+
+        <div id="tab-3" data-tab-title="Dicionário" class="tab-content">
+            <form style="width: 100%; margin: 0 auto;" role="form">
+                <div class="row">
+                    <div class="form-group col-md-3">
+                        <label>Livros:</label><br />
+                        @Html.DropDownListFor(x => x.IdLivro, Model.Livros, "Selecione", new { @class = "form-control" })
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label>Tags:</label>
+                        @Html.DropDownListFor(x => x.IdTag, Model.Tags, "Selecione", new { @class = "form-control" })
+                    </div>
+                    <div>
+                        <br /><br />
+                        <label class="exibicao">Expandir: </label> <input type="checkbox" name="Expandir" value="Expandir" class="btn btn-primary mb-12">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label> </label><br />
+                        <button id="btnBuscar" class="btn btn-primary mb-2">
+                            <i class="fa fa-search" aria-hidden="true"></i> Buscar
+                        </button>
+                    </div>
+                </div>
+            </form>
         </div>
 
     </div>
@@ -327,6 +351,14 @@ $(function () {
                 }
             }
         });
+    });
+</script>
+
+<script src="~/Scripts/tail.select-full.min.js"></script>
+
+<script>
+    tail.select('#IdLivro', {
+        search: true, descriptions: true, multiLimit: 15, hideSelected: true, hideDisabled: true, multiShowCount: false, multiContainer: true
     });
 </script>
 

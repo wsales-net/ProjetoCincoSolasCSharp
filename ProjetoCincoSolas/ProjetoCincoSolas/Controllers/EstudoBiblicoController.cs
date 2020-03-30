@@ -3,46 +3,41 @@ using System.Collections.Generic;
 using System.Web;
 using System.Web.Mvc;
 using ProjetoCincoSolas.Business;
-using ProjetoCincoSolas.DAO;
 using ProjetoCincoSolas.Helpers;
 using ProjetoCincoSolas.Models;
 using ProjetoCincoSolas.ViewModel;
 
 namespace ProjetoCincoSolas.Controllers
 {
-    public class ComentarioBiblicoController : Controller
+    public class EstudoBiblicoController : Controller
     {
-        private readonly ComentarioBiblicoNegocio _comentarioBiblicoNegocio;
-        private readonly BaseRepository baseRepository;
+        private readonly ComentarioBiblicoNegocio _comentarioBiblicoNegocio = new ComentarioBiblicoNegocio();
+        private readonly AutorFraseCristaNegocio _autorFraseCristaNegocio = new AutorFraseCristaNegocio();
+        private readonly AssuntoFraseNegocio _assuntoFraseCristaNegocio = new AssuntoFraseNegocio();
+        private readonly FraseCristaNegocio _fraseCristaNegocio = new FraseCristaNegocio();
 
-        public ComentarioBiblicoController()
+
+        public EstudoBiblicoController()
         {
-            _comentarioBiblicoNegocio = new ComentarioBiblicoNegocio(baseRepository);
+
         }
 
-
-        /// <summary>
-        /// Carrega a página com os livros da Bíblia.
-        /// </summary>
-        /// <returns></returns>
+        // <summary>
+        // Carrega a página com os livros da Bíblia.
+        // </summary>
+        // <returns></returns>
         public ActionResult Index()
         {
-            try
+            var model = new EstudoBiblicoViewModel
             {
-                var model = new ComentarioBiblicoViewModel
-                {
-                    Livros = _comentarioBiblicoNegocio.MontarComboLivros(),
-                    Capitulos = new List<SelectListItem>()
-                };
+                Livros = _comentarioBiblicoNegocio.MontarComboLivros(),
+                Autores = _autorFraseCristaNegocio.MontarComboAutorFrase(),
+                Assuntos = _assuntoFraseCristaNegocio.MontarComboAssuntoFrase(),
+                Capitulos = new List<SelectListItem>(),
+            };
 
-                return View(model);
-            }
-            catch (Exception e)
-            {
-                throw new HttpException(403, "Acesso Negado");
-            }
+            return View(model);
         }
-
 
         /// <summary>
         /// Retorna lista de capítulos do livro selecionado da bíblia.
@@ -226,13 +221,60 @@ namespace ProjetoCincoSolas.Controllers
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public ActionResult Perolas()
+        public JsonResult ListarAssuntos(string idAutor)
         {
-            return View();
+            var retorno = new Retorno();
+
+            try
+            {
+                var assuntos = _fraseCristaNegocio.GetAllAssuntoPorAutor(idAutor);
+
+                if (assuntos == null)
+                {
+                    retorno.AddErro("Erro na requisição");
+                }
+
+                return new JsonResult
+                {
+                    Data = new
+                    {
+                        assuntos,
+                        retorno
+                    }
+                };
+            }
+            catch (Exception)
+            {
+                throw new HttpException(403, "Acesso Negado");
+            }
+        }
+
+        public ActionResult ConsultarFrase(string textoFrase, string idAutor, string IdAssunto)
+        {
+            var retorno = new Retorno();
+            try
+            {
+                var frases = _fraseCristaNegocio.GetAllFraseCrista(textoFrase, idAutor, IdAssunto);
+
+                if (frases == null)
+                {
+                    retorno.AddErro("Erro na requisição");
+                }
+
+                return new JsonResult
+                {
+                    Data = new
+                    {
+                        frases,
+                        retorno
+                    },
+                    JsonRequestBehavior = JsonRequestBehavior.AllowGet
+                };
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
     }
 }

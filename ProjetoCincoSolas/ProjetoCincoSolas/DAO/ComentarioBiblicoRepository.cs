@@ -4,20 +4,20 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
+using System.Data.SqlClient;
 using System.Configuration;
 
 namespace ProjetoCincoSolas.DAO
 {
     public class ComentarioBiblicoRepository : BaseRepository
     {
-
         public IList<LivroBiblia> GetAllLivros()
         {
             var listaLivroBiblia = new List<LivroBiblia>();
 
             try
             {
-                using (var conn = new SQLiteConnection(SrtCon))
+                using (var conn = new SQLiteConnection(conSqlite))
                 {
                     const string sql = "Select Distinct NumeroLivroBiblia, LivroBiblia From LivroBiblia";
 
@@ -49,7 +49,7 @@ namespace ProjetoCincoSolas.DAO
         {
             var listaLivroBiblia = new List<int>();
 
-            using (var conn = new SQLiteConnection(SrtCon))
+            using (var conn = new SQLiteConnection(conSqlite))
             {
                 var sql = "Select Distinct Capitulo From Livrobiblia Where NumeroLivroBiblia = " + numeroLivro;
 
@@ -77,7 +77,7 @@ namespace ProjetoCincoSolas.DAO
         {
             var palavras = "";
 
-            using (var conn = new SQLiteConnection(SrtCon))
+            using (var conn = new SQLiteConnection(conSqlite))
             {
                 var sql = @"Select Significado From Dicionario Where Id = " + id;
 
@@ -105,7 +105,7 @@ namespace ProjetoCincoSolas.DAO
         {
             var listaComentarioLivroBiblia = new List<ComentarioBiblico>();
 
-            using (var conn = new SQLiteConnection(SrtCon))
+            using (var conn = new SQLiteConnection(conSqlite))
             {
                 var sql = @"Select Distinct c.Id, c.Nome, clb.IdNumeroLivroBiblia From ComentarioLivroBiblia clb 
                             Join Comentario c on c.Id = clb.IdComentario 
@@ -147,11 +147,11 @@ namespace ProjetoCincoSolas.DAO
         {
             var listaComentarioLivroBiblia = new List<ComentarioBiblico>();
 
-            using (var conn = new SQLiteConnection(SrtCon))
+            using (var conn = new SQLiteConnection(conSqlite))
             {
                 var sql = @"Select IdComentario, Comentario From ComentarioLivroBiblia
                             Where IdComentario = " + idComentario +
-                            " And IdNumeroLivroBiblia = " + idNumeroLivroBiblia + 
+                            " And IdNumeroLivroBiblia = " + idNumeroLivroBiblia +
                             " And IdCapitulo = " + idCapitulo;
                 try
                 {
@@ -186,7 +186,7 @@ namespace ProjetoCincoSolas.DAO
         {
             var palavras = new List<Dicionario>();
 
-            using (var conn = new SQLiteConnection(SrtCon))
+            using (var conn = new SQLiteConnection(conSqlite))
             {
                 var sql = @"Select Id, Palavra, LivroDicionario From Dicionario Where Palavra like '" + palavra + "%'";
 
@@ -214,5 +214,38 @@ namespace ProjetoCincoSolas.DAO
             }
         }
 
+        public IList<TagFraseBiblica> GetAllTagsFrase()
+        {
+            try
+            {
+                var listaTagFraseBiblica = new List<TagFraseBiblica>();
+
+                using (var conn = new SqlConnection(conSqlLocal))
+                {
+                    const string sql = "Select * From TagFraseBiblica";
+
+                    conn.Open();
+                    var cmd = new SqlCommand(sql, conn);
+                    using (var reader = cmd.ExecuteReader(CommandBehavior.CloseConnection))
+                    {
+                        while (reader.Read())
+                        {
+                            var tagFrase = new TagFraseBiblica
+                            {
+                                Id = reader["Id"].ObjectToInt(),
+                                Tag = reader["Tag"].ToString()
+                            };
+
+                            listaTagFraseBiblica.Add(tagFrase);
+                        }
+                    }
+                    return listaTagFraseBiblica;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }

@@ -1,0 +1,106 @@
+﻿@model ProjetoCincoSolas.ViewModel.ComentarioBiblicoViewModel
+
+@{
+    ViewBag.Title = "Perolas";
+}
+
+<link href="~/Content/about.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/about_responsive.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/tail.select-default.min.css" rel="stylesheet" />
+
+<!-- Home -->
+<div class="home">
+    <div class="home_background" style="background-image:url(../../Imagens/events.jpg)"></div>
+    <div class="home_content">
+        <div class="container">
+            <div class="row">
+                <div class="col d-flex flex-row align-items-center justify-content-start">
+                    <div class="home_title">Perolas</div>
+                    <div class="breadcrumbs ml-auto">
+                        <ul>
+                            <li><a href="@Url.Action("Index", "Home")">Início</a></li>
+                            <li>Perolas</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+
+<div class="container">
+    <div class="event_container d-flex flex-lg-row flex-column align-items-center justify-content-start">
+
+        <div class="event_timer_container col-sm-12 col-md-12 col-lg-12">
+            <h4><i>"Cerca de 5 000 citações que servem de inspiração para comunicadores cristãos."</i></h4>
+
+            <div class="form-row">
+                <div class="col-md-3">
+                    <label for="uname">Autor</label>
+                    <br />
+                    @*@Html.DropDownListFor(x => x.IdLivro, Model.Livros, "Selecione o livro", new { @class = "form-control col-md-12", @id = "select2" })*@
+                </div>
+                <div class="col-md-8">
+                    <label for="Tag">Assunto</label><br />
+                    <select class="form-control form-control-xs selectpicker" multiple data-size="7" id="tag" data-width="100%">
+                        <option value="">Graça</option>
+                        <option value="">Amor</option>
+                        <option value="">Cuidado</option>
+                        <option value="">Piedade</option>
+                        <option value="">Santidade</option>
+                        <option value="">Misericórdia</option>
+                        <option value="">Pecado</option>
+                    </select>
+                </div>
+            </div>
+            <br>
+            <div class="input-group pesquisa-curso">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control btnPesquisar" aria-label="Text input with dropdown button" placeholder="Pesquisar frase">
+                    <div class="input-group-append">
+                        <button id="btnBuscar" type="button" class="btn btn-outline-primary my-2 my-sm-0">Pesquisar</button>
+                    </div>
+                </div>
+            </div>
+            <br>
+        </div>
+    </div>
+    <script src="~/Scripts/tail.select-full.min.js"></script>
+    <script>
+        tail.select('#tag', {
+            search: true, descriptions: true, multiLimit: 15, hideSelected: true, hideDisabled: true, multiShowCount: false, multiContainer: true
+        });
+        tail.select('#select2', {
+            search: true
+        });
+    </script>
+
+    <!--Busca da lista de comentários-->
+    <script>
+    $("#btnPesquisar").on('click', (function (e) {
+        e.preventDefault();
+
+        var idLivro = $('#IdLivro').val();
+
+        var textos = [];
+        $('#tag option:selected').each(function (e) {
+            textos.push(this.text)
+        });
+
+        $.ajax({
+            url: '@Url.Action("ListarComentarios", "ComentarioBiblico")',
+            data: { idLivro, textos },
+            method: 'POST',
+            dataType: 'json',
+            cache: false,
+            success: function (json) {
+                
+            }
+        });
+
+        return false;
+    }));
+    </script>
+</div>
+

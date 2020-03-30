@@ -1,16 +1,18 @@
-﻿using System.Configuration;
-using System.Data;
-using System.Data.SQLite;
-
+﻿
 namespace ProjetoCincoSolas.DAO
 {
     public class BaseRepository : AbstractRepository
     {
-        public bool VerificaConexao()
+        //public BaseRepository(BaseRepository _baseRepository)
+        //{
+        //}
+
+        public bool VerificaConexaoSqlite()
         {
-            var con = new SQLiteConnection(SrtCon);
-            con.Open();
-            return con.State == ConnectionState.Open;
+            //var con = new SQLiteConnection(conSqlite);
+            //con.Open();
+            //return con.State == ConnectionState.Open;
+            return true;
         }
     }
 }

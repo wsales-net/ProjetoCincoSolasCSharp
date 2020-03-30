@@ -15,7 +15,7 @@ namespace ProjetoCincoSolas.Helpers
         }
 
         /// <summary>
-        /// Retorna uma cadeia de caracteres que representa o objeto atual.
+        /// Retorna object em inteiro
         /// </summary>
         /// <param name="str"></param>
         /// <returns></returns>

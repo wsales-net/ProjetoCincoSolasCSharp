@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using ProjetoCincoSolas.DAO;
@@ -9,14 +8,7 @@ namespace ProjetoCincoSolas.Business
 {
     public class ComentarioBiblicoNegocio
     {
-        private readonly ComentarioBiblicoRepository _comentarioBiblicoRepository;
-        private readonly BaseRepository _baseRepository;
-
-        public ComentarioBiblicoNegocio(BaseRepository baseRepository)
-        {
-            _baseRepository = baseRepository;
-            _comentarioBiblicoRepository = new ComentarioBiblicoRepository();
-        }
+        private readonly ComentarioBiblicoRepository _comentarioBiblicoRepository = new ComentarioBiblicoRepository();
 
         public IList<LivroBiblia> GetAllLivros()
         {
@@ -43,11 +35,6 @@ namespace ProjetoCincoSolas.Business
             return _comentarioBiblicoRepository.GetAllPalavra(palavra);
         }
 
-
-        /// <summary>
-        /// Retona lista de livros.
-        /// </summary>
-        /// <returns></returns>
         public IEnumerable<SelectListItem> MontarComboLivros()
         {
             var livros = _comentarioBiblicoRepository.GetAllLivros();

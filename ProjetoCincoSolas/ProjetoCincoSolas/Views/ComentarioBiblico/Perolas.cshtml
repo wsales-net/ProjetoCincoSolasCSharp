@@ -1,10 +1,12 @@
-﻿
+﻿@model ProjetoCincoSolas.ViewModel.ComentarioBiblicoViewModel
+
 @{
     ViewBag.Title = "Perolas";
 }
 
 <link href="~/Content/about.css" rel="stylesheet" type="text/css" />
 <link href="~/Content/about_responsive.css" rel="stylesheet" type="text/css" />
+
 <!-- Home -->
 <div class="home">
     <div class="home_background" style="background-image:url(../../Imagens/events.jpg)"></div>
@@ -18,6 +20,22 @@
                             <li><a href="@Url.Action("Index", "Home")">Início</a></li>
                             <li>Perolas</li>
                         </ul>
+                    </div>
+                </div>
+                <div class="event_container d-flex flex-lg-row flex-column align-items-center justify-content-start">
+                    <div class="event_timer_container col-sm-12 col-md-12 col-lg-12">
+
+                        <h4><i>"Cerca de 5 000 citações que servem de inspiração para comunicadores cristãos."</i></h4>
+                        <div class="input-group pesquisa-curso">
+                            <div class="input-group mb-3">
+                                @Html.DropDownListFor(x => x.IdLivro, Model.Livros, "Selecione o autor", new { @class = "form-control col-md-3" })
+                                <input type="text" class="form-control btnPesquisar" aria-label="Text input with dropdown button" placeholder="Pesquisar frase">
+                                <div class="input-group-append">
+                                    <button id="btnPesquisar" type="button" class="btn btn-outline-primary my-2 my-sm-0">Pesquisar</button>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
                     </div>
                 </div>
             </div>
